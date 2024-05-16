@@ -49,6 +49,8 @@ class _ApplicationState extends State<Application>
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData appTheme = Theme.of(context);
+
     return Scaffold(
         body: PageView(
           controller: _pageViewController,
@@ -57,7 +59,8 @@ class _ApplicationState extends State<Application>
         ),
         bottomNavigationBar: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: appTheme.bottomNavigationBarTheme.backgroundColor ??
+                Colors.white,
             boxShadow: [
               BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 24),
             ],
@@ -68,13 +71,13 @@ class _ApplicationState extends State<Application>
             controller: _pageController,
             indicatorColor: Colors.transparent,
             labelStyle: TextStyle(
-              color: Colors.black,
+              // color: Colors.black,
               height: 0.5.h,
               fontSize: 12.sp,
               fontWeight: FontWeight.bold,
             ),
             unselectedLabelStyle: TextStyle(
-              color: const Color(0xFF9FA9AF),
+              // color: const Color(0xFF9FA9AF),
               height: 0.5.h,
               fontSize: 10.sp,
               fontWeight: FontWeight.bold,
