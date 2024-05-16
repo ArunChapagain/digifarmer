@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.1
   flutter_smart_dialog: ^4.9.6+1
+  remixicon: ^1.2.0
 
 dev_dependencies:
   flutter_test:
