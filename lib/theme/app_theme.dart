@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ///Whether to use dark mode
 bool isDarkMode(BuildContext context) {
@@ -47,7 +48,7 @@ class AppThemeGreen {
     useMaterial3: false,
     brightness: Brightness.light,
     //font
-    fontFamily: null,
+    fontFamily: GoogleFonts.nunitoSans().fontFamily,
     //letter
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.black87),
@@ -108,7 +109,8 @@ class AppThemeGreen {
     useMaterial3: false,
     brightness: Brightness.dark,
     //font
-    fontFamily: null,
+    fontFamily: GoogleFonts.nunitoSans().fontFamily,
+
     //letter
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Color(0xFFEFEFEF)),

@@ -1,5 +1,5 @@
 import 'package:digifarmer/view/diseases_detection/diseases_detection.dart';
-import 'package:digifarmer/view/home/home_scree.dart';
+import 'package:digifarmer/view/home/home_screen.dart';
 import 'package:digifarmer/view/news/news_screen.dart';
 import 'package:digifarmer/view/weather/weather_scree.dart';
 import 'package:flutter/material.dart';

@@ -8,8 +8,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child:
-              Text('No content', style: Theme.of(context).textTheme.bodyLarge),
+          child: Text('This the the test for the font style ',
+              style: Theme.of(context).textTheme.titleLarge),
         ),
       ),
     );
