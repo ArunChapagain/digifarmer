@@ -99,8 +99,8 @@ class AppThemeGreen {
         const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF6F8FA)),
     //Radio
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(const Color(0xFF111315)),
-      overlayColor: MaterialStateProperty.all(const Color(0xFF111315)),
+      fillColor: WidgetStateProperty.all(const Color(0xFF111315)),
+      overlayColor: WidgetStateProperty.all(const Color(0xFF111315)),
     ),
   );
 
@@ -162,8 +162,8 @@ class AppThemeGreen {
         const BottomSheetThemeData(modalBackgroundColor: Color(0xFF111315)),
     //Radio
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(const Color(0xFFEFEFEF)),
-      overlayColor: MaterialStateProperty.all(const Color(0xFFEFEFEF)),
+      fillColor: WidgetStateProperty.all(const Color(0xFFEFEFEF)),
+      overlayColor: WidgetStateProperty.all(const Color(0xFFEFEFEF)),
     ),
   );
 }

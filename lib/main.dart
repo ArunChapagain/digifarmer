@@ -1,6 +1,6 @@
 import 'package:digifarmer/application.dart';
 import 'package:digifarmer/theme/app_theme.dart';
-import 'package:digifarmer/widgets/will_pop_scope_route/will_pop_scope_route.dart';
+import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

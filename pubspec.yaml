@@ -17,6 +17,7 @@ dependencies:
   flutter_smart_dialog: ^4.9.6+1
   remixicon: ^1.2.0
   google_fonts: ^6.2.1
+  svg_flutter: ^0.0.1
 
 dev_dependencies:
   flutter_test:
