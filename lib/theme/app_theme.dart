@@ -41,7 +41,7 @@ class AppTheme {
 ///theme
 class AppThemeGreen {
   ///Main color
-  static const primaryColor = Color.fromARGB(255, 49, 137, 45);
+  static const primaryColor = Color(0xFF51A637);
 
   ///Light theme
   static final lightTheme = ThemeData(
