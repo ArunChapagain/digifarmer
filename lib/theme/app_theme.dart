@@ -1,12 +1,12 @@
+import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 ///Whether to use dark mode
 bool isDarkMode(BuildContext context) {
-  final ThemeMode themeMode =
-      MediaQuery.platformBrightnessOf(context) == Brightness.dark
-          ? ThemeMode.dark
-          : ThemeMode.light;
+  Theme.of(context);
+  final ThemeMode themeMode = context.read<MyappProvider>().themeMode;
   if (themeMode == ThemeMode.system) {
     return View.of(context).platformDispatcher.platformBrightness ==
         Brightness.dark;
@@ -14,6 +14,13 @@ bool isDarkMode(BuildContext context) {
     return themeMode == ThemeMode.dark;
   }
 }
+
+ThemeMode themeMode(String mode) => switch (mode) {
+      'system' => ThemeMode.system,
+      'dark' => ThemeMode.dark,
+      'light' => ThemeMode.light,
+      _ => ThemeMode.system,
+    };
 
 ///Theme basics
 class AppTheme {
