@@ -1,8 +1,11 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
+import 'package:digifarmer/theme/app_theme.dart';
 import 'package:digifarmer/view/home/widgets/slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:remixicon/remixicon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,7 +24,7 @@ class HomePage extends StatelessWidget {
       //                 myappProvider.themeMode = ThemeMode.light;
       //               },
       //             )
-      //           : IconButton(A
+      //           : IconButton(
       //               icon: Icon(Remix.moon_line),
       //               onPressed: () {
       //                 myappProvider.themeMode = ThemeMode.dark;
@@ -38,19 +41,9 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: SizedBox(
-                height: 250.h,
+                height: 200.h,
                 child: Stack(
                   children: [
-                    Text(
-                      'Digifarmer',
-                      style:
-                          Theme.of(context).textTheme.displayMedium!.copyWith(
-                                fontFamily: GoogleFonts.righteous().fontFamily,
-                                fontSize: 34.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                    ),
                     Container(
                       alignment: Alignment.topRight,
                       child: Image.asset(
@@ -58,14 +51,50 @@ class HomePage extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     ),
+                    Column(
+                      children: [
+                        Text(
+                          'Digifarmer',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(
+                                fontFamily: GoogleFonts.righteous().fontFamily,
+                                fontSize: 34.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                        ),
+                        const Text(
+                          'Smart Farming Solutions',
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-            // SizedBox(height: 20.h),
-            SizedBox(
-              height: 200.h,
-              child: const SliderCarousel(),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Row(
+                    children: [
+                      const Icon(Remix.lightbulb_flash_line),
+                      SizedBox(width: 8.w),
+                      Text(
+                        'Tips',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 5.h),
+                const SliderCarousel(),
+              ],
             ),
           ],
         ),

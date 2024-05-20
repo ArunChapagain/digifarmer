@@ -14,7 +14,6 @@ class SliderCarousel extends StatefulWidget {
 
 class _CarouselWithIndicatorState extends State<SliderCarousel> {
   int _current = 0;
-  final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.w),
                     child: Column(
                       children: [
                         Text(
@@ -68,7 +67,7 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                           data[index]['description']!,
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontSize: 14.8.sp,
+                                    fontSize: 14.6.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                         ),
@@ -94,21 +93,15 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: data.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () => _controller.animateToPage(entry.key),
-              child: Container(
-                width: 12.0,
-                height: 12.0,
-                margin: EdgeInsets.symmetric(vertical: 8.w, horizontal: 4.w),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: // (Theme.of(context).brightness == Brightness.dark
-                        //         ? Colors.white
-                        //         : Colors.black)
-                        Theme.of(context)
-                            .primaryColor
-                            .withOpacity(_current == entry.key ? 0.9 : 0.2)),
-              ),
+            return Container(
+              width: 12.0,
+              height: 12.0,
+              margin: EdgeInsets.symmetric(vertical: 8.w, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context)
+                      .primaryColor
+                      .withOpacity(_current == entry.key ? 0.9 : 0.2)),
             );
           }).toList(),
         ),
