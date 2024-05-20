@@ -57,7 +57,6 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                           data[index]['title']!,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    // color: Theme.of(context).
                                     fontSize: 22.sp,
                                     fontWeight: FontWeight.w900,
                                   ),
