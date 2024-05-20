@@ -33,13 +33,13 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
                       blurRadius: 10,
-                      offset:const  Offset(1, 11),
+                      offset: const Offset(1, 11),
                     ),
                   ]),
               child: Stack(
                 children: [
                   Opacity(
-                    opacity: 0.6,
+                    opacity: 0.4,
                     child: Transform.scale(
                       scaleY: 1.1,
                       scaleX: 1.08,
@@ -50,14 +50,30 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                       ),
                     ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        data[index]['title']!,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          data[index]['title']!,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    // color: Theme.of(context).
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                        ),
+                        SizedBox(height: 5.h),
+                        Text(
+                          data[index]['description']!,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontSize: 14.8.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

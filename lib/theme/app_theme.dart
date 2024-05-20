@@ -55,7 +55,7 @@ class AppThemeGreen {
     useMaterial3: false,
     brightness: Brightness.light,
     //font
-    fontFamily: GoogleFonts.nunitoSans().fontFamily,
+    fontFamily: GoogleFonts.openSans().fontFamily,
     //letter
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.black87),
