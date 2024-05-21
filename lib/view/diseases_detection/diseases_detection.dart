@@ -1,3 +1,4 @@
+import 'package:digifarmer/view/diseases_detection/detect_page.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class DiseasesDetectionPage extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 7.w),
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
         physics: const BouncingScrollPhysics(),
         child: Column(children: [
           SizedBox(height: 40.h),
@@ -118,25 +119,35 @@ class DiseasesDetectionPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AnimatedPress(
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 10,
-                              spreadRadius: 2,
-                              offset: const Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Image.asset(
-                          plants[index]['image'],
-                          height: 120.h,
-                          width: 200.h,
-                          fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetectPage(
+                            title: plants[index]['name'],
+                            imagePath: plants[index]['image'],
+                          ),
+                        ));
+                      },
+                      child: AnimatedPress(
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Image.asset(
+                            plants[index]['image'],
+                            height: 120.h,
+                            width: 200.h,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),

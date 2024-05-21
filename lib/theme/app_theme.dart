@@ -49,7 +49,7 @@ class AppTheme {
 ///theme
 class AppThemeGreen {
   ///Main color
-  static const primaryColor = Color(0xFF51A637);
+  static const primaryColor = Color(0xFF5AC03B);
 
   ///Light theme
   static final lightTheme = ThemeData(
