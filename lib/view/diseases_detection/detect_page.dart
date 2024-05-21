@@ -52,13 +52,26 @@ class DetectPage extends StatelessWidget {
                   ),
                   Positioned(
                     top: 60.h,
-                    left: 80.w,
-                    child: Text(
-                      title,
-                      style: textStyle.copyWith(
-                        fontSize: 34.sp,
-                        color: Colors.white,
-                      ),
+                    left: 10.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: textStyle.copyWith(
+                            fontSize: 34.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Identifier',
+                          style: TextStyle(
+                            fontSize: 24.sp,
+                            color: Colors.white,
+                            height: 0.6.h,
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 ],
