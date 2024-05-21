@@ -37,11 +37,10 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                   ]),
               child: Stack(
                 children: [
-                  Opacity(
-                    opacity: 0.4,
-                    child: Transform.scale(
-                      scaleY: 1.1,
-                      scaleX: 1.08,
+                  Positioned(
+                    top: 0.1.w,
+                    child: Opacity(
+                      opacity: 0.4,
                       child: Image.asset(
                         height: 200.h,
                         data[index]['image']!,
@@ -57,17 +56,17 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
                           data[index]['title']!,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontSize: 22.sp,
+                                    fontSize: 20.5.sp,
                                     fontWeight: FontWeight.w900,
                                   ),
                         ),
-                        SizedBox(height: 5.h),
+                        SizedBox(height: 3.h),
                         Text(
                           data[index]['description']!,
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontSize: 14.6.sp,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.7.sp,
+                                    fontWeight: FontWeight.w700,
                                   ),
                         ),
                       ],
@@ -78,6 +77,7 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
             );
           },
           options: CarouselOptions(
+            enlargeFactor: 0.2,
             aspectRatio: 2.0,
             enlargeCenterPage: true,
             scrollDirection: Axis.horizontal,

@@ -1,5 +1,6 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -55,8 +56,34 @@ class AppThemeGreen {
     useMaterial3: false,
     brightness: Brightness.light,
     //font
-    fontFamily: GoogleFonts.openSans().fontFamily,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     //letter
+    // textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+    //     displayLarge: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w900,
+    //     ),
+    //     displayMedium: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w600,
+    //     ),
+    //     displaySmall: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w500,
+    //     ),
+    //     bodyLarge: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w400,
+    //     ),
+    //     bodyMedium: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w300,
+    //     ),
+    //     bodySmall: TextStyle(
+    //       color: Colors.black87,
+    //       fontWeight: FontWeight.w200,
+    //     )),
+
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.black87),
       displayMedium: TextStyle(color: Colors.black87),
@@ -116,7 +143,7 @@ class AppThemeGreen {
     useMaterial3: false,
     brightness: Brightness.dark,
     //font
-    fontFamily: GoogleFonts.nunitoSans().fontFamily,
+    fontFamily: GoogleFonts.poppins().fontFamily,
 
     //letter
     textTheme: const TextTheme(
@@ -126,6 +153,7 @@ class AppThemeGreen {
       bodyLarge: TextStyle(color: Color(0xFFEFEFEF)),
       bodyMedium: TextStyle(color: Color(0xFFEFEFEF)),
       bodySmall: TextStyle(color: Color(0xFFEFEFEF)),
+      headlineLarge: TextStyle(fontWeight: FontWeight.bold), // Custom headline6
     ),
     //main color
     primaryColor: primaryColor,
