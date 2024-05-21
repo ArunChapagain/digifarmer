@@ -22,7 +22,7 @@ class _ApplicationState extends State<Application>
   final List<Widget> _pages = [
     const HomePage(),
     const NewsPage(),
-    const DiseasesDetectionPage(),
+    DiseasesDetectionPage(),
     const WeatherPage()
   ];
 
