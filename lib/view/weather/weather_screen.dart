@@ -138,7 +138,7 @@ class _HomePageState extends State<WeatherPage> {
           AnimatedPress(
             child: RotatingIconButton(
               onPressed: () {
-                weatherProvider.setAndGetweather(_cityController.text);
+                weatherProvider.getWeather();
               },
             ),
           )
