@@ -1,3 +1,4 @@
+import 'package:digifarmer/db/preference_db.dart';
 import 'package:digifarmer/services/weather_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,7 +6,7 @@ import 'package:intl/intl.dart';
 class WeatherProvider with ChangeNotifier {
   final WeatherService _weatherService = WeatherService();
   bool _isLoading = false;
-  String location = 'Pokhara';
+  String location = '';
   String weatherIcon = 'heavycloud.png';
   double temperature = 0.0;
   int windSpeed = 0;
@@ -17,11 +18,23 @@ class WeatherProvider with ChangeNotifier {
   List dailyWeatherForecast = [];
   String currentWeatherStatus = '';
 
+  Future<void> getWeather() async {
+    location = await PreferencesDB.db.getLocation();
+    await fetchWeatherData(location);
+    notifyListeners();
+  }
+
+  Future<void> setAndGetweather(String location) async {
+    print(location);
+    await PreferencesDB.db.setLocation(location);
+    await fetchWeatherData(location);
+  }
+
   Future<void> fetchWeatherData(String searchText) async {
     try {
-      _isLoading = true;
+      _isLoading = false;
       final weatherData = await _weatherService.fetchWeatherData(searchText);
-
+      print(weatherData);
       final locationData = weatherData["location"];
       final currentWeather = weatherData["current"];
 

@@ -52,7 +52,7 @@ class _InitState extends State<Init> {
     final MyappProvider myappProvider = context.read<MyappProvider>();
     final WeatherProvider weatherProvider = context.read<WeatherProvider>();
     myappProvider.loadThemeMode();
-    weatherProvider.fetchWeatherData('pokhara');
+    weatherProvider.getWeather();
     await preCacheImage(context);
   }
 
