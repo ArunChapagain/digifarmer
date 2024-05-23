@@ -154,6 +154,7 @@ class DiseasesDetectionPage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             plants[index]['name'],
