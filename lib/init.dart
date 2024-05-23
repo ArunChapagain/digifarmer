@@ -1,7 +1,6 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
-import 'package:digifarmer/theme/app_theme.dart';
+import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class Init extends StatefulWidget {
@@ -45,30 +44,15 @@ class _InitState extends State<Init> {
 
   @override
   Widget build(BuildContext context) {
-    ///Immersive mode (full screen mode)
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    SystemChrome.setSystemUIOverlayStyle(
-      isDarkMode(context)
-          ? SystemUiOverlayStyle.dark.copyWith(
-              statusBarColor: Colors.transparent,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: Colors.transparent,
-            )
-          : SystemUiOverlayStyle.light.copyWith(
-              statusBarColor: Colors.transparent,
-              statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark,
-              systemNavigationBarColor: Colors.transparent,
-            ),
-    );
     return widget.child;
   }
 
   ///Application initialization
   void init() async {
     final MyappProvider myappProvider = context.read<MyappProvider>();
+    final WeatherProvider weatherProvider = context.read<WeatherProvider>();
     myappProvider.loadThemeMode();
+    weatherProvider.fetchWeatherData('pokhara');
     await preCacheImage(context);
   }
 

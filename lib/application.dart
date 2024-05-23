@@ -1,7 +1,7 @@
 import 'package:digifarmer/view/diseases_detection/diseases_detection.dart';
 import 'package:digifarmer/view/home/home_screen.dart';
 import 'package:digifarmer/view/news/news_screen.dart';
-import 'package:digifarmer/view/weather/weather_scree.dart';
+import 'package:digifarmer/view/weather/weather_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:remixicon/remixicon.dart';
