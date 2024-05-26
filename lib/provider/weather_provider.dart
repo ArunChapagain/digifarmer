@@ -34,7 +34,6 @@ class WeatherProvider with ChangeNotifier {
     try {
       _isLoading = false;
       final weatherData = await _weatherService.fetchWeatherData(searchText);
-      print(weatherData);
       final locationData = weatherData["location"];
       final currentWeather = weatherData["current"];
 

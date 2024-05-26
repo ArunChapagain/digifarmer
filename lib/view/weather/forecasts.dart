@@ -133,14 +133,13 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
       return Container(
         margin: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
-          color: const Color(0xFFFAF9F9),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              offset: const Offset(0, 1),
-              blurRadius: 5,
-              color: Colors.black.withOpacity(.4),
-            ),
+                offset: const Offset(0, 1),
+                blurRadius: 5,
+                color: _constants.primaryColor.withOpacity(.4)),
           ],
         ),
         child: Padding(
@@ -254,9 +253,9 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
               child: Container(
                 height: size.height * .75,
                 width: size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50),
                   ),

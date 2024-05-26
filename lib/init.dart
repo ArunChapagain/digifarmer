@@ -21,13 +21,13 @@ class _InitState extends State<Init> {
 
     ///App life cycle
     _appLifecycleListener = AppLifecycleListener(
-      onResume: () => print('App Resume'),
-      onInactive: () => print('App Inactive'),
-      onHide: () => print('App Hide'),
-      onShow: () => print('App Show'),
+      onResume: () {},
+      onInactive: () {},
+      onHide: () {},
+      onShow: () {},
       onPause: () {},
-      onRestart: () => print('App Restart'),
-      onDetach: () => print('App Detach'),
+      onRestart: () {},
+      onDetach: () {},
     );
 
     ///Initialization

@@ -81,7 +81,7 @@ class _HomePageState extends State<WeatherPage> {
       required WeatherProvider weatherProvider}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
-      height: 310.h,
+      height: 320.h,
       decoration: BoxDecoration(
         gradient: constants.linearGradientBlue,
         boxShadow: [
@@ -142,11 +142,6 @@ class _HomePageState extends State<WeatherPage> {
               },
             ),
           )
-          // ReloadWeatherButton(
-          //   onPressed: () {
-          //     weatherProvider.setAndGetweather(_cityController.text);
-          //   },
-          // )
         ],
       ),
     );
@@ -455,7 +450,8 @@ class HourlyForecastList extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 5),
           width: 110.w,
           decoration: BoxDecoration(
-            color: const Color(0xFFF8F8F8),
+            // color: const Color(0xFFF8F8F8),
+            color: Theme.of(context).cardColor,
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             boxShadow: [
               BoxShadow(
