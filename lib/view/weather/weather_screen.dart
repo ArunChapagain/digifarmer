@@ -1,7 +1,8 @@
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/constants.dart';
 import 'package:digifarmer/view/weather/forecasts.dart';
-import 'package:digifarmer/view/weather/weather_item.dart';
+import 'package:digifarmer/view/weather/widgets/reload_weather.dart';
+import 'package:digifarmer/view/weather/widgets/weather_item.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,7 +81,7 @@ class _HomePageState extends State<WeatherPage> {
       required WeatherProvider weatherProvider}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
-      height: 310.h,
+      height: 320.h,
       decoration: BoxDecoration(
         gradient: constants.linearGradientBlue,
         boxShadow: [
@@ -135,18 +136,12 @@ class _HomePageState extends State<WeatherPage> {
               fetchWeatherData: weatherProvider.fetchWeatherData,
               constants: _constants),
           AnimatedPress(
-            child: IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white,
-                size: 30.sp,
-              ),
-              onPressed: () => weatherProvider.fetchWeatherData(
-                  _cityController.text.isEmpty
-                      ? 'Pokhara'
-                      : _cityController.text),
+            child: RotatingIconButton(
+              onPressed: () {
+                weatherProvider.getWeather();
+              },
             ),
-          ),
+          )
         ],
       ),
     );
@@ -323,7 +318,7 @@ class SearchCityBottomSheet extends StatelessWidget {
               child: Divider(thickness: 3.5, color: constants.primaryColor)),
           const SizedBox(height: 10),
           TextField(
-            onChanged: (searchText) => fetchWeatherData(searchText),
+            // onChanged: (searchText) => fetchWeatherData(searchText),
             controller: cityController,
             autofocus: true,
             decoration: InputDecoration(
@@ -336,6 +331,38 @@ class SearchCityBottomSheet extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: constants.primaryColor),
                 borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20.w,
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                Provider.of<WeatherProvider>(context, listen: false)
+                    .setAndGetweather(cityController.text);
+              },
+              child: AnimatedPress(
+                child: Container(
+                  width: 110.w,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0089E4),
+                    borderRadius: BorderRadius.circular(8.w),
+                  ),
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -423,7 +450,8 @@ class HourlyForecastList extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 5),
           width: 110.w,
           decoration: BoxDecoration(
-            color: const Color(0xFFF8F8F8),
+            // color: const Color(0xFFF8F8F8),
+            color: Theme.of(context).cardColor,
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             boxShadow: [
               BoxShadow(

@@ -1,10 +1,8 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
-import 'package:digifarmer/theme/app_theme.dart';
 import 'package:digifarmer/view/home/widgets/slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:remixicon/remixicon.dart';
 
 class HomePage extends StatelessWidget {
