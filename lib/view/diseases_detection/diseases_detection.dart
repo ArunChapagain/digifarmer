@@ -113,7 +113,6 @@ class DiseasesDetectionPage extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
               crossAxisSpacing: 10.w,
-              mainAxisSpacing: 10.h,
               childAspectRatio: 0.75.w,
               children: List.generate(plants.length, (index) {
                 return Column(
