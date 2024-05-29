@@ -14,35 +14,38 @@ class DiseasesDetectionPage extends StatelessWidget {
   final List<Map> plants = [
     {
       'name': 'Tomato Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/tomato.png',
+      'color': '0xfff94533'
     },
     {
       'name': 'Potato Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/potato.png',
+      'color': '0xffdea55a'
     },
     {
       'name': 'Maize Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/corn.png',
+      'color': '0xffd8a520'
     },
     {
       'name': 'Rice Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/rice.png',
+      'color': '0xffadd65f'
     },
     {
       'name': 'Wheat Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/wheat.png',
+      'color': '0xffd8a520'
     },
     {
       'name': 'Sugarcane Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/sugarcane.png',
+      'color': '0xffadd65f'
     },
     {
       'name': 'Cotton Leaf',
-      'image': 'assets/images/detection/plant.jpg',
-    },
-    {
-      'name': 'Soybean Leaf',
-      'image': 'assets/images/detection/plant.jpg',
+      'image': 'assets/images/detection/cotton.png',
+      'color': '0xff8a5046'
     },
   ];
 
@@ -51,7 +54,7 @@ class DiseasesDetectionPage extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         physics: const BouncingScrollPhysics(),
         child: Column(children: [
           SizedBox(height: 40.h),
@@ -112,7 +115,7 @@ class DiseasesDetectionPage extends StatelessWidget {
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
-              crossAxisSpacing: 10.w,
+              crossAxisSpacing: 15.w,
               childAspectRatio: 0.75.w,
               children: List.generate(plants.length, (index) {
                 return Column(
@@ -124,28 +127,24 @@ class DiseasesDetectionPage extends StatelessWidget {
                           builder: (context) => DetectPage(
                             title: plants[index]['name'],
                             imagePath: plants[index]['image'],
+                            color: plants[index]['color'],
                           ),
                         ));
                       },
                       child: AnimatedPress(
                         child: Container(
-                          clipBehavior: Clip.antiAlias,
+                          height: 120.h,
+                          width: 200.h,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
                           decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 231, 230, 230),
                             borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 10,
-                                spreadRadius: 2,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
                           ),
                           child: Image.asset(
+                            height: 50.h,
+                            width: 60.w,
                             plants[index]['image'],
-                            height: 120.h,
-                            width: 200.h,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
