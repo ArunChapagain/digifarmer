@@ -5,8 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:remixicon/remixicon.dart';
 
 class DetectPage extends StatelessWidget {
-  DetectPage({super.key, required this.title, required this.imagePath});
+  DetectPage(
+      {super.key,
+      required this.title,
+      required this.imagePath,
+      required this.color});
   final String title;
+  final String color;
   final String imagePath;
   final textStyle = TextStyle(
       fontFamily: GoogleFonts.poppins(fontWeight: FontWeight.w700).fontFamily);
@@ -16,7 +21,7 @@ class DetectPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Column(
             children: [
               Row(
@@ -26,14 +31,14 @@ class DetectPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Remix.arrow_left_s_line, size: 30.sp),
+                      icon: Icon(Remix.arrow_left_s_line, size: 26.sp),
                     ),
                   ),
                   Text(
                     'back',
                     style: TextStyle(
                       fontSize: 20.sp,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -41,13 +46,18 @@ class DetectPage extends StatelessWidget {
               SizedBox(height: 20.h),
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.r),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: Color(
+                        int.parse(color),
+                      ),
+                    ),
                     child: Image.asset(
-                      'assets/images/detection/plant.jpg',
+                      imagePath,
                       height: 175.h,
                       width: 400.w,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   Positioned(
@@ -60,7 +70,7 @@ class DetectPage extends StatelessWidget {
                           title,
                           style: textStyle.copyWith(
                             fontSize: 34.sp,
-                            color: Colors.white,
+                            color: const Color(0xFFFFFFFF),
                           ),
                         ),
                         Text(
