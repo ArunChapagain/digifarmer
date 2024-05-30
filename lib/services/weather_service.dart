@@ -12,7 +12,6 @@ class WeatherService {
       Uri.parse('${baseURL}forecast.json?key=$API_KEY&days=7&q=$location'),
     );
     final response2 = await http.get(Uri.parse(currentWeatherAPI + location));
-    print("This is current ${response2.body}");
     if (response.statusCode == 200) {
       return json.decode(response.body) as Map<String, dynamic>;
     } else if (response.statusCode == 502) {
