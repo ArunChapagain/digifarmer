@@ -10,27 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myappProvider = MyappProvider();
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     Consumer<MyappProvider>(builder: (_, myappProvider, child) {
-      //       return isDarkMode(context)
-      //           ? IconButton(
-      //               icon: Icon(Remix.sun_line),
-      //               onPressed: () {
-      //                 myappProvider.themeMode = ThemeMode.light;
-      //               },
-      //             )
-      //           : IconButton(
-      //               icon: Icon(Remix.moon_line),
-      //               onPressed: () {
-      //                 myappProvider.themeMode = ThemeMode.dark;
-      //               },
-      //             );
-      //     })
-      //   ],
-      // ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

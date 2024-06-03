@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class WeatherService {
   Future<Map<String, dynamic>> fetchWeatherData(String location) async {
     final response = await http.get(
-      Uri.parse('${weatherAPIBaseURL}forecast.json?key=$weatherAPIKey&days=7&q=$location'),
+      Uri.parse('$weatherAPIBaseURL$weatherAPIEndPoint?key=$weatherAPIKey&days=7&q=$location'),
     );
     if (response.statusCode == 200) {
       return json.decode(response.body) as Map<String, dynamic>;
