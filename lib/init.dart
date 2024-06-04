@@ -1,4 +1,5 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
+import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,8 +52,10 @@ class _InitState extends State<Init> {
   void init() async {
     final MyappProvider myappProvider = context.read<MyappProvider>();
     final WeatherProvider weatherProvider = context.read<WeatherProvider>();
+    final NewsProvider newsProvider = context.read<NewsProvider>();
     myappProvider.loadThemeMode();
-    weatherProvider.getWeather();
+    await weatherProvider.getWeather();
+    newsProvider.fetchNews(1);
     await preCacheImage(context);
   }
 

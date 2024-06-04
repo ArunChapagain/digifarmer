@@ -20,19 +20,20 @@ class WeatherProvider with ChangeNotifier {
 
   Future<void> getWeather() async {
     location = await PreferencesDB.db.getLocation();
+    print('Location: $location');
     await fetchWeatherData(location);
     notifyListeners();
   }
 
   Future<void> setAndGetweather(String location) async {
-    print(location);
     await PreferencesDB.db.setLocation(location);
     await fetchWeatherData(location);
   }
 
   Future<void> fetchWeatherData(String searchText) async {
     try {
-      _isLoading = false;
+      _isLoading = true;
+      print('Search Text: $searchText');
       final weatherData = await _weatherService.fetchWeatherData(searchText);
       final locationData = weatherData["location"];
       final currentWeather = weatherData["current"];

@@ -1,6 +1,7 @@
 import 'package:digifarmer/application.dart';
 import 'package:digifarmer/init.dart';
 import 'package:digifarmer/provider/myapp_provider.dart';
+import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
 import 'package:digifarmer/widgets/will_pop_scope_route.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => MyappProvider()),
-          ChangeNotifierProvider(create: (context) => WeatherProvider())
+          ChangeNotifierProvider(create: (context) => WeatherProvider()),
+          ChangeNotifierProvider(create: (context) => NewsProvider())
         ],
         builder: (context, child) {
           final watchApplicationProvider = context.watch<MyappProvider>();
