@@ -25,22 +25,19 @@ class WeatherProvider with ChangeNotifier {
   }
 
   Future<void> setAndGetweather(String location) async {
-    print(location);
     await PreferencesDB.db.setLocation(location);
     await fetchWeatherData(location);
   }
 
   Future<void> fetchWeatherData(String searchText) async {
     try {
-      _isLoading = false;
+      _isLoading = true;
       final weatherData = await _weatherService.fetchWeatherData(searchText);
       final locationData = weatherData["location"];
       final currentWeather = weatherData["current"];
-
       location = getShortLocationName(locationData["name"]);
       currentDate = formatDate(locationData["localtime"]);
       currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
-
       currentWeatherStatus = currentWeather["condition"]["text"];
       weatherIcon =
           "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
