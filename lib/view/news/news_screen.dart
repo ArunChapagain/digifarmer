@@ -1,6 +1,6 @@
 import 'package:digifarmer/provider/news_provider.dart';
-import 'package:digifarmer/theme/app_theme.dart';
 import 'package:digifarmer/view/news/controller/pagination_scroll_control.dart';
+import 'package:digifarmer/view/news/news_detail_screen.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +39,7 @@ class _NewsPageState extends State<NewsPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
+        forceMaterialTransparency: true,
         title: Text(
           'News',
           style: TextStyle(
@@ -85,86 +85,96 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final date =
         DateFormat('MMMM dd, yyyy').format(DateTime.parse(news['publishedAt']));
-    return AnimatedPress(
-      child: Container(
-        // height: 120.h,
-        // width: 50.h,
-        margin: EdgeInsetsDirectional.symmetric(
-          horizontal: 10.w,
-          vertical: 10.w,
-        ),
-        padding:
-            EdgeInsetsDirectional.symmetric(horizontal: 8.h, vertical: 8.w),
-        decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(15.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.07),
-                blurRadius: 8,
-                offset: const Offset(1, 7),
-              )
-            ]),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                news['urlToImage'] != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(10.r),
-                        child: Image.network(
-                          news['urlToImage'],
-                          height: 80.h,
-                          width: 100.w,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    : const SizedBox(),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: Text(
-                    maxLines: 3,
-                    news['title'],
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w700,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewsDetailPage(news: news),
+          ),
+        );
+      },
+      child: AnimatedPress(
+        child: Container(
+          // height: 120.h,
+          // width: 50.h,
+          margin: EdgeInsetsDirectional.symmetric(
+            horizontal: 10.w,
+            vertical: 10.w,
+          ),
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 8.h, vertical: 8.w),
+          decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(15.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.07),
+                  blurRadius: 8,
+                  offset: const Offset(1, 7),
+                )
+              ]),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  news['urlToImage'] != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10.r),
+                          child: Image.network(
+                            news['urlToImage'],
+                            height: 80.h,
+                            width: 100.w,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : const SizedBox(),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: Text(
+                      maxLines: 3,
+                      news['title'],
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-              ],
-            ),
-            SizedBox(height: 8.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 150.w,
-                  child: Text(
-                    news['source']['name'],
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 150.w,
+                    child: Text(
+                      news['source']['name'],
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    date,
                     style: TextStyle(
+                      color: Colors.grey,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
-                      color: Colors.grey,
                     ),
                   ),
-                ),
-                Text(
-                  date,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
+                  SizedBox(
+                    width: 5.w,
                   ),
-                ),
-                SizedBox(
-                  width: 5.w,
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
