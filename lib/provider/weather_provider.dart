@@ -20,7 +20,6 @@ class WeatherProvider with ChangeNotifier {
 
   Future<void> getWeather() async {
     location = await PreferencesDB.db.getLocation();
-    print('Location: $location');
     await fetchWeatherData(location);
     notifyListeners();
   }
@@ -35,13 +34,13 @@ class WeatherProvider with ChangeNotifier {
       _isLoading = true;
       print('Search Text: $searchText');
       final weatherData = await _weatherService.fetchWeatherData(searchText);
+      print('currentweather');
       final locationData = weatherData["location"];
       final currentWeather = weatherData["current"];
-
       location = getShortLocationName(locationData["name"]);
       currentDate = formatDate(locationData["localtime"]);
       currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
-
+      print('currentTime');
       currentWeatherStatus = currentWeather["condition"]["text"];
       weatherIcon =
           "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
