@@ -1,5 +1,5 @@
 class NewsModel {
-   NewsModel({
+  NewsModel({
     int? id,
     String? source,
     String? author,
@@ -19,6 +19,7 @@ class NewsModel {
   String? content;
   factory NewsModel.fromJson(Map<String, dynamic> map) {
     return NewsModel(
+      // id: map['id'] ?? 0,
       author: map['author'] ?? "",
       source: map['source']['name'] ?? "",
       title: map['title'] ?? "",
