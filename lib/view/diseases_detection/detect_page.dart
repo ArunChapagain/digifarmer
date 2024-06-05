@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:flutter/material.dart';
@@ -31,15 +30,53 @@ class _DetectPageState extends State<DetectPage> {
     loadModel();
   }
 
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: riceDiseaseModel,
+  //     labels: riceDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: wheatDiseaseModel,
+  //     labels: wheatDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
   loadModel() async {
     await Tflite.loadModel(
-      model: cottonDiseaseModel,
-      labels: cottonDiseasetxt,
+      model: tomatoDiseaseModel,
+      labels: tomatoDiseasetxt,
       isAsset: true,
     );
   }
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: sugarcaneDiseaseModel,
+  //     labels: sugarcaneDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
 
-  Future pickImage(bool isCamera, BuildContext context) async {
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: cottonDiseaseModel,
+  //     labels: cottonDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
+  }
+
+  Future pickImage(
+    bool isCamera,
+    // BuildContext context,
+  ) async {
     final image = await ImagePicker()
         .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
 
@@ -48,10 +85,13 @@ class _DetectPageState extends State<DetectPage> {
       // _loading = true;
       _imageFile = File(image.path);
     });
-    classifyImage(_imageFile!, context);
+    classifyImage(_imageFile!);
   }
 
-  classifyImage(File image, BuildContext context) async {
+  classifyImage(
+    File image,
+    // BuildContext context,
+  ) async {
     var output = await Tflite.runModelOnImage(
         path: image.path,
         imageMean: 0.0,
@@ -60,17 +100,15 @@ class _DetectPageState extends State<DetectPage> {
         threshold: 0.2,
         asynch: true);
 
-    print('This is the detection output${output}');
-    // setState(() {
-    //   _loading = false;
-    //   _outputs = output;
-    // });
     if (output != null) {
-      displayResult(output[0]['label'], context);
+      displayResult(output[0]['label']);
     }
   }
 
-  displayResult(String digonosis, BuildContext context) {
+  displayResult(
+    String digonosis,
+    // BuildContext context,
+  ) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -259,7 +297,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 30.h),
               button(
-                () => pickImage(true, context),
+                () => pickImage(true),
                 'Take picture',
                 'of your plant',
                 Remix.camera_line,
@@ -267,7 +305,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 15.h),
               button(
-                () => pickImage(false, context),
+                () => pickImage(false),
                 'Import',
                 'from your gallary',
                 Remix.gallery_view_2,
