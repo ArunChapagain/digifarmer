@@ -137,7 +137,7 @@ class DiseasesDetectionPage extends StatelessWidget {
                           width: 200.h,
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 231, 230, 230),
+                            color: const Color(0xFFE7E6E6),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Image.asset(

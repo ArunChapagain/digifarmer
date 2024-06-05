@@ -1,4 +1,3 @@
-import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:digifarmer/view/home/widgets/slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
