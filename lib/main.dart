@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
               designSize: const Size(360, 640),
               builder: (context, child) {
                 return MaterialApp(
-                  themeMode: watchApplicationProvider.themeMode,
+                  // themeMode: watchApplicationProvider.themeMode,
+                  themeMode: ThemeMode.light,
                   theme: AppTheme.getLightThemeData(context),
                   darkTheme: AppTheme.getDarkThemeData(context),
                   debugShowCheckedModeBanner: false,

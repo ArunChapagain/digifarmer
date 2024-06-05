@@ -5,20 +5,28 @@ import 'package:flutter/material.dart';
 class NewsProvider extends ChangeNotifier {
   final List<NewsModel> _news = [];
   bool _isLoading = false;
-
+  final List newsJson = [];
   NewsService newsService = NewsService();
   Future<void> getNews(int page) async {
     final result = await newsService.fetchNews(1);
 
     result['articles'].forEach((value) {
-      _news.add(NewsModel.fromJson(value));
+      newsJson.add(value);
+      _news.add(NewsModel(
+        id: value['id'],
+        author: value['author'],
+        source: value['source']['name'],
+        title: value['title'] as String,
+        description: value['description'],
+        urlToImage: value['urlToImage'],
+        publishedAt: value['publishedAt'],
+        content: value['content'],
+      ));
     });
+    // newsJson.forEach((element) {
+    //   print(element['title']);
+    // });
     _isLoading = false;
-    notifyListeners();
-  }
-
-  set news(List<NewsModel> news) {
-    news = _news;
     notifyListeners();
   }
 
