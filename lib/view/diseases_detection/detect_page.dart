@@ -1,11 +1,15 @@
+import 'dart:io';
+import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:remixicon/remixicon.dart';
 
-class DetectPage extends StatelessWidget {
-  DetectPage(
+class DetectPage extends StatefulWidget {
+  const DetectPage(
       {super.key,
       required this.title,
       required this.imagePath,
@@ -13,9 +17,191 @@ class DetectPage extends StatelessWidget {
   final String title;
   final String color;
   final String imagePath;
+
+  @override
+  State<DetectPage> createState() => _DetectPageState();
+}
+
+class _DetectPageState extends State<DetectPage> {
+  File? _imageFile;
+  @override
+  void initState() {
+    super.initState();
+    loadModel();
+  }
+
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: riceDiseaseModel,
+  //     labels: riceDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: wheatDiseaseModel,
+  //     labels: wheatDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+  loadModel() async {
+    await Tflite.loadModel(
+      model: tomatoDiseaseModel,
+      labels: tomatoDiseasetxt,
+      isAsset: true,
+    );
+  }
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: sugarcaneDiseaseModel,
+  //     labels: sugarcaneDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+
+  // loadModel() async {
+  //   await Tflite.loadModel(
+  //     model: cottonDiseaseModel,
+  //     labels: cottonDiseasetxt,
+  //     isAsset: true,
+  //   );
+  // }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
+  }
+
+  Future pickImage(
+    bool isCamera,
+    // BuildContext context,
+  ) async {
+    final image = await ImagePicker()
+        .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
+
+    if (image == null) return null;
+    setState(() {
+      // _loading = true;
+      _imageFile = File(image.path);
+    });
+    classifyImage(_imageFile!);
+  }
+
+  classifyImage(
+    File image,
+    // BuildContext context,
+  ) async {
+    var output = await Tflite.runModelOnImage(
+        path: image.path,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        numResults: 2,
+        threshold: 0.2,
+        asynch: true);
+
+    if (output != null) {
+      displayResult(output[0]['label']);
+    }
+  }
+
+  displayResult(
+    String digonosis,
+    // BuildContext context,
+  ) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.r),
+            topRight: Radius.circular(20.r),
+          ),
+        ),
+        isDismissible: true,
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 400.h,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r),
+              ),
+              border: Border.all(
+                  color: Theme.of(context).primaryColor.withOpacity(0.8),
+                  width: 3.w),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                              margin: EdgeInsets.only(right: 10.w, top: 5.h),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.8),
+                                    width: 3.w),
+                              ),
+                              child: Icon(Remix.close_line, size: 30.sp))),
+                    ],
+                  ),
+                  Text(
+                    //make the first |letter and letter after space of the digonois to be capital
+                    digonosis[0].toUpperCase() +
+                        digonosis.substring(1).toLowerCase(),
+                    style: TextStyle(
+                      fontSize: 28.sp,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Text(
+                        'Class: ',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'Fungi',
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    'episom is a fungal disease that affects the leaves of the plant. It is caused by the fungus Puccinia polysora. The disease is characterized by the presence of small, yellowish-brown spots on the leaves. ',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      // height: 1.5.h,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   final textStyle = TextStyle(
       fontFamily: GoogleFonts.poppins(fontWeight: FontWeight.w700).fontFamily);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +236,11 @@ class DetectPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
                       color: Color(
-                        int.parse(color),
+                        int.parse(widget.color),
                       ),
                     ),
                     child: Image.asset(
-                      imagePath,
+                      widget.imagePath,
                       height: 175.h,
                       width: 400.w,
                       fit: BoxFit.contain,
@@ -67,7 +253,7 @@ class DetectPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          widget.title,
                           style: textStyle.copyWith(
                             fontSize: 34.sp,
                             color: const Color(0xFFFFFFFF),
@@ -111,6 +297,7 @@ class DetectPage extends StatelessWidget {
               ),
               SizedBox(height: 30.h),
               button(
+                () => pickImage(true),
                 'Take picture',
                 'of your plant',
                 Remix.camera_line,
@@ -118,6 +305,7 @@ class DetectPage extends StatelessWidget {
               ),
               SizedBox(height: 15.h),
               button(
+                () => pickImage(false),
                 'Import',
                 'from your gallary',
                 Remix.gallery_view_2,
@@ -131,46 +319,56 @@ class DetectPage extends StatelessWidget {
   }
 
   Widget button(
-      String title, String subTitle, IconData icon, BuildContext context) {
-    return AnimatedPress(
-      child: Container(
-        height: 70.h,
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withOpacity(0.8),
-          borderRadius: BorderRadius.circular(30.r),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.start,
-                  style: textStyle.copyWith(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 22.sp,
+    Function onTap,
+    String title,
+    String subTitle,
+    IconData icon,
+    BuildContext context,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: AnimatedPress(
+        child: Container(
+          height: 70.h,
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(30.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.start,
+                    style: textStyle.copyWith(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 22.sp,
+                    ),
                   ),
-                ),
-                Text(
-                  subTitle,
-                  style: textStyle.copyWith(
-                    fontSize: 16.sp,
-                    color: const Color(0xFF428C2C),
-                    height: 0.7.h,
+                  Text(
+                    subTitle,
+                    style: textStyle.copyWith(
+                      fontSize: 16.sp,
+                      color: const Color(0xFF428C2C),
+                      height: 0.7.h,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
-              child:
-                  Icon(icon, color: Colors.white.withOpacity(0.9), size: 40.sp),
-            ),
-          ],
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                child: Icon(icon,
+                    color: Colors.white.withOpacity(0.9), size: 40.sp),
+              ),
+            ],
+          ),
         ),
       ),
     );

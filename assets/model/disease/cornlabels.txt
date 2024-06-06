@@ -1,0 +1,4 @@
+0 Rust
+1 Gray Leaf
+2 Healthy
+3  Blight
