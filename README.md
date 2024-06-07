@@ -1,6 +1,4 @@
-# digifarmer
-
-A new Flutter project.
+# Digifarmer
 
 ## Getting Started
 
