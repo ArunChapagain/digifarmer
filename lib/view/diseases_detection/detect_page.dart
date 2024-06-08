@@ -30,42 +30,47 @@ class _DetectPageState extends State<DetectPage> {
     loadModel();
   }
 
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //     model: riceDiseaseModel,
-  //     labels: riceDiseasetxt,
-  //     isAsset: true,
-  //   );
-  // }
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //     model: wheatDiseaseModel,
-  //     labels: wheatDiseasetxt,
-  //     isAsset: true,
-  //   );
-  // }
   loadModel() async {
-    await Tflite.loadModel(
-      model: tomatoDiseaseModel,
-      labels: tomatoDiseasetxt,
-      isAsset: true,
-    );
+    if (widget.title == 'Rice Leaf') {
+      await Tflite.loadModel(
+        model: riceDiseaseModel,
+        labels: riceDiseasetxt,
+        isAsset: true,
+      );
+    } else if (widget.title == 'Wheat Leaf') {
+      await Tflite.loadModel(
+        model: wheatDiseaseModel,
+        labels: wheatDiseasetxt,
+        isAsset: true,
+      );
+    } else if (widget.title == 'Tomato Leaf') {
+      await Tflite.loadModel(
+        model: tomatoDiseaseModel,
+        labels: tomatoDiseasetxt,
+        isAsset: true,
+      );
+    } else if (widget.title == 'SugarCane Leaf') {
+      await Tflite.loadModel(
+        model: sugarcaneDiseaseModel,
+        labels: sugarcaneDiseasetxt,
+        isAsset: true,
+      );
+    }
+    else if (widget.title == 'Cotton Leaf') {
+       await Tflite.loadModel(
+        model: cottonDiseaseModel,
+        labels: cottonDiseasetxt,
+        isAsset: true,
+      );
+    }
+    else if (widget.title == 'Maize Leaf') {
+       await Tflite.loadModel(
+        model: cornDiseaseModel,
+        labels: cornDiseasetxt,
+        isAsset: true,
+      );
+    }
   }
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //     model: sugarcaneDiseaseModel,
-  //     labels: sugarcaneDiseasetxt,
-  //     isAsset: true,
-  //   );
-  // }
-
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //     model: cottonDiseaseModel,
-  //     labels: cottonDiseasetxt,
-  //     isAsset: true,
-  //   );
-  // }
 
   @override
   void dispose() {
