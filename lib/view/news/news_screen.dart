@@ -38,8 +38,8 @@ class _NewsPageState extends State<NewsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         forceMaterialTransparency: true,
+        centerTitle: true,
         title: Text(
           'News',
           style: TextStyle(
