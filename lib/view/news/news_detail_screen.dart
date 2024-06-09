@@ -14,19 +14,6 @@ class NewsDetailPage extends StatelessWidget {
     final date =
         DateFormat('MMMM dd, yyyy').format(DateTime.parse(news['publishedAt']));
     return Scaffold(
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        leading: IconButton(
-          icon: Icon(
-            Remix.arrow_left_s_line,
-            size: 36.sp,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

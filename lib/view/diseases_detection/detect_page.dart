@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/widgets/animation.dart';
+import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
@@ -31,6 +32,7 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
+    print(widget.title);
     if (widget.title == 'Rice Leaf') {
       await Tflite.loadModel(
         model: riceDiseaseModel,
@@ -49,22 +51,20 @@ class _DetectPageState extends State<DetectPage> {
         labels: tomatoDiseasetxt,
         isAsset: true,
       );
-    } else if (widget.title == 'SugarCane Leaf') {
+    } else if (widget.title == 'Sugarcane Leaf') {
       await Tflite.loadModel(
         model: sugarcaneDiseaseModel,
         labels: sugarcaneDiseasetxt,
         isAsset: true,
       );
-    }
-    else if (widget.title == 'Cotton Leaf') {
-       await Tflite.loadModel(
+    } else if (widget.title == 'Cotton Leaf') {
+      await Tflite.loadModel(
         model: cottonDiseaseModel,
         labels: cottonDiseasetxt,
         isAsset: true,
       );
-    }
-    else if (widget.title == 'Maize Leaf') {
-       await Tflite.loadModel(
+    } else if (widget.title == 'Maize Leaf') {
+      await Tflite.loadModel(
         model: cornDiseaseModel,
         labels: cornDiseasetxt,
         isAsset: true,
@@ -301,76 +301,18 @@ class _DetectPageState extends State<DetectPage> {
                 ),
               ),
               SizedBox(height: 30.h),
-              button(
-                () => pickImage(true),
-                'Take picture',
-                'of your plant',
-                Remix.camera_line,
-                context,
+              DetectButton(
+                onTap: () => pickImage(true),
+                title: 'Take picture',
+                subTitle: 'of your plant',
+                icon: Remix.camera_line,
               ),
               SizedBox(height: 15.h),
-              button(
-                () => pickImage(false),
-                'Import',
-                'from your gallary',
-                Remix.gallery_view_2,
-                context,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget button(
-    Function onTap,
-    String title,
-    String subTitle,
-    IconData icon,
-    BuildContext context,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        onTap();
-      },
-      child: AnimatedPress(
-        child: Container(
-          height: 70.h,
-          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(30.r),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    textAlign: TextAlign.start,
-                    style: textStyle.copyWith(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 22.sp,
-                    ),
-                  ),
-                  Text(
-                    subTitle,
-                    style: textStyle.copyWith(
-                      fontSize: 16.sp,
-                      color: const Color(0xFF428C2C),
-                      height: 0.7.h,
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                child: Icon(icon,
-                    color: Colors.white.withOpacity(0.9), size: 40.sp),
+              DetectButton(
+                onTap: () => pickImage(false),
+                title: 'Import',
+                subTitle: 'from your gallary',
+                icon: Remix.gallery_view_2,
               ),
             ],
           ),

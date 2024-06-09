@@ -26,15 +26,9 @@ class _CarouselWithIndicatorState extends State<SliderCarousel> {
               height: 100.h,
               width: 300.w,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
-                  color: Theme.of(context).cardColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      offset: const Offset(1, 11),
-                    ),
-                  ]),
+                borderRadius: BorderRadius.circular(20.r),
+                color: Theme.of(context).cardColor,
+              ),
               child: Stack(
                 children: [
                   Positioned(

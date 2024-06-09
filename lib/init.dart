@@ -1,7 +1,9 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
+import 'package:digifarmer/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class Init extends StatefulWidget {
@@ -45,6 +47,15 @@ class _InitState extends State<Init> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+      ),
+    );
     return widget.child;
   }
 
@@ -54,7 +65,7 @@ class _InitState extends State<Init> {
     final WeatherProvider weatherProvider = context.read<WeatherProvider>();
     final NewsProvider newsProvider = context.read<NewsProvider>();
     myappProvider.loadThemeMode();
-     weatherProvider.getWeather();
+    weatherProvider.getWeather();
     newsProvider.getNews(1);
     await preCacheImage(context);
   }
