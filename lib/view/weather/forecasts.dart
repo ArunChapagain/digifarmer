@@ -228,7 +228,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
     return Scaffold(
       backgroundColor: _constants.primaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: _constants.primaryColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
