@@ -150,10 +150,10 @@ class WeatherCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               rowCard(
-                Remix.celsius_line,
+                Icons.thermostat_outlined,
                 const Color(0xff9c6135),
                 const Color(0xFFFCF0B6),
-                weatherProvider.temperature.toString(),
+                '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
               ),
               rowCard(
                 Icons.water_drop_outlined,
@@ -185,7 +185,6 @@ class WeatherCard extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             icon,
