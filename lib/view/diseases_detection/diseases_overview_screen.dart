@@ -18,11 +18,6 @@ class DiseasesDetectionPage extends StatelessWidget {
       'color': '0xfff94533'
     },
     {
-      'name': 'Potato Leaf',
-      'image': 'assets/images/detection/potato.png',
-      'color': '0xffdea55a'
-    },
-    {
       'name': 'Maize Leaf',
       'image': 'assets/images/detection/corn.png',
       'color': '0xffd8a520'
