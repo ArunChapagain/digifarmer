@@ -37,8 +37,9 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        forceMaterialTransparency: true,
+        elevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // forceMaterialTransparency: true,
         centerTitle: true,
         title: Text(
           'News',
@@ -53,7 +54,7 @@ class _NewsPageState extends State<NewsPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 20.h),
           child:
               Consumer<NewsProvider>(builder: (context, newsProvider, child) {
             final newsList = newsProvider.newsJson;

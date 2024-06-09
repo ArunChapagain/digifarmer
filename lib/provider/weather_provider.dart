@@ -7,7 +7,7 @@ class WeatherProvider with ChangeNotifier {
   final WeatherService _weatherService = WeatherService();
   bool _isLoading = false;
   String location = '';
-  String weatherIcon = 'heavycloud.png';
+  String weatherIcon = '';
   double temperature = 0.0;
   int windSpeed = 0;
   int humidity = 0;
@@ -17,6 +17,7 @@ class WeatherProvider with ChangeNotifier {
   List hourlyWeatherForecast = [];
   List dailyWeatherForecast = [];
   String currentWeatherStatus = '';
+  String ?currentIcon ;
 
   Future<void> getWeather() async {
     location = await PreferencesDB.db.getLocation();
@@ -39,6 +40,8 @@ class WeatherProvider with ChangeNotifier {
       currentDate = formatDate(locationData["localtime"]);
       currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
       currentWeatherStatus = currentWeather["condition"]["text"];
+      currentIcon = currentWeather["condition"]["icon"];
+      print(currentIcon);
       weatherIcon =
           "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
       temperature = (currentWeather["temp_c"]).toDouble();

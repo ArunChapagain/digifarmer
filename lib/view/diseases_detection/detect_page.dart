@@ -32,6 +32,7 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
+    print(widget.title);
     if (widget.title == 'Rice Leaf') {
       await Tflite.loadModel(
         model: riceDiseaseModel,
@@ -50,7 +51,7 @@ class _DetectPageState extends State<DetectPage> {
         labels: tomatoDiseasetxt,
         isAsset: true,
       );
-    } else if (widget.title == 'SugarCane Leaf') {
+    } else if (widget.title == 'Sugarcane Leaf') {
       await Tflite.loadModel(
         model: sugarcaneDiseaseModel,
         labels: sugarcaneDiseasetxt,
