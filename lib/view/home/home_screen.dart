@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 20.h),
                       const WeatherCard(),
                       SizedBox(height: 20.h),
                       Row(

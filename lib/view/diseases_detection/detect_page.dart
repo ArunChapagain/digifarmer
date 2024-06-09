@@ -302,6 +302,7 @@ class _DetectPageState extends State<DetectPage> {
               ),
               SizedBox(height: 30.h),
               DetectButton(
+                isSecondBtn: true,
                 onTap: () => pickImage(true),
                 title: 'Take picture',
                 subTitle: 'of your plant',
