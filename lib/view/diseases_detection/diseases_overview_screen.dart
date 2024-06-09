@@ -101,12 +101,12 @@ class DiseasesDetectionPage extends StatelessWidget {
             'Select the crop',
             style: textStyle.copyWith(
               fontSize: 25.sp,
-              color: Theme.of(context).primaryColor.withOpacity(0.8),
+              color: Theme.of(context).primaryColor,
             ),
           ),
           SizedBox(height: 20.h),
           SizedBox(
-            height: 700.h,
+            height: 525.h,
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
