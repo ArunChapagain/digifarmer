@@ -184,20 +184,14 @@ class WeatherCard extends StatelessWidget {
               children: [
                 rowCard(
                   Icons.thermostat_outlined,
-                  const Color(0xff9c6135),
-                  const Color(0xFFFCF0B6),
                   '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
                 ),
                 rowCard(
                   Icons.water_drop_outlined,
-                  const Color(0xff599d8b),
-                  const Color(0xFFD5E1E1),
                   '${weatherProvider.humidity.toString()}%',
                 ),
                 rowCard(
                   Icons.cloud_outlined,
-                  const Color(0xffa33f3f),
-                  const Color(0xFFF6C7C7),
                   ' ${weatherProvider.cloud.toString()}%',
                 ),
               ],
@@ -208,8 +202,8 @@ class WeatherCard extends StatelessWidget {
     });
   }
 
-  Widget rowCard(IconData icon, Color iconColor, Color color, String data) {
-    color = const Color.fromARGB(255, 19, 112, 22);
+  Widget rowCard(IconData icon, String data) {
+    Color color = const Color.fromARGB(255, 19, 112, 22);
     return Container(
       // height: 55.h,
       width: 100.w,
