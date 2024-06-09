@@ -129,7 +129,7 @@ class WeatherCard extends StatelessWidget {
       final date = DateFormat('EEEE, MMM d').format(DateTime.now());
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 10.w),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
         decoration: BoxDecoration(
           color: weatherConstants.primaryColor,
           borderRadius: BorderRadius.circular(20),
@@ -177,7 +177,6 @@ class WeatherCard extends StatelessWidget {
               color: Colors.white,
               thickness: 1,
             ),
-            SizedBox(height: 6.h),
             // SizedBox(height: 2.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,10 +194,10 @@ class WeatherCard extends StatelessWidget {
                   '${weatherProvider.humidity.toString()}%',
                 ),
                 rowCard(
-                  Icons.cloud_outlined,
+                  Remix.cloud_line,
                   const Color(0xffa33f3f),
                   const Color(0xFFF6C7C7),
-                  ' ${weatherProvider.cloud.toString()}%',
+                  '${weatherProvider.cloud.toString()}%',
                 ),
               ],
             )
@@ -213,9 +212,10 @@ class WeatherCard extends StatelessWidget {
     return Container(
       // height: 55.h,
       width: 100.w,
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
       decoration: BoxDecoration(
-        color: const Color(0xDB9BE655),
+        // color: color,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -224,13 +224,16 @@ class WeatherCard extends StatelessWidget {
           Icon(
             icon,
             color: color,
-            size: 28.sp,
+            // color: Colors.grey[200],
+            size: 28,
           ),
-          // SizedBox(width: 3.w),
+          // SizedBox(width: 5.w),
           Text(
             data,
             style: TextStyle(
               color: color,
+              // color: Colors.grey[200],
+
               fontSize: 20.sp,
               fontWeight: FontWeight.w900,
             ),
