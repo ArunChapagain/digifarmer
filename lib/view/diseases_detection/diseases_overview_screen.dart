@@ -18,11 +18,6 @@ class DiseasesDetectionPage extends StatelessWidget {
       'color': '0xfff94533'
     },
     {
-      'name': 'Potato Leaf',
-      'image': 'assets/images/detection/potato.png',
-      'color': '0xffdea55a'
-    },
-    {
       'name': 'Maize Leaf',
       'image': 'assets/images/detection/corn.png',
       'color': '0xffd8a520'
@@ -106,12 +101,12 @@ class DiseasesDetectionPage extends StatelessWidget {
             'Select the crop',
             style: textStyle.copyWith(
               fontSize: 25.sp,
-              color: Theme.of(context).primaryColor.withOpacity(0.8),
+              color: Theme.of(context).primaryColor,
             ),
           ),
           SizedBox(height: 20.h),
           SizedBox(
-            height: 700.h,
+            height: 525.h,
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,

@@ -262,35 +262,35 @@ class LocationDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset("assets/images/weather/pin.png", width: 20.w),
-        const SizedBox(width: 2),
-        Text(
-          location,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: () {
+        cityController.clear();
+        bottom_sheet.showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => SingleChildScrollView(
+            controller: bottom_sheet.ModalScrollController.of(context),
+            child: SearchCityBottomSheet(
+                cityController: cityController,
+                fetchWeatherData: fetchWeatherData,
+                constants: constants),
           ),
-        ),
-        IconButton(
-          onPressed: () {
-            cityController.clear();
-            bottom_sheet.showMaterialModalBottomSheet(
-              context: context,
-              builder: (context) => SingleChildScrollView(
-                controller: bottom_sheet.ModalScrollController.of(context),
-                child: SearchCityBottomSheet(
-                    cityController: cityController,
-                    fetchWeatherData: fetchWeatherData,
-                    constants: constants),
-              ),
-            );
-          },
-          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
-        ),
-      ],
+        );
+      },
+      child: Row(
+        children: [
+          Image.asset("assets/images/weather/pin.png", width: 20.w),
+          const SizedBox(width: 2),
+          Text(
+            location,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+        ],
+      ),
     );
   }
 }
@@ -320,7 +320,7 @@ class SearchCityBottomSheet extends StatelessWidget {
           TextField(
             // onChanged: (searchText) => fetchWeatherData(searchText),
             controller: cityController,
-            autofocus: true,
+            autofocus: false,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: constants.primaryColor),
               suffixIcon: GestureDetector(

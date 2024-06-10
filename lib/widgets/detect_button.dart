@@ -9,14 +9,24 @@ class DetectButton extends StatelessWidget {
       required this.onTap,
       required this.title,
       required this.subTitle,
-      required this.icon});
+      required this.icon,
+      this.isSecondBtn});
   final Function onTap;
-
+  final bool? isSecondBtn;
   final String title;
   final String subTitle;
   final IconData icon;
   final textStyle = TextStyle(
       fontFamily: GoogleFonts.poppins(fontWeight: FontWeight.w700).fontFamily);
+
+  bool get btn {
+    if (isSecondBtn == null) {
+      return false;
+    } else {
+      return isSecondBtn!;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,7 +38,7 @@ class DetectButton extends StatelessWidget {
           height: 75.h,
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            // color: Theme.of(context).primaryColor.withOpacity(0.8),
             borderRadius: BorderRadius.all(
               Radius.circular(26.r),
             ),
@@ -40,13 +50,18 @@ class DetectButton extends StatelessWidget {
                 offset: const Offset(1, 7),
               ),
             ],
-            gradient: const LinearGradient(
-              colors: [
-                Color.fromARGB(255, 127, 182, 8),
-                Color(0xff87bb18),
-                Color.fromARGB(255, 187, 233, 71),
-                Color.fromARGB(255, 149, 200, 37),
-              ],
+            gradient: LinearGradient(
+              colors: btn
+                  ? [
+                      const Color(0xFFBBDD73),
+                      const Color(0xFFCDE299),
+                    ]
+                  : [
+                      const Color.fromARGB(255, 127, 182, 8),
+                      const Color(0xff87bb18),
+                      const Color(0xFFB2E23A),
+                      const Color(0xFFA2CB49),
+                    ],
               begin: Alignment.topLeft,
               end: Alignment.topRight,
             ),
@@ -62,7 +77,9 @@ class DetectButton extends StatelessWidget {
                     title,
                     textAlign: TextAlign.start,
                     style: textStyle.copyWith(
-                      color: Colors.white.withOpacity(0.9),
+                      color: btn
+                          ? const Color(0xFF020120).withOpacity(0.7)
+                          : Colors.white.withOpacity(0.9),
                       fontSize: 22.sp,
                     ),
                   ),
@@ -72,7 +89,9 @@ class DetectButton extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16.sp,
-                      color: const Color(0xFF428C2C),
+                      color: btn
+                          ? const Color(0xFF020120).withOpacity(0.5)
+                          : const Color(0xFF428C2C),
                       height: 0.7.h,
                     ),
                   ),
@@ -80,8 +99,13 @@ class DetectButton extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                child: Icon(icon,
-                    color: Colors.white.withOpacity(0.9), size: 40.sp),
+                child: Icon(
+                  icon,
+                  color: btn
+                      ? const Color(0xFF020120).withOpacity(0.7)
+                      : Colors.white.withOpacity(0.9),
+                  size: 40.sp,
+                ),
               ),
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:digifarmer/provider/weather_provider.dart';
-import 'package:digifarmer/theme/constants.dart';
 import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
 import 'package:digifarmer/view/home/widgets/slider.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
@@ -53,24 +52,22 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.grey,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                const WeatherCard(),
-                SizedBox(height: 20.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Row(
-                    children: [
-                      const Icon(Remix.lightbulb_flash_line),
-                      SizedBox(width: 8.w),
-                      Text(
-                        'Tips',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      SizedBox(height: 20.h),
+                      const WeatherCard(),
+                      SizedBox(height: 20.h),
+                      Row(
+                        children: [
+                          const Icon(Remix.lightbulb_flash_line),
+                          SizedBox(width: 8.w),
+                          Text(
+                            'Tips',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -80,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               child: Column(
                 children: [
                   Row(
@@ -123,93 +120,67 @@ class WeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weatherConstants = Constants();
     return Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
       final date = DateFormat('EEEE, MMM d').format(DateTime.now());
-      return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10.w),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
-        decoration: BoxDecoration(
-          color: weatherConstants.primaryColor,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).primaryColor.withOpacity(0.5),
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
-          ],
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).primaryColor.withOpacity(0.5),
+      return Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                date,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontSize: 30.sp,
+                      fontFamily: GoogleFonts.notoSans(
+                        fontWeight: FontWeight.w700,
+                      ).fontFamily,
+                    ),
+              ),
+              SizedBox(width: 20.w),
+              weatherProvider.currentIcon != null
+                  ? Image.asset(
+                      'assets/images/weather/${weatherProvider.weatherIcon}',
+                      height: 50.h,
+                    )
+                  : const CupertinoActivityIndicator(),
             ],
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                SizedBox(width: 20.w),
-                Text(
-                  date,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontSize: 30.sp,
-                        fontFamily: GoogleFonts.notoSans(
-                          fontWeight: FontWeight.w700,
-                        ).fontFamily,
-                        color: Colors.grey[200],
-                      ),
-                ),
-                SizedBox(width: 20.w),
-                weatherProvider.currentIcon != null
-                    ? Image.asset(
-                        'assets/images/weather/${weatherProvider.weatherIcon}',
-                        height: 35.h,
-                      )
-                    : const CupertinoActivityIndicator(),
-              ],
-            ),
-            SizedBox(height: 6.h),
-            const Divider(
-              color: Colors.white,
-              thickness: 1,
-            ),
-            SizedBox(height: 6.h),
-            // SizedBox(height: 2.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                rowCard(
-                  Icons.thermostat_outlined,
-                  '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
-                ),
-                rowCard(
-                  Icons.water_drop_outlined,
-                  '${weatherProvider.humidity.toString()}%',
-                ),
-                rowCard(
-                  Icons.cloud_outlined,
-                  ' ${weatherProvider.cloud.toString()}%',
-                ),
-              ],
-            )
-          ],
-        ),
+          SizedBox(height: 8.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              rowCard(
+                Icons.thermostat_outlined,
+                const Color(0xff9c6135),
+                const Color(0xFFFCF0B6),
+                '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
+              ),
+              rowCard(
+                Icons.water_drop_outlined,
+                const Color(0xff599d8b),
+                const Color(0xFFD5E1E1),
+                '${weatherProvider.humidity.toString()}%',
+              ),
+              rowCard(
+                Remix.cloud_line,
+                const Color(0xffa33f3f),
+                const Color(0xFFF6C7C7),
+                '${weatherProvider.cloud.toString()}%',
+              ),
+            ],
+          )
+        ],
       );
     });
   }
 
-  Widget rowCard(IconData icon, String data) {
-    Color color = const Color.fromARGB(255, 19, 112, 22);
+  Widget rowCard(IconData icon, Color iconColor, Color color, String data) {
     return Container(
-      // height: 55.h,
+      height: 45.h,
       width: 100.w,
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
       decoration: BoxDecoration(
-        color: const Color(0xDB9BE655),
+        color: color,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -217,14 +188,14 @@ class WeatherCard extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: color,
-            size: 28.sp,
+            color: iconColor,
+            size: 28,
           ),
-          // SizedBox(width: 3.w),
+          SizedBox(width: 5.w),
           Text(
             data,
             style: TextStyle(
-              color: color,
+              color: iconColor,
               fontSize: 20.sp,
               fontWeight: FontWeight.w900,
             ),

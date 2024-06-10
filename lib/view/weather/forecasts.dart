@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ForecastsScreen extends StatefulWidget {
-  final dailyForecastWeather;
+  final dynamic dailyForecastWeather;
 
   const ForecastsScreen({super.key, required this.dailyForecastWeather});
 
@@ -183,14 +183,14 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                     children: [
                       Image.asset(
                           'assets/images/weather/${forecast["weatherIcon"]}',
-                          width: 60),
+                          width: 40.w),
                       const SizedBox(width: 5),
                       Text(
                         forecast["weatherName"] == 'Patchy rain nearby'
                             ? 'Partially cloudy'
                             : forecast["weatherName"],
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: TextStyle(
+                          fontSize: 18.sp,
                           color: Colors.grey,
                           fontWeight: FontWeight.w600,
                         ),
@@ -228,7 +228,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
     return Scaffold(
       backgroundColor: _constants.primaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: _constants.primaryColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -268,7 +268,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                       right: 20,
                       left: 20,
                       child: Container(
-                        height: 290,
+                        height: 200.h,
                         width: size.width * .7,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
@@ -292,23 +292,24 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                           clipBehavior: Clip.none,
                           children: [
                             Positioned(
-                              left: 20,
-                              width: 130,
+                              top: 20.h,
+                              left: 10.w,
+                              width: 100,
                               child: Image.asset(
                                 "assets/images/weather/${getForecastWeather(0)["weatherIcon"]}",
                                 // width: 120,
                               ),
                             ),
                             Positioned(
-                              top: 160,
-                              left: 30,
+                              top: 100.h,
+                              left: 20.w,
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: Text(
                                   getForecastWeather(0)["weatherName"],
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 22,
+                                      fontSize: 26.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -344,7 +345,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                               ),
                             ),
                             Positioned(
-                                top: 320,
+                                top: 220.h,
                                 left: 0,
                                 child: SizedBox(
                                   height: 700,
