@@ -48,7 +48,8 @@ class AppTheme {
 ///theme
 class AppThemeGreen {
   ///Main color
-  static const primaryColor = Color(0xFF5AC03B);
+  // static const primaryColor = Color(0xFF5AC03B);
+  static const primaryColor = Color(0xFF54BB35);
 
   ///Light theme
   static final lightTheme = ThemeData(
@@ -56,32 +57,6 @@ class AppThemeGreen {
     brightness: Brightness.light,
     //font
     fontFamily: GoogleFonts.poppins().fontFamily,
-    //letter
-    // textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-    //     displayLarge: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w900,
-    //     ),
-    //     displayMedium: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w600,
-    //     ),
-    //     displaySmall: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w500,
-    //     ),
-    //     bodyLarge: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w400,
-    //     ),
-    //     bodyMedium: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //     bodySmall: TextStyle(
-    //       color: Colors.black87,
-    //       fontWeight: FontWeight.w200,
-    //     )),
 
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.black87),
@@ -94,8 +69,7 @@ class AppThemeGreen {
     //main color
     primaryColor: primaryColor,
     //scaffold background color
-    scaffoldBackgroundColor:
-        const Color(0xFFF6F8FA), //0xFFF7F7F7 0xFFF9F9F9 0xFFF6F8FA 0xFFFCFBFC
+    scaffoldBackgroundColor: const Color(0xFFF6F8FA),
     //bottomNavigationBar
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
