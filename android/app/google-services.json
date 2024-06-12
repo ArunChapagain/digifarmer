@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "835986027126",
+    "project_id": "digifarmer-dc358",
+    "storage_bucket": "digifarmer-dc358.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835986027126:android:6b8bd1126d962adfc46557",
+        "android_client_info": {
+          "package_name": "com.example.digifarmer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLmtI6WJJAuxDXlMGCKVrhoQfpEu_2u6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

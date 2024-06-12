@@ -17,7 +17,6 @@ dependencies:
   flutter_smart_dialog: ^4.9.6+1
   remixicon: ^1.2.0
   google_fonts: ^6.2.1
-  svg_flutter: ^0.0.1
   shared_preferences: ^2.2.3
   provider: ^6.1.2
   carousel_slider: ^4.2.1
@@ -28,6 +27,9 @@ dependencies:
   flutter_tflite: ^1.0.1
   image_picker: ^0.8.6
   flutter_no_internet_widget: ^1.0.0+18-dev.1
+  firebase_core: ^3.1.0
+  firebase_auth: ^5.1.0
+  google_sign_in: ^6.2.1
 
 
 dev_dependencies:
@@ -46,6 +48,7 @@ flutter:
     - assets/images/home/
     - assets/images/detection/
     - assets/images/weather/
+    - assets/images/auth/
     - assets/model/
     - assets/model/disease/
     
