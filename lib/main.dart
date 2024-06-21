@@ -5,7 +5,6 @@ import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
 import 'package:digifarmer/view/auth/auth_page.dart';
-import 'package:digifarmer/view/auth/login_or_register.dart';
 import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +31,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => NewsProvider())
         ],
         builder: (context, child) {
-          final watchApplicationProvider = context.watch<MyappProvider>();
 
           return ScreenUtilInit(
               designSize: const Size(360, 640),
               builder: (context, child) {
                 return MaterialApp(
-                  // themeMode: watchApplicationProvider.themeMode,
                   themeMode: ThemeMode.light,
                   theme: AppTheme.getLightThemeData(context),
                   darkTheme: AppTheme.getDarkThemeData(context),
