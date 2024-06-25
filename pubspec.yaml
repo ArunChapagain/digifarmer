@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.11.0
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.1
   flutter_smart_dialog: ^4.9.6+1
@@ -36,11 +35,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: "^0.11.0"
 
-flutter_launcher_icons:
+flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/images/icon/icon.png"
 
 flutter:
   uses-material-design: true
@@ -52,5 +52,6 @@ flutter:
     - assets/images/detection/
     - assets/images/weather/
     - assets/images/auth/
+    - assets/images/icon/
     - assets/model/
     - assets/model/disease/
