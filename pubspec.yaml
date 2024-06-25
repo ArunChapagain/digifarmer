@@ -30,6 +30,7 @@ dependencies:
   firebase_core: ^3.1.0
   firebase_auth: ^5.1.0
   google_sign_in: ^6.2.1
+  internet_connection_checker_plus: ^0.0.1
 
 
 dev_dependencies:

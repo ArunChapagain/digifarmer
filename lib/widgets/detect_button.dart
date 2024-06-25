@@ -35,7 +35,7 @@ class DetectButton extends StatelessWidget {
       },
       child: AnimatedPress(
         child: Container(
-          height: 75.h,
+          height: 70.h,
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
           decoration: BoxDecoration(
             // color: Theme.of(context).primaryColor.withOpacity(0.8),
@@ -59,8 +59,8 @@ class DetectButton extends StatelessWidget {
                   : [
                       const Color.fromARGB(255, 127, 182, 8),
                       const Color(0xff87bb18),
-                      const Color(0xFFB2E23A),
-                      const Color(0xFFA2CB49),
+                      const Color(0xFF99C628),
+                      const Color(0xFFA8D24C),
                     ],
               begin: Alignment.topLeft,
               end: Alignment.topRight,

@@ -1,6 +1,8 @@
+import 'package:digifarmer/application.dart';
 import 'package:digifarmer/firebase_options.dart';
 import 'package:digifarmer/init.dart';
 import 'package:digifarmer/provider/myapp_provider.dart';
+// import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
@@ -10,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,10 +31,10 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => MyappProvider()),
           ChangeNotifierProvider(create: (context) => WeatherProvider()),
-          ChangeNotifierProvider(create: (context) => NewsProvider())
+          ChangeNotifierProvider(create: (context) => NewsProvider()),
+          // ChangeNotifierProvider(create: (context) => NetworkCheckerProvider())
         ],
         builder: (context, child) {
-
           return ScreenUtilInit(
               designSize: const Size(360, 640),
               builder: (context, child) {
@@ -40,8 +43,8 @@ class MyApp extends StatelessWidget {
                   theme: AppTheme.getLightThemeData(context),
                   darkTheme: AppTheme.getDarkThemeData(context),
                   debugShowCheckedModeBanner: false,
-                  title: 'Digifarmer',
-                  home: const WillPopScopeRoute(child: Init(child: AuthPage())),
+                  title: 'DigiFarmer',
+                  home: const WillPopScopeRoute(child: Init(child: Application())),
                 );
               });
         });

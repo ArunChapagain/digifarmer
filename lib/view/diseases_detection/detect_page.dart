@@ -69,6 +69,12 @@ class _DetectPageState extends State<DetectPage> {
         labels: cornDiseasetxt,
         isAsset: true,
       );
+    } else if (widget.title == 'Plant Health') {
+      await Tflite.loadModel(
+        model: plantHealthModel,
+        labels: plantHealthtxt,
+        isAsset: true,
+      );
     }
   }
 
@@ -240,9 +246,7 @@ class _DetectPageState extends State<DetectPage> {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: Color(
-                        int.parse(widget.color),
-                      ),
+                      color: Color(int.parse(widget.color)).withOpacity(0.7),
                     ),
                     child: Image.asset(
                       widget.imagePath,
@@ -261,14 +265,14 @@ class _DetectPageState extends State<DetectPage> {
                           widget.title,
                           style: textStyle.copyWith(
                             fontSize: 34.sp,
-                            color: const Color(0xFFFFFFFF),
+                            color: Color(int.parse(widget.color)),
                           ),
                         ),
                         Text(
                           'Identifier',
                           style: TextStyle(
                             fontSize: 24.sp,
-                            color: Colors.white,
+                            color: Color(int.parse(widget.color)),
                             height: 0.6.h,
                           ),
                         ),
@@ -277,7 +281,7 @@ class _DetectPageState extends State<DetectPage> {
                   )
                 ],
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 35.h),
               Text(
                 'Digifarmer',
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
@@ -286,7 +290,7 @@ class _DetectPageState extends State<DetectPage> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
               Text(
                 'Supporting Farmers in ',
                 style: textStyle.copyWith(
@@ -300,7 +304,7 @@ class _DetectPageState extends State<DetectPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 35.h),
               DetectButton(
                 isSecondBtn: true,
                 onTap: () => pickImage(true),
