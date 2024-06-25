@@ -1,17 +1,17 @@
 name: digifarmer
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
+  sdk: ">=3.3.4 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-
+  flutter_launcher_icons: ^0.11.0
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.1
   flutter_smart_dialog: ^4.9.6+1
@@ -32,15 +32,17 @@ dependencies:
   google_sign_in: ^6.2.1
   internet_connection_checker_plus: ^0.0.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^4.0.0
 
-flutter:
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
 
+flutter:
   uses-material-design: true
 
   assets:
@@ -52,4 +54,3 @@ flutter:
     - assets/images/auth/
     - assets/model/
     - assets/model/disease/
-    

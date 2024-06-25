@@ -1,10 +1,13 @@
+import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/view/news/controller/pagination_scroll_control.dart';
 import 'package:digifarmer/view/news/news_detail_screen.dart';
 import 'package:digifarmer/widgets/animation.dart';
+import 'package:digifarmer/widgets/no_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +24,10 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   void initState() {
+    // context.read<NetworkCheckerProvider>().listenNetwork(() {
+      
+    //   context.read<NewsProvider>().getNews(1);
+    // });
     paginationScrollController.init(loadAction: () {
       // => context.read<RequestCubit>().getNewRequests()
     });
@@ -55,22 +62,25 @@ class _NewsPageState extends State<NewsPage> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 20.h),
-          child:
-              Consumer<NewsProvider>(builder: (context, newsProvider, child) {
+          child: Consumer2<NewsProvider, NetworkCheckerProvider>(
+              builder: (context, newsProvider, networkProvider, child) {
             final newsList = newsProvider.newsJson;
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              controller: paginationScrollController.scrollController,
-              itemCount: newsList.length - 1,
-              itemBuilder: (context, index) {
-                String? title = newsList[index]['title'];
-                return (title) != null
-                    ? NewsCard(
-                        news: newsList[index + 1],
-                      )
-                    : const SizedBox();
-              },
-            );
+            return networkProvider.state ==
+                    InternetConnectionStatus.disconnected
+                ? const NoInternetWidget()
+                : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    controller: paginationScrollController.scrollController,
+                    itemCount: newsList.length - 1,
+                    itemBuilder: (context, index) {
+                      String? title = newsList[index]['title'];
+                      return (title) != null
+                          ? NewsCard(
+                              news: newsList[index + 1],
+                            )
+                          : const SizedBox();
+                    },
+                  );
           }),
         ),
       ),

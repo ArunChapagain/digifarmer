@@ -41,7 +41,6 @@ class WeatherProvider with ChangeNotifier {
       currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
       currentWeatherStatus = currentWeather["condition"]["text"];
       currentIcon = currentWeather["condition"]["icon"];
-      print(currentIcon);
       weatherIcon =
           "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
       temperature = (currentWeather["temp_c"]).toDouble();

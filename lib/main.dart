@@ -2,11 +2,10 @@ import 'package:digifarmer/application.dart';
 import 'package:digifarmer/firebase_options.dart';
 import 'package:digifarmer/init.dart';
 import 'package:digifarmer/provider/myapp_provider.dart';
-// import 'package:digifarmer/provider/network_checker_provider.dart';
+import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
-import 'package:digifarmer/view/auth/auth_page.dart';
 import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => MyappProvider()),
           ChangeNotifierProvider(create: (context) => WeatherProvider()),
           ChangeNotifierProvider(create: (context) => NewsProvider()),
-          // ChangeNotifierProvider(create: (context) => NetworkCheckerProvider())
+          ChangeNotifierProvider(create: (context) => NetworkCheckerProvider())
         ],
         builder: (context, child) {
           return ScreenUtilInit(

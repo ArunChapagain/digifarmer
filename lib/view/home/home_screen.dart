@@ -170,78 +170,76 @@ class WeatherCard extends StatelessWidget {
     return Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
       final date = DateFormat('EEEE, MMM d').format(DateTime.now());
-      return AnimatedPress(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.w),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
-          decoration: BoxDecoration(
-            color: weatherConstants.primaryColor,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.5),
-                blurRadius: 10,
-                offset: const Offset(0, 3),
-              ),
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+        decoration: BoxDecoration(
+          color: weatherConstants.primaryColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).primaryColor.withOpacity(0.5),
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor,
+              Theme.of(context).primaryColor.withOpacity(0.5),
             ],
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(0.5),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 20.w),
+                Text(
+                  date,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 26.sp,
+                        fontFamily: GoogleFonts.notoSans(
+                          fontWeight: FontWeight.w700,
+                        ).fontFamily,
+                        color: Colors.grey[200],
+                      ),
+                ),
+                SizedBox(width: 15.w),
+                weatherProvider.currentIcon != null
+                    ? Image.asset(
+                        'assets/images/weather/${weatherProvider.weatherIcon}',
+                        height: 32.h,
+                      )
+                    : const CupertinoActivityIndicator(),
               ],
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 20.w),
-                  Text(
-                    date,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 26.sp,
-                          fontFamily: GoogleFonts.notoSans(
-                            fontWeight: FontWeight.w700,
-                          ).fontFamily,
-                          color: Colors.grey[200],
-                        ),
-                  ),
-                  SizedBox(width: 15.w),
-                  weatherProvider.currentIcon != null
-                      ? Image.asset(
-                          'assets/images/weather/${weatherProvider.weatherIcon}',
-                          height: 32.h,
-                        )
-                      : const CupertinoActivityIndicator(),
-                ],
-              ),
-              SizedBox(height: 6.h),
-              const Divider(
-                color: Colors.white,
-                thickness: 1,
-              ),
-              SizedBox(height: 6.h),
-              // SizedBox(height: 2.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  rowCard(
-                    Icons.thermostat_outlined,
-                    '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
-                  ),
-                  rowCard(
-                    Icons.water_drop_outlined,
-                    '${weatherProvider.humidity.toString()}%',
-                  ),
-                  rowCard(
-                    Icons.cloud_outlined,
-                    ' ${weatherProvider.cloud.toString()}%',
-                  ),
-                ],
-              )
-            ],
-          ),
+            SizedBox(height: 6.h),
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
+            ),
+            SizedBox(height: 6.h),
+            // SizedBox(height: 2.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                rowCard(
+                  Icons.thermostat_outlined,
+                  '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
+                ),
+                rowCard(
+                  Icons.water_drop_outlined,
+                  '${weatherProvider.humidity.toString()}%',
+                ),
+                rowCard(
+                  Icons.cloud_outlined,
+                  ' ${weatherProvider.cloud.toString()}%',
+                ),
+              ],
+            )
+          ],
         ),
       );
     });

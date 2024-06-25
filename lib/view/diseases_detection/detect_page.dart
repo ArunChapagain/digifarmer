@@ -32,7 +32,6 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
-    print(widget.title);
     if (widget.title == 'Rice Leaf') {
       await Tflite.loadModel(
         model: riceDiseaseModel,
@@ -246,7 +245,9 @@ class _DetectPageState extends State<DetectPage> {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      color: Color(int.parse(widget.color)).withOpacity(0.7),
+                      color: Color(
+                        int.parse(widget.color),
+                      ),
                     ),
                     child: Image.asset(
                       widget.imagePath,
@@ -265,14 +266,14 @@ class _DetectPageState extends State<DetectPage> {
                           widget.title,
                           style: textStyle.copyWith(
                             fontSize: 34.sp,
-                            color: Color(int.parse(widget.color)),
+                            color: const Color(0xFFFFFFFF),
                           ),
                         ),
                         Text(
                           'Identifier',
                           style: TextStyle(
                             fontSize: 24.sp,
-                            color: Color(int.parse(widget.color)),
+                            color: Colors.white,
                             height: 0.6.h,
                           ),
                         ),

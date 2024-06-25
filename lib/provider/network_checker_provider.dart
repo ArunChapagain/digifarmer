@@ -10,6 +10,8 @@ class NetworkCheckerProvider extends ChangeNotifier {
           _status == InternetConnectionStatus.disconnected) {
         _status = status;
         function();
+      } else {
+        _status = status;
       }
       notifyListeners();
     });
