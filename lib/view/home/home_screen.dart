@@ -1,11 +1,10 @@
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/constants.dart';
-import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
+import 'package:digifarmer/view/diseases_detection/detect_page.dart';
 import 'package:digifarmer/view/home/widgets/slider.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 15.h),
                 const WeatherCard(),
                 SizedBox(height: 20.h),
                 Padding(
@@ -141,12 +140,16 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => DiseasesDetectionPage(),
+                            builder: (context) => const DetectPage(
+                              title: 'Plant Health',
+                              imagePath: 'assets/images/detection/health.png',
+                              color: '0xFF42A57F',
+                            ),
                           ),
                         );
                       },
                       title: 'Detector',
-                      subTitle: 'Tap to detect disease',
+                      subTitle: 'Tap to diagnose plant health',
                       icon: Remix.search_2_line),
                 ],
               ),
@@ -167,78 +170,76 @@ class WeatherCard extends StatelessWidget {
     return Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
       final date = DateFormat('EEEE, MMM d').format(DateTime.now());
-      return AnimatedPress(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.w),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
-          decoration: BoxDecoration(
-            color: weatherConstants.primaryColor,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.5),
-                blurRadius: 10,
-                offset: const Offset(0, 3),
-              ),
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+        decoration: BoxDecoration(
+          color: weatherConstants.primaryColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).primaryColor.withOpacity(0.5),
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor,
+              Theme.of(context).primaryColor.withOpacity(0.5),
             ],
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(0.5),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 20.w),
+                Text(
+                  date,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 26.sp,
+                        fontFamily: GoogleFonts.notoSans(
+                          fontWeight: FontWeight.w700,
+                        ).fontFamily,
+                        color: Colors.grey[200],
+                      ),
+                ),
+                SizedBox(width: 15.w),
+                weatherProvider.currentIcon != null
+                    ? Image.asset(
+                        'assets/images/weather/${weatherProvider.weatherIcon}',
+                        height: 32.h,
+                      )
+                    : const CupertinoActivityIndicator(),
               ],
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 20.w),
-                  Text(
-                    date,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 26.sp,
-                          fontFamily: GoogleFonts.notoSans(
-                            fontWeight: FontWeight.w700,
-                          ).fontFamily,
-                          color: Colors.grey[200],
-                        ),
-                  ),
-                  SizedBox(width: 15.w),
-                  weatherProvider.currentIcon != null
-                      ? Image.asset(
-                          'assets/images/weather/${weatherProvider.weatherIcon}',
-                          height: 32.h,
-                        )
-                      : const CupertinoActivityIndicator(),
-                ],
-              ),
-              SizedBox(height: 6.h),
-              const Divider(
-                color: Colors.white,
-                thickness: 1,
-              ),
-              SizedBox(height: 6.h),
-              // SizedBox(height: 2.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  rowCard(
-                    Icons.thermostat_outlined,
-                    '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
-                  ),
-                  rowCard(
-                    Icons.water_drop_outlined,
-                    '${weatherProvider.humidity.toString()}%',
-                  ),
-                  rowCard(
-                    Icons.cloud_outlined,
-                    ' ${weatherProvider.cloud.toString()}%',
-                  ),
-                ],
-              )
-            ],
-          ),
+            SizedBox(height: 6.h),
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
+            ),
+            SizedBox(height: 6.h),
+            // SizedBox(height: 2.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                rowCard(
+                  Icons.thermostat_outlined,
+                  '${(weatherProvider.temperature).toInt().toString()}\u00B0C',
+                ),
+                rowCard(
+                  Icons.water_drop_outlined,
+                  '${weatherProvider.humidity.toString()}%',
+                ),
+                rowCard(
+                  Icons.cloud_outlined,
+                  ' ${weatherProvider.cloud.toString()}%',
+                ),
+              ],
+            )
+          ],
         ),
       );
     });

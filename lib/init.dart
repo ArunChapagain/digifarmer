@@ -1,4 +1,5 @@
 import 'package:digifarmer/provider/myapp_provider.dart';
+import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +64,14 @@ class _InitState extends State<Init> {
     final MyappProvider myappProvider = context.read<MyappProvider>();
     final WeatherProvider weatherProvider = context.read<WeatherProvider>();
     final NewsProvider newsProvider = context.read<NewsProvider>();
+    final NetworkCheckerProvider networkCheckerProvider =
+        context.read<NetworkCheckerProvider>();
+
     myappProvider.loadThemeMode();
-    weatherProvider.getWeather();
-    newsProvider.getNews(1);
+    networkCheckerProvider.listenNetwork(() {
+      weatherProvider.getWeather();
+      newsProvider.getNews(1);
+    });
     await preCacheImage(context);
   }
 

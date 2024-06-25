@@ -39,7 +39,6 @@ class _RegisterPageState extends State<RegisterPage> {
           password: passwordController.text,
         );
         if (!context.mounted) return;
-
         Navigator.pop(context);
       } else {
         Navigator.pop(context);

@@ -32,7 +32,6 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
-    print(widget.title);
     if (widget.title == 'Rice Leaf') {
       await Tflite.loadModel(
         model: riceDiseaseModel,
@@ -67,6 +66,12 @@ class _DetectPageState extends State<DetectPage> {
       await Tflite.loadModel(
         model: cornDiseaseModel,
         labels: cornDiseasetxt,
+        isAsset: true,
+      );
+    } else if (widget.title == 'Plant Health') {
+      await Tflite.loadModel(
+        model: plantHealthModel,
+        labels: plantHealthtxt,
         isAsset: true,
       );
     }
@@ -277,7 +282,7 @@ class _DetectPageState extends State<DetectPage> {
                   )
                 ],
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 35.h),
               Text(
                 'Digifarmer',
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
@@ -286,7 +291,7 @@ class _DetectPageState extends State<DetectPage> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
               Text(
                 'Supporting Farmers in ',
                 style: textStyle.copyWith(
@@ -300,7 +305,7 @@ class _DetectPageState extends State<DetectPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 35.h),
               DetectButton(
                 isSecondBtn: true,
                 onTap: () => pickImage(true),
