@@ -355,7 +355,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return buildForecastCard(
-                                          getForecastWeather(index + 1));
+                                          getForecastWeather(index));
                                     },
                                   ),
                                 ))
