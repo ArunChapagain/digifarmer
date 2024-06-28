@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:digifarmer/constants/constants.dart';
+import 'package:digifarmer/constants/diseases_data.dart';
+import 'package:digifarmer/provider/detection_provider.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:remixicon/remixicon.dart';
 
 class DetectPage extends StatefulWidget {
@@ -27,6 +30,7 @@ class _DetectPageState extends State<DetectPage> {
   File? _imageFile;
   @override
   void initState() {
+    DetectionProvider().getDetectionDetail(widget.title, 'Healthy');
     super.initState();
     loadModel();
   }
@@ -111,6 +115,7 @@ class _DetectPageState extends State<DetectPage> {
         asynch: true);
 
     if (output != null) {
+      context.read<DetectionProvider>().getDetectionDetail(widget.title, output[0]['label']);
       displayResult(output[0]['label']);
     }
   }
@@ -119,6 +124,8 @@ class _DetectPageState extends State<DetectPage> {
     String digonosis,
     // BuildContext context,
   ) {
+    var data =context.read<DetectionProvider>().json;
+    
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -186,7 +193,7 @@ class _DetectPageState extends State<DetectPage> {
                         ),
                       ),
                       Text(
-                        'Fungi',
+                        data['class'] ?? 'Healthy',
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w800,
@@ -196,7 +203,7 @@ class _DetectPageState extends State<DetectPage> {
                   ),
                   SizedBox(height: 10.h),
                   Text(
-                    'episom is a fungal disease that affects the leaves of the plant. It is caused by the fungus Puccinia polysora. The disease is characterized by the presence of small, yellowish-brown spots on the leaves. ',
+                    data['description'] ?? 'No description available',
                     style: TextStyle(
                       fontSize: 20.sp,
                       // height: 1.5.h,
