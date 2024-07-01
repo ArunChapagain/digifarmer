@@ -25,7 +25,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   void initState() {
     // context.read<NetworkCheckerProvider>().listenNetwork(() {
-      
+
     //   context.read<NewsProvider>().getNews(1);
     // });
     paginationScrollController.init(loadAction: () {
@@ -47,7 +47,7 @@ class _NewsPageState extends State<NewsPage> {
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         // forceMaterialTransparency: true,
-        centerTitle: true,
+        // centerTitle: true,
         title: Text(
           'News',
           style: TextStyle(

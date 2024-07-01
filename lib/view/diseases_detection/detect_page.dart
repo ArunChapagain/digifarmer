@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:digifarmer/constants/constants.dart';
-import 'package:digifarmer/constants/diseases_data.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
+import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,6 @@ class _DetectPageState extends State<DetectPage> {
   File? _imageFile;
   @override
   void initState() {
-    DetectionProvider().getDetectionDetail(widget.title, 'Healthy');
     super.initState();
     loadModel();
   }
@@ -96,7 +95,7 @@ class _DetectPageState extends State<DetectPage> {
 
     if (image == null) return null;
     setState(() {
-      // _loading = true;
+      // context.read<DetectionProvider>().isDetection = true;
       _imageFile = File(image.path);
     });
     classifyImage(_imageFile!);
@@ -115,18 +114,16 @@ class _DetectPageState extends State<DetectPage> {
         asynch: true);
 
     if (output != null) {
-      context.read<DetectionProvider>().getDetectionDetail(widget.title, output[0]['label']);
+      Provider.of<DetectionProvider>(context, listen: false)
+          .getDetectionDetail(widget.title, output[0]['label']);
+
       displayResult(output[0]['label']);
     }
   }
 
-  displayResult(
-    String digonosis,
-    // BuildContext context,
-  ) {
-    var data =context.read<DetectionProvider>().json;
-    
+  displayResult(String digonosis) {
     showModalBottomSheet(
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.r),
@@ -136,83 +133,101 @@ class _DetectPageState extends State<DetectPage> {
         isDismissible: true,
         context: context,
         builder: (context) {
-          return Container(
-            height: 400.h,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r),
-              ),
-              border: Border.all(
-                  color: Theme.of(context).primaryColor.withOpacity(0.8),
-                  width: 3.w),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                              margin: EdgeInsets.only(right: 10.w, top: 5.h),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.8),
-                                    width: 3.w),
+          return Consumer<DetectionProvider>(
+            builder: (context, value, child) {
+              String type = value.classDetection;
+              String description = value.details;
+              if (value.isDetection == true) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                );
+              } else {
+                return Container(
+                  height: 400.h,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                    border: Border.all(
+                        color: Theme.of(context).primaryColor.withOpacity(0.8),
+                        width: 3.w),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                    margin:
+                                        EdgeInsets.only(right: 10.w, top: 5.h),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .primaryColor
+                                              .withOpacity(0.8),
+                                          width: 3.w),
+                                    ),
+                                    child:
+                                        Icon(Remix.close_line, size: 30.sp))),
+                          ],
+                        ),
+                        Text(
+                          //make the first |letter and letter after space of the digonois to be capital
+                          digonosis[0].toUpperCase() +
+                              digonosis.substring(1).toLowerCase(),
+                          style: TextStyle(
+                            fontSize: 26.sp,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        Row(
+                          children: [
+                            Text(
+                              type.isEmpty ? '' : 'Class: ',
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
                               ),
-                              child: Icon(Remix.close_line, size: 30.sp))),
-                    ],
-                  ),
-                  Text(
-                    //make the first |letter and letter after space of the digonois to be capital
-                    digonosis[0].toUpperCase() +
-                        digonosis.substring(1).toLowerCase(),
-                    style: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w900,
+                            ),
+                            Text(
+                              type,
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10.h),
+                        Text(
+                          description,
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            // height: 1.5.h,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10.h),
-                  Row(
-                    children: [
-                      Text(
-                        'Class: ',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        data['class'] ?? 'Healthy',
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    data['description'] ?? 'No description available',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      // height: 1.5.h,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
-              ),
-            ),
+                );
+              }
+            },
           );
         });
   }
@@ -222,114 +237,117 @@ class _DetectPageState extends State<DetectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: Column(
+        body: SafeArea(
+      child: body(context),
+    ));
+  }
+
+  Widget body(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: Column(
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  AnimatedPress(
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Remix.arrow_left_s_line, size: 26.sp),
-                    ),
-                  ),
-                  Text(
-                    'back',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
-                      color: Color(
-                        int.parse(widget.color),
-                      ),
-                    ),
-                    child: Image.asset(
-                      widget.imagePath,
-                      height: 175.h,
-                      width: 400.w,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  Positioned(
-                    top: 60.h,
-                    left: 10.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.title,
-                          style: textStyle.copyWith(
-                            fontSize: 34.sp,
-                            color: const Color(0xFFFFFFFF),
-                          ),
-                        ),
-                        Text(
-                          'Identifier',
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            color: Colors.white,
-                            height: 0.6.h,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 35.h),
-              Text(
-                'Digifarmer',
-                style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                      fontFamily: GoogleFonts.righteous().fontFamily,
-                      fontSize: 34.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                'Supporting Farmers in ',
-                style: textStyle.copyWith(
-                  fontSize: 22.sp,
+              AnimatedPress(
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Remix.arrow_left_s_line, size: 26.sp),
                 ),
               ),
               Text(
-                'Safegauarding their Crops Health',
+                'back',
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
                 ),
-              ),
-              SizedBox(height: 35.h),
-              DetectButton(
-                isSecondBtn: true,
-                onTap: () => pickImage(true),
-                title: 'Take picture',
-                subTitle: 'of your plant',
-                icon: Remix.camera_line,
-              ),
-              SizedBox(height: 15.h),
-              DetectButton(
-                onTap: () => pickImage(false),
-                title: 'Import',
-                subTitle: 'from your gallary',
-                icon: Remix.gallery_view_2,
               ),
             ],
           ),
-        ),
+          SizedBox(height: 20.h),
+          Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: Color(
+                    int.parse(widget.color),
+                  ),
+                ),
+                child: Image.asset(
+                  widget.imagePath,
+                  height: 175.h,
+                  width: 400.w,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              Positioned(
+                top: 60.h,
+                left: 10.w,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style: textStyle.copyWith(
+                        fontSize: 34.sp,
+                        color: const Color(0xFFFFFFFF),
+                      ),
+                    ),
+                    Text(
+                      'Identifier',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        color: Colors.white,
+                        height: 0.6.h,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 35.h),
+          Text(
+            'Digifarmer',
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontFamily: GoogleFonts.righteous().fontFamily,
+                  fontSize: 34.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            'Supporting Farmers in ',
+            style: textStyle.copyWith(
+              fontSize: 22.sp,
+            ),
+          ),
+          Text(
+            'Safegauarding their Crops Health',
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(height: 35.h),
+          DetectButton(
+            isSecondBtn: true,
+            onTap: () => pickImage(true),
+            title: 'Take picture',
+            subTitle: 'of your plant',
+            icon: Remix.camera_line,
+          ),
+          SizedBox(height: 15.h),
+          DetectButton(
+            onTap: () => pickImage(false),
+            title: 'Import',
+            subTitle: 'from your gallary',
+            icon: Remix.gallery_view_2,
+          ),
+        ],
       ),
     );
   }

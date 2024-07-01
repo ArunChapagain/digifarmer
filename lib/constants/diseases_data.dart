@@ -3,34 +3,6 @@ final diseasesData = [
     "plant": "Rice",
     "diagnose": [
       {
-        "name": "Brown Spot",
-        "class": "Fungus",
-        "description":
-            "Brown Spot of rice is caused by the fungus Bipolaris oryzae. It manifests as small, circular, dark brown lesions on leaves leading to reduced photosynthesis and poor grain quality."
-      },
-      {
-        "name": "Rice Hispa",
-        "class": "Insect",
-        "description":
-            "Rice Hispa caused by the insect Dicladi spa armigera results in feeding scars on leaves. The larvae feed on leaf tissues causing 'skeletonized' leaves and reduces photosynthetic capacity."
-      },
-      {
-        "name": "Leaf Blast",
-        "class": "Fungus",
-        "description":
-            "Leaf Blast caused by the fungus Magnaporthe oryzae appears as diamond-shaped lesions with gray centers and dark borders on leaves. It can severely affect leaf function and yield."
-      },
-      {
-        "name": "Healthy",
-        "class": "",
-        "description": "The respective plant is healthy."
-      }
-    ]
-  },
-  {
-    "plant": "Corn",
-    "diagnose": [
-      {
         "name": "Rust",
         "class": "Fungus",
         "description":
@@ -47,6 +19,34 @@ final diseasesData = [
         "class": "Fungus",
         "description":
             "Blight in corn often referred to as Northern Corn Leaf Blight which is caused by the fungus Exserohilum turcicum. It manifests as long, elliptical grayish-green lesions on the leaves which can merge to cause extensive leaf damage."
+      },
+      {
+        "name": "Healthy",
+        "class": "",
+        "description": "The respective plant is healthy."
+      }
+    ]
+  },
+  {
+    "plant": "Maize",
+    "diagnose": [
+      {
+        "name": "Brown Spot",
+        "class": "Fungus",
+        "description":
+            "Brown Spot of rice is caused by the fungus Bipolaris oryzae. It manifests as small, circular, dark brown lesions on leaves leading to reduced photosynthesis and poor grain quality."
+      },
+      {
+        "name": "Rice Hispa",
+        "class": "Insect",
+        "description":
+            "Rice Hispa caused by the insect Dicladi spa armigera results in feeding scars on leaves. The larvae feed on leaf tissues causing 'skeletonized' leaves and reduces photosynthetic capacity."
+      },
+      {
+        "name": "Leaf Blast",
+        "class": "Fungus",
+        "description":
+            "Leaf Blast caused by the fungus Magnaporthe oryzae appears as diamond-shaped lesions with gray centers and dark borders on leaves. It can severely affect leaf function and yield."
       },
       {
         "name": "Healthy",

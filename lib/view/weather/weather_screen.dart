@@ -48,7 +48,6 @@ class _HomePageState extends State<WeatherPage> {
                   SizedBox(height: 40.w),
                   Text(
                     'Weather',
-                    textAlign: TextAlign.end,
                     style: TextStyle(
                       fontSize: 35.sp,
                       fontFamily: GoogleFonts.poppins(

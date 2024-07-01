@@ -2,6 +2,7 @@ import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
+import 'package:digifarmer/services/diseases_detail_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +67,8 @@ class _InitState extends State<Init> {
     final NewsProvider newsProvider = context.read<NewsProvider>();
     final NetworkCheckerProvider networkCheckerProvider =
         context.read<NetworkCheckerProvider>();
-
+    DiseasesDetailService.loadJson();
+    
     myappProvider.loadThemeMode();
     networkCheckerProvider.listenNetwork(() {
       weatherProvider.getWeather();
