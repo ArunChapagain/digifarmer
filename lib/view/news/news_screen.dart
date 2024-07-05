@@ -24,10 +24,6 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   void initState() {
-    // context.read<NetworkCheckerProvider>().listenNetwork(() {
-
-    //   context.read<NewsProvider>().getNews(1);
-    // });
     paginationScrollController.init(loadAction: () {
       // => context.read<RequestCubit>().getNewRequests()
     });
@@ -65,7 +61,7 @@ class _NewsPageState extends State<NewsPage> {
           child: Consumer2<NewsProvider, NetworkCheckerProvider>(
               builder: (context, newsProvider, networkProvider, child) {
             final newsList = newsProvider.newsJson;
-            return networkProvider.state ==
+            return networkProvider.status ==
                     InternetConnectionStatus.disconnected
                 ? const NoInternetWidget()
                 : ListView.builder(
