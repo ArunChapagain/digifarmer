@@ -17,5 +17,5 @@ class NetworkCheckerProvider extends ChangeNotifier {
     });
   }
 
-  InternetConnectionStatus get state => _status;
+  InternetConnectionStatus get status => _status;
 }

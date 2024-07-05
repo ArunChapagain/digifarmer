@@ -1,12 +1,15 @@
+import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/constants.dart';
 import 'package:digifarmer/view/weather/forecasts.dart';
 import 'package:digifarmer/view/weather/widgets/reload_weather.dart';
 import 'package:digifarmer/view/weather/widgets/weather_item.dart';
 import 'package:digifarmer/widgets/animation.dart';
+import 'package:digifarmer/widgets/no_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as bottom_sheet;
@@ -31,45 +34,48 @@ class _HomePageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<WeatherProvider>(
-            builder: (context, weatherProvider, chid) {
+        child: Consumer2<WeatherProvider, NetworkCheckerProvider>(
+            builder: (context, weatherProvider, networkProvider, chid) {
           if (weatherProvider.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 40.w),
-                  Text(
-                    'Weather',
-                    style: TextStyle(
-                      fontSize: 35.sp,
-                      fontFamily: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w700,
-                      ).fontFamily,
-                      height: 0.1,
+          return networkProvider.status == InternetConnectionStatus.disconnected
+              ? const NoInternetWidget()
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 40.w),
+                        Text(
+                          'Weather',
+                          style: TextStyle(
+                            fontSize: 35.sp,
+                            fontFamily: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w700,
+                            ).fontFamily,
+                            height: 0.1,
+                          ),
+                        ),
+                        SizedBox(height: 30.w),
+                        weatherCard(
+                            constants: _constants,
+                            weatherProvider: weatherProvider),
+                        SizedBox(height: 20.w),
+                        TodayForecast(
+                            dailyWeatherForecast:
+                                weatherProvider.dailyWeatherForecast,
+                            hourlyWeatherForecast:
+                                weatherProvider.hourlyWeatherForecast,
+                            constants: _constants),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 30.w),
-                  weatherCard(
-                      constants: _constants, weatherProvider: weatherProvider),
-                  SizedBox(height: 20.w),
-                  TodayForecast(
-                      dailyWeatherForecast:
-                          weatherProvider.dailyWeatherForecast,
-                      hourlyWeatherForecast:
-                          weatherProvider.hourlyWeatherForecast,
-                      constants: _constants),
-                ],
-              ),
-            ),
-          );
+                );
         }),
       ),
     );
