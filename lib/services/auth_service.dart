@@ -3,6 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
  class AuthService
 {
+  //error in login with google
   signInWithGoogle() async{
 
 //begin interactive sign in process
