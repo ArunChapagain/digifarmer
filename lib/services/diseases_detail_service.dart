@@ -15,6 +15,7 @@ class DiseasesDetailService {
     var plantData =
         detectDetailsJson.firstWhere((element) => element['plant'] == plant);
     var diagnoseList = plantData['diagnose'];
+    print(plantData);
     return diagnoseList.firstWhere((diagnose) => diagnose['name'] == name);
     // return null;
   }

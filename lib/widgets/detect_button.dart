@@ -53,11 +53,11 @@ class DetectButton extends StatelessWidget {
             gradient: LinearGradient(
               colors: btn
                   ? [
-                      const Color(0xFFBBDD73),
-                      const Color(0xFFCDE299),
+                      const Color(0xFFA9C864),
+                      const Color(0xFFBCD57F),
                     ]
                   : [
-                      const Color.fromARGB(255, 127, 182, 8),
+                      const Color(0xFF7FB608),
                       const Color(0xff87bb18),
                       const Color(0xFF99C628),
                       const Color(0xFFA8D24C),

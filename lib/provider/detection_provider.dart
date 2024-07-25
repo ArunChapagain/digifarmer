@@ -11,6 +11,7 @@ class DetectionProvider extends ChangeNotifier {
     print('Plant: $plant, Disease: $disease');
     setDetection = true;
     json = await DiseasesDetailService.findDiagnose(plant, disease);
+    print(json);
     _class = json['class'] ?? '';
     _details = json['description'] ?? '';
     setDetection = false;
@@ -21,7 +22,7 @@ class DetectionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isDetection => _isDetecting;
+  bool get isDetectionLoading => _isDetecting;
   String get classDetection => _class;
   String get details => _details;
 }

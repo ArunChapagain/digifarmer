@@ -183,11 +183,11 @@ class WeatherCard extends StatelessWidget {
               offset: const Offset(0, 3),
             ),
           ],
-          gradient:const LinearGradient(
+          gradient: const LinearGradient(
             colors: [
-               Color.fromARGB(255, 127, 182, 8),
-               Color(0xff87bb18),
-               Color(0xFF99C628),
+              Color.fromARGB(255, 127, 182, 8),
+              Color(0xff87bb18),
+              Color(0xFF99C628),
               // Theme.of(context).primaryColor,
               // Theme.of(context).primaryColor.withOpacity(0.5),
             ],
@@ -264,7 +264,7 @@ class WeatherCard extends StatelessWidget {
           Icon(
             icon,
             color: color,
-            size: 28.sp,
+            size: 27.sp,
           ),
           // SizedBox(width: 3.w),
           Text(

@@ -33,9 +33,9 @@
         "description": "Rust in corn is caused by the fungus Puccinia sorghi. It appears as small, reddish-brown pustules on leaves and stalks which can coalesce and cause significant leaf damage reducing photosynthetic capacity and yield."
       },
       {
-        "name": "Gray Leaf Spot",
+        "name": "Gray Leaf",
         "class": "Fungus",
-        "description": "Gray Leaf Spot is caused by the fungus Cercospora zeae-maydis. It produces rectangular, grayish lesions on leaves which can merge to form large necrotic areas reducing the photosynthetic area and affecting yield."
+        "description": "Gray Leaf Spot is caused by the fungus Mycosphaerella graminicola. It produces rectangular, grayish lesions on leaves which can merge to form large necrotic areas reducing the photosynthetic area and affecting yield."
       },
       {
         "name": "Blight",
@@ -53,10 +53,11 @@
     "plant": "Wheat",
     "diagnose": [
       {
-        "name": "Brown Rust",
+        "name": "Brown_rust",
         "class": "Fungus",
         "description": "Brown Rust also known as leaf rust is caused by the fungus Puccinia triticina. It appears as small, reddish-brown pustules primarily on the upper surfaces of leaves. Severe infections can lead to significant yield loss."
       },
+
       {
         "name": "Yellow Rust",
         "class": "Fungus",
@@ -115,8 +116,8 @@
     ]
   },
   {
-   "plant": "Tomato",
-   "diagnose":  [
+    "plant": "Tomato",
+    "diagnose": [
       {
         "name": "Bacterial Spot",
         "class": "Bacteria",

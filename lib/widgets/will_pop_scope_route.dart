@@ -28,7 +28,7 @@ class _WillPopScopeRouteState extends State<WillPopScopeRoute> {
         SmartDialog.showToast('Press again to exit');
         if (lastPressedAt == null ||
             DateTime.now().difference(lastPressedAt!) >
-                const Duration(seconds: 1)) {
+                const Duration(seconds: 2)) {
           //If the interval between two clicks exceeds 1 second, the time will be reset.
           lastPressedAt = DateTime.now();
           return;
