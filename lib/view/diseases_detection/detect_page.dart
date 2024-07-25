@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
-import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +136,7 @@ class _DetectPageState extends State<DetectPage> {
             builder: (context, value, child) {
               String type = value.classDetection;
               String description = value.details;
-              if (value.isDetection == true) {
+              if (value.isDetectionLoading == true) {
                 return Center(
                   child: CircularProgressIndicator(
                     strokeWidth: 5,
