@@ -11,8 +11,8 @@ import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:provider/provider.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +45,13 @@ class MyApp extends StatelessWidget {
                   darkTheme: AppTheme.getDarkThemeData(context),
                   debugShowCheckedModeBanner: false,
                   title: 'DigiFarmer',
-                  home: const WillPopScopeRoute(child: Init(child: Application())),
+                  navigatorObservers: [FlutterSmartDialog.observer],
+                  builder: FlutterSmartDialog.init(),
+                  home: const WillPopScopeRoute(
+                    child: Init(
+                      child: Application(),
+                    ),
+                  ),
                 );
               });
         });

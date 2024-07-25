@@ -183,10 +183,13 @@ class WeatherCard extends StatelessWidget {
               offset: const Offset(0, 3),
             ),
           ],
-          gradient: LinearGradient(
+          gradient:const LinearGradient(
             colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).primaryColor.withOpacity(0.5),
+               Color.fromARGB(255, 127, 182, 8),
+               Color(0xff87bb18),
+               Color(0xFF99C628),
+              // Theme.of(context).primaryColor,
+              // Theme.of(context).primaryColor.withOpacity(0.5),
             ],
           ),
         ),

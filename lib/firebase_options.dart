@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -59,4 +56,16 @@ class DefaultFirebaseOptions {
     projectId: 'digifarmer-dc358',
     storageBucket: 'digifarmer-dc358.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAUPcmnCgMA9rMg4YfR_fBGazm355UiWy0',
+    appId: '1:835986027126:ios:02224f8e7d6b72d2c46557',
+    messagingSenderId: '835986027126',
+    projectId: 'digifarmer-dc358',
+    storageBucket: 'digifarmer-dc358.appspot.com',
+    androidClientId: '835986027126-8im63jhj5riintu9onvbrbqsqbqkbs7p.apps.googleusercontent.com',
+    iosClientId: '835986027126-bu3akdp8el5l32gsrhsa95t37vmi9sun.apps.googleusercontent.com',
+    iosBundleId: 'com.example.digifarmer',
+  );
+
 }

@@ -12,7 +12,12 @@
           "package_name": "com.example.digifarmer"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "835986027126-bs991nlbrqpidia2ivao46msuafn79eh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCLmtI6WJJAuxDXlMGCKVrhoQfpEu_2u6g"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835986027126-bs991nlbrqpidia2ivao46msuafn79eh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
