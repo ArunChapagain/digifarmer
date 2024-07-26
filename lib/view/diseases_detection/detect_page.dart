@@ -93,10 +93,8 @@ class _DetectPageState extends State<DetectPage> {
         .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
 
     if (image == null) return null;
-    setState(() {
       // context.read<DetectionProvider>().isDetection = true;
       _imageFile = File(image.path);
-    });
     classifyImage(_imageFile!);
   }
 
