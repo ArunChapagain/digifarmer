@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img alt="Preview1" src="./README/preview/preview.png">
+  <img alt="Preview" src="./README/preview/preview.png">
 </p>
 
 <br/>
