@@ -13,7 +13,7 @@
 
 <sub>
 
-- [Introduction](# introduction)
+- [Introduction](#introduction)
 
 - [Related Websites](#-Related Websites)
 
@@ -22,16 +22,7 @@
 - [Development environment](#️-Development environment)
 
   -[Basic environment](#️-Basic environment)
-
-
 -[Start](#-Start)
-
--[Project Structure](#-Project Structure)
-
-
--[Packages](#-Packages)
-
--[Illustration](#️-Illustration)
 
 </sub>
 
