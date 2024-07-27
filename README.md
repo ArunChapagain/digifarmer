@@ -9,20 +9,6 @@
   Digifarmer<img alt="Logo" src="./README/logo/logo.png" width="48px" style="border-radius:16px;" />
 </h1> 
 
-
-
-<sub>
-
-- [Introduction](#introduction)
-
-- [Related Websites](#Related Websites)
-
-- [Features](#Features)
-
-- [Start](#Start)
-
-</sub>
-
 <br/>
 
 ## 🐦 Introduction
