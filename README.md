@@ -15,14 +15,11 @@
 
 - [Introduction](#introduction)
 
-- [Related Websites](#-Related Websites)
+- [Related Websites](#Related Websites)
 
-- [Features](#-Features)
+- [Features](#Features)
 
-- [Development environment](#️-Development environment)
-
-  -[Basic environment](#️-Basic environment)
--[Start](#-Start)
+- [Start](#Start)
 
 </sub>
 
@@ -32,9 +29,7 @@
 
 `Digifarmer` is a comprehensive Flutter-based mobile application designed to assist farmers and agriculturists by providing vital information and services. It integrates various functionalities such as disease detection, plant health diagnostics, weather forecasting, and agriculture-related news updates. This tool aims to enhance decision-making, improve crop management, and increase productivity. 
 
-> [!NOTE]
-> Note: Since you are learning practical engineering, the focus is on learning, and many business logic may not be consistent with reality.  
-> Emoji will have different styles depending on the device.  
+
 
 
 ## 🌏 Related websites
