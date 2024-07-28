@@ -154,7 +154,7 @@
     "plant": "Plant",
     "diagnose": [
       {
-        "name": "Powdery Mildew",
+        "name": "Powdery",
         "class": "Fungus",
         "description": "Powdery Mildew is a fungal disease that affects a wide range of plants. It is characterized by white, powdery spots on the leaves and stems. The fungus can lead to stunted growth and reduced yield."
       },

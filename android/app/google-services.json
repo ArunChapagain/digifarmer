@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "835986027126",
-    "project_id": "digifarmer-dc358",
-    "storage_bucket": "digifarmer-dc358.appspot.com"
+    "project_number": "945948737344",
+    "project_id": "digifarmer-1e693",
+    "storage_bucket": "digifarmer-1e693.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:835986027126:android:6b8bd1126d962adfc46557",
+        "mobilesdk_app_id": "1:945948737344:android:540b6ea81f1305f5bcc4a5",
         "android_client_info": {
           "package_name": "com.example.digifarmer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "835986027126-bs991nlbrqpidia2ivao46msuafn79eh.apps.googleusercontent.com",
+          "client_id": "945948737344-32rrglgcl2p0rmgbpd3rkgum5o6j00qi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCLmtI6WJJAuxDXlMGCKVrhoQfpEu_2u6g"
+          "current_key": "AIzaSyBh7bcxrsB4cZN7Yzls9q2wsVI9x6niDck"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "835986027126-bs991nlbrqpidia2ivao46msuafn79eh.apps.googleusercontent.com",
+              "client_id": "945948737344-32rrglgcl2p0rmgbpd3rkgum5o6j00qi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

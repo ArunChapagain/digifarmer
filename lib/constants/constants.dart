@@ -6,6 +6,7 @@ const String newsAPIEndPoint = '/everything';
 const String weatherAPIKey = '';
 const String weatherAPIBaseURL = 'https://api.weatherapi.com/v1';
 const String weatherAPIEndPoint = '/forecast.json';
+//https://newsapi.org/v2/everything?q=farmers&sortBy=popularity&apiKey=e13c1810209a4e6ca7997d39b797152c
 
 //model
 String tomatoDiseaseModel = "assets/model/disease/tomato.tflite";

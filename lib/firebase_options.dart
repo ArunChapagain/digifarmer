@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCLmtI6WJJAuxDXlMGCKVrhoQfpEu_2u6g',
-    appId: '1:835986027126:android:6b8bd1126d962adfc46557',
-    messagingSenderId: '835986027126',
-    projectId: 'digifarmer-dc358',
-    storageBucket: 'digifarmer-dc358.appspot.com',
+    apiKey: 'AIzaSyBh7bcxrsB4cZN7Yzls9q2wsVI9x6niDck',
+    appId: '1:945948737344:android:540b6ea81f1305f5bcc4a5',
+    messagingSenderId: '945948737344',
+    projectId: 'digifarmer-1e693',
+    storageBucket: 'digifarmer-1e693.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAUPcmnCgMA9rMg4YfR_fBGazm355UiWy0',
-    appId: '1:835986027126:ios:02224f8e7d6b72d2c46557',
-    messagingSenderId: '835986027126',
-    projectId: 'digifarmer-dc358',
-    storageBucket: 'digifarmer-dc358.appspot.com',
-    androidClientId: '835986027126-8im63jhj5riintu9onvbrbqsqbqkbs7p.apps.googleusercontent.com',
-    iosClientId: '835986027126-bu3akdp8el5l32gsrhsa95t37vmi9sun.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAhn6EvgCPWag5KHZHggNW1AS5LmVT9ul8',
+    appId: '1:945948737344:ios:34de70b4401afd07bcc4a5',
+    messagingSenderId: '945948737344',
+    projectId: 'digifarmer-1e693',
+    storageBucket: 'digifarmer-1e693.appspot.com',
+    iosClientId: '945948737344-lupjog5s8t2vmcoli7t1ngmrf5stlgk6.apps.googleusercontent.com',
     iosBundleId: 'com.example.digifarmer',
   );
 
