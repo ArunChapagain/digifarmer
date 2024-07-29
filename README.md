@@ -6,7 +6,7 @@
 <br/>
 
 <h1 align="center"> 
-  Digifarmer<img alt="Logo" src="./README/logo/logo.png" width="48px" style="border-radius:16px;" />
+  Digifarmer<img alt="Logo" src="./README/logo/logo.png" width="48px" style="border-radius:16px; padding-top:5px;" />
 </h1> 
 
 <br/>
