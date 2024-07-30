@@ -39,15 +39,32 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-
-      if (e.code == 'invalid-email') {
+      print(e.code);
+      if (e.code == 'user-not-found') {
+        // User not found
+        wrongCredentialMessage('Invalid Email');
+      } else if (e.code == 'wrong-password') {
+        // Wrong Password
+        wrongCredentialMessage('Invalid Password');
+      } else if (e.code == 'invalid-email') {
         // Wrong Email
         wrongCredentialMessage('Invalid Email');
       } else if (e.code == 'invalid-credential') {
-        wrongCredentialMessage('Invalid Password');
+        wrongCredentialMessage('User not found');
       }
+    }
+  }
 
-      //         ));
+  String errorMessageContent(String message) {
+    switch (message) {
+      case 'Invalid Email':
+        return 'Please enter a valid email';
+      case 'User not found':
+        return 'Sign up to create an account';
+      case 'Invalid Password':
+        return 'Invalid Password';
+      default:
+        return 'An error occurred';
     }
   }
 
@@ -56,9 +73,7 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (context) => AlertDialog(
               title: Text(message),
-              content: message == 'Invalid Email'
-                  ? const Text('Please enter a valid email')
-                  : const Text('Please enter a valid password'),
+              content: Text(errorMessageContent(message)),
               actions: [
                 TextButton(
                     onPressed: () {
