@@ -35,10 +35,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => NetworkCheckerProvider()),
           ChangeNotifierProvider(create: (context) => DetectionProvider()),
           ChangeNotifierProvider(create: (context) => LocationProvider()),
-          ChangeNotifierProxyProvider<LocationProvider, WeatherProvider>(
-              create: (context) => WeatherProvider(null, null),
-              update: (context, locationProvider, _) => WeatherProvider(
-                  locationProvider.latitude, locationProvider.longitude)),
+          ChangeNotifierProvider(create: (context) => WeatherProvider()),
+          // ChangeNotifierProxyProvider<LocationProvider, WeatherProvider>(
+          //     create: (context) => WeatherProvider(null, null),
+          //     update: (context, locationProvider, _) => WeatherProvider(
+          //         locationProvider.latitude, locationProvider.longitude)),
         ],
         builder: (context, child) {
           return ScreenUtilInit(

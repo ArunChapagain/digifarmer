@@ -131,7 +131,6 @@ class _HomePageState extends State<WeatherPage> {
 
   Widget weatherCardLeadingRow(
       BuildContext context, WeatherProvider weatherProvider) {
-    print("weatherProvider.location: ${weatherProvider.location}");
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Row(
@@ -317,6 +316,7 @@ class SearchCityBottomSheet extends StatelessWidget {
           const SizedBox(height: 10),
           TextField(
             // onChanged: (searchText) => fetchWeatherData(searchText),
+
             controller: cityController,
             autofocus: false,
             decoration: InputDecoration(
@@ -335,73 +335,75 @@ class SearchCityBottomSheet extends StatelessWidget {
           SizedBox(
             height: 20.w,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Provider.of<LocationProvider>(context, listen: false)
-                      .getCurrentLocation()
-                      .then((_) {
-                    Provider.of<WeatherProvider>(context, listen: false)
-                        .fetchWeatherDataViaGps();
-                  });
-                },
-                child: AnimatedPress(
-                  child: Container(
-                    // width: 110.w,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0089E4),
-                      borderRadius: BorderRadius.circular(8.w),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Location via GPS',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+          Consumer2(builder: (context, WeatherProvider weatherProvider,
+              LocationProvider locationProvider, child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    locationProvider.getCurrentLocation().then((_) {
+                      weatherProvider.setAndGetWeather(
+                          '${locationProvider.latitude},${locationProvider.longitude}');
+                      Navigator.pop(context);
+                    });
+                  },
+                  child: AnimatedPress(
+                    child: Container(
+                      // width: 110.w,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 10.h),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0089E4),
+                        borderRadius: BorderRadius.circular(8.w),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Location via GPS',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 5.w),
-                        const Icon(Icons.gps_fixed, color: Colors.white),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Provider.of<WeatherProvider>(context, listen: false)
-                      .setAndGetweather(cityController.text);
-                },
-                child: AnimatedPress(
-                  child: Container(
-                    width: 110.w,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0089E4),
-                      borderRadius: BorderRadius.circular(8.w),
-                    ),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                          SizedBox(width: 5.w),
+                          const Icon(Icons.gps_fixed, color: Colors.white),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+                GestureDetector(
+                  onTap: () {
+                    Provider.of<WeatherProvider>(context, listen: false)
+                        .setAndGetWeather(cityController.text);
+                  },
+                  child: AnimatedPress(
+                    child: Container(
+                      width: 110.w,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.h),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0089E4),
+                        borderRadius: BorderRadius.circular(8.w),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
         ],
       ),
     );

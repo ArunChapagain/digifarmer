@@ -1,15 +1,14 @@
 import 'dart:async';
-
-import 'package:digifarmer/db/preference_db.dart';
-import 'package:digifarmer/services/weather_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:digifarmer/db/preference_db.dart';
+import 'package:digifarmer/services/weather_service.dart';
 
 class WeatherProvider with ChangeNotifier {
-  WeatherProvider(this.latitude, this.longitude);
+  // WeatherProvider(this.latitude, this.longitude);
 
-  final double? latitude;
-  final double? longitude;
+  // final double? latitude;
+  // final double? longitude;
   final WeatherService _weatherService = WeatherService();
   bool _isLoading = false;
   String location = '';
@@ -25,27 +24,31 @@ class WeatherProvider with ChangeNotifier {
   String currentWeatherStatus = '';
   String? currentIcon;
 
+  bool get isLoading => _isLoading;
+
   Future<void> getWeather() async {
     location = await PreferencesDB.db.getLocation();
     await fetchWeatherDataViaCity(location);
     notifyListeners();
   }
 
-  Future<void> setAndGetweather(String location) async {
-    await setLocation();
+  Future<void> setAndGetWeather(String location) async {
+    await setLocation(location);
     await fetchWeatherDataViaCity(location);
   }
 
-  Future<void> setLocation() async {
+  Future<void> setLocation(String location) async {
+    this.location = location;
     await PreferencesDB.db.setLocation(location);
   }
 
   Future<void> setWeatherData(dynamic weatherData) async {
     print('weatherData: $weatherData');
+
     final locationData = weatherData["location"];
     final currentWeather = weatherData["current"];
     location = getShortLocationName(locationData["name"]);
-     setLocation();
+    await setLocation(location);
     currentDate = formatDate(locationData["localtime"]);
     currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
     currentWeatherStatus = currentWeather["condition"]["text"];
@@ -65,30 +68,37 @@ class WeatherProvider with ChangeNotifier {
   Future<void> fetchWeatherDataViaCity(String searchText) async {
     try {
       _isLoading = true;
+      notifyListeners();
       final weatherData =
           await _weatherService.fetchWeatherDataViaCity(searchText);
       await setWeatherData(weatherData);
-
       _isLoading = false;
       notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       // Handle error
     }
   }
 
-  Future<void> fetchWeatherDataViaGps() async {
+  Future<void> fetchWeatherDataViaGps(double latitude, double longitude) async {
+    // Future<void> fetchWeatherDataViaGps( ) async {
     try {
       _isLoading = true;
+      notifyListeners();
       if (latitude == null || longitude == null) {
+        _isLoading = false;
+        notifyListeners();
         return;
-      } else {
-        final weatherData =
-            await _weatherService.fetchWeatherDataViaGps(latitude!, longitude!);
-        await setWeatherData(weatherData);
       }
+      final weatherData =
+          await _weatherService.fetchWeatherDataViaGps(latitude!, longitude!);
+      await setWeatherData(weatherData);
       _isLoading = false;
       notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       // Handle error
     }
   }
@@ -107,6 +117,4 @@ class WeatherProvider with ChangeNotifier {
     final words = location.split(" ");
     return words.length > 1 ? "${words[0]} ${words[1]}" : words[0];
   }
-
-  bool get isLoading => _isLoading;
 }
