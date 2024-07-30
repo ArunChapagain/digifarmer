@@ -29,6 +29,13 @@
             {
               "client_id": "945948737344-32rrglgcl2p0rmgbpd3rkgum5o6j00qi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "945948737344-lupjog5s8t2vmcoli7t1ngmrf5stlgk6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.digifarmer"
+              }
             }
           ]
         }

@@ -60,30 +60,30 @@ class _HomePageState extends State<HomePage> {
                                 size: 40.sp,
                               ),
                             ],
-                          // ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     setState(() {
-                          //       //logout
-                          //       FirebaseAuth.instance.signOut();
-                          //     });
-                          //   },
-                          //   child: AnimatedPress(
-                          //     child: Container(
-                          //       height: 30.h,
-                          //       width: 40.w,
-                          //       decoration: BoxDecoration(
-                          //         color: Theme.of(context)
-                          //             .primaryColor
-                          //             .withOpacity(0.6),
-                          //         borderRadius: BorderRadius.circular(10),
-                          //       ),
-                          //       child: const Icon(
-                          //         Remix.user_3_line,
-                          //         color: Colors.white,
-                          //       ),
-                          //     ),
-                          //   ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                //logout
+                                FirebaseAuth.instance.signOut();
+                              });
+                            },
+                            child: AnimatedPress(
+                              child: Container(
+                                height: 30.h,
+                                width: 40.w,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(.85),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Icon(
+                                  Remix.logout_circle_r_line,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),

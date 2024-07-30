@@ -49,6 +49,19 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  String errorMessageContent(String message) {
+    switch (message) {
+      case 'Invalid Email':
+        return 'Please enter a valid email';
+      case 'User not found':
+        return 'Sign up to create an account';
+      case 'Invalid Password':
+        return 'Invalid Password';
+      default:
+        return 'An error occurred';
+    }
+  }
+
   void wrongCredentialMessage(String message) {
     showDialog(
         context: context,
