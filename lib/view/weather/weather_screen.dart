@@ -1,3 +1,4 @@
+import 'package:digifarmer/provider/location_provider.dart';
 import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/constants.dart';
@@ -130,6 +131,7 @@ class _HomePageState extends State<WeatherPage> {
 
   Widget weatherCardLeadingRow(
       BuildContext context, WeatherProvider weatherProvider) {
+    print("weatherProvider.location: ${weatherProvider.location}");
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Row(
@@ -138,7 +140,6 @@ class _HomePageState extends State<WeatherPage> {
           LocationDisplay(
               location: weatherProvider.location,
               cityController: _cityController,
-              fetchWeatherData: weatherProvider.fetchWeatherData,
               constants: _constants),
           AnimatedPress(
             child: RotatingIconButton(
@@ -255,14 +256,12 @@ class WeatherStatsRow extends StatelessWidget {
 class LocationDisplay extends StatelessWidget {
   final String location;
   final TextEditingController cityController;
-  final Function fetchWeatherData;
   final Constants constants;
 
   const LocationDisplay(
       {super.key,
       required this.location,
       required this.cityController,
-      required this.fetchWeatherData,
       required this.constants});
 
   @override
@@ -275,9 +274,7 @@ class LocationDisplay extends StatelessWidget {
           builder: (context) => SingleChildScrollView(
             controller: bottom_sheet.ModalScrollController.of(context),
             child: SearchCityBottomSheet(
-                cityController: cityController,
-                fetchWeatherData: fetchWeatherData,
-                constants: constants),
+                cityController: cityController, constants: constants),
           ),
         );
       },
@@ -302,14 +299,10 @@ class LocationDisplay extends StatelessWidget {
 
 class SearchCityBottomSheet extends StatelessWidget {
   final TextEditingController cityController;
-  final Function fetchWeatherData;
   final Constants constants;
 
   const SearchCityBottomSheet(
-      {super.key,
-      required this.cityController,
-      required this.fetchWeatherData,
-      required this.constants});
+      {super.key, required this.cityController, required this.constants});
 
   @override
   Widget build(BuildContext context) {
@@ -342,34 +335,72 @@ class SearchCityBottomSheet extends StatelessWidget {
           SizedBox(
             height: 20.w,
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {
-                Provider.of<WeatherProvider>(context, listen: false)
-                    .setAndGetweather(cityController.text);
-              },
-              child: AnimatedPress(
-                child: Container(
-                  width: 110.w,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0089E4),
-                    borderRadius: BorderRadius.circular(8.w),
-                  ),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Provider.of<LocationProvider>(context, listen: false)
+                      .getCurrentLocation()
+                      .then((_) {
+                    Provider.of<WeatherProvider>(context, listen: false)
+                        .fetchWeatherDataViaGps();
+                  });
+                },
+                child: AnimatedPress(
+                  child: Container(
+                    // width: 110.w,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0089E4),
+                      borderRadius: BorderRadius.circular(8.w),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Location via GPS',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(width: 5.w),
+                        const Icon(Icons.gps_fixed, color: Colors.white),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<WeatherProvider>(context, listen: false)
+                      .setAndGetweather(cityController.text);
+                },
+                child: AnimatedPress(
+                  child: Container(
+                    width: 110.w,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0089E4),
+                      borderRadius: BorderRadius.circular(8.w),
+                    ),
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
