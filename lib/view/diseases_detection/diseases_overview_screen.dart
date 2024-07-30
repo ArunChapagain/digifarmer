@@ -135,11 +135,14 @@ class DiseasesDetectionPage extends StatelessWidget {
                             color: const Color(0xFFE7E6E6),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Image.asset(
-                            height: 50.h,
-                            width: 60.w,
-                            plants[index]['image'],
-                            fit: BoxFit.contain,
+                          child: Hero(
+                            tag: plants[index]['name'],
+                            child: Image.asset(
+                              height: 50.h,
+                              width: 60.w,
+                              plants[index]['image'],
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                       ),

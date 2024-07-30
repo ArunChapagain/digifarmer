@@ -43,8 +43,6 @@ class WeatherProvider with ChangeNotifier {
   }
 
   Future<void> setWeatherData(dynamic weatherData) async {
-    print('weatherData: $weatherData');
-
     final locationData = weatherData["location"];
     final currentWeather = weatherData["current"];
     location = getShortLocationName(locationData["name"]);
@@ -86,13 +84,10 @@ class WeatherProvider with ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      if (latitude == null || longitude == null) {
         _isLoading = false;
         notifyListeners();
-        return;
-      }
       final weatherData =
-          await _weatherService.fetchWeatherDataViaGps(latitude!, longitude!);
+          await _weatherService.fetchWeatherDataViaGps(latitude, longitude);
       await setWeatherData(weatherData);
       _isLoading = false;
       notifyListeners();

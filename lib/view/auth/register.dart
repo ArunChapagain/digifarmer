@@ -38,14 +38,12 @@ class _RegisterPageState extends State<RegisterPage> {
           email: usernameController.text,
           password: passwordController.text,
         );
-        if (!context.mounted) return;
-        Navigator.pop(context);
       } else {
         Navigator.pop(context);
         wrongCredentialMessage('Passwords do not match');
       }
     } on FirebaseAuthException {
-      Navigator.pop(context);
+      wrongCredentialMessage('Invalid Email');
     }
   }
 

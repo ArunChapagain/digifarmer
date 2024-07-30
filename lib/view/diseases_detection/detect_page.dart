@@ -93,8 +93,7 @@ class _DetectPageState extends State<DetectPage> {
         .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
 
     if (image == null) return null;
-      // context.read<DetectionProvider>().isDetection = true;
-      _imageFile = File(image.path);
+    _imageFile = File(image.path);
     classifyImage(_imageFile!);
   }
 
@@ -273,11 +272,14 @@ class _DetectPageState extends State<DetectPage> {
                     int.parse(widget.color),
                   ),
                 ),
-                child: Image.asset(
-                  widget.imagePath,
-                  height: 175.h,
-                  width: 400.w,
-                  fit: BoxFit.contain,
+                child: Hero(
+                  tag: widget.title,
+                  child: Image.asset(
+                    widget.imagePath,
+                    height: 175.h,
+                    width: 400.w,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               Positioned(

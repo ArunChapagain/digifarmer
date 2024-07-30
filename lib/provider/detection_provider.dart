@@ -8,10 +8,8 @@ class DetectionProvider extends ChangeNotifier {
   Map<String, dynamic> json = {};
 
   void getDetectionDetail(String plant, String disease) async {
-    print('Plant: $plant, Disease: $disease');
     setDetection = true;
     json = await DiseasesDetailService.findDiagnose(plant, disease);
-    print(json);
     _class = json['class'] ?? '';
     _details = json['description'] ?? '';
     setDetection = false;
