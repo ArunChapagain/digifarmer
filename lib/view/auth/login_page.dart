@@ -20,9 +20,21 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordController = TextEditingController();
 
+  void displayCircularProgress() {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          color: Colors.blue[300]!,
+        ),
+      ),
+    );
+  }
+
 // sign user in method
-  void signIn() async {
+  void signIn(BuildContext context) async {
     FocusScope.of(context).unfocus();
+    displayCircularProgress();
 
     try {
       final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -43,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         wrongCredentialMessage('User not found');
       }
     }
+    Navigator.pop(context);
   }
 
   String errorMessageContent(String message) {
@@ -144,7 +157,9 @@ class _LoginPageState extends State<LoginPage> {
                   //login button
                   MyButton(
                     text: 'Sign In',
-                    ontap: signIn,
+                    ontap: () {
+                      signIn(context);
+                    },
                   ),
                   SizedBox(
                     height: 30.h,
@@ -179,7 +194,9 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       SquareTile(
                           onTap: () {
+                            displayCircularProgress();
                             AuthService().signInWithGoogle();
+                            Navigator.pop(context);
                           },
                           imgUrl: 'assets/images/auth/google.png'),
                       SizedBox(
