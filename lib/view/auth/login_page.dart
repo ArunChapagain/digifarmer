@@ -23,13 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 // sign user in method
   void signIn() async {
     FocusScope.of(context).unfocus();
-    showDialog(
-        context: context,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue[300]!,
-              ),
-            ));
+
     try {
       final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: usernameController.text,

@@ -5,10 +5,6 @@ import 'package:digifarmer/db/preference_db.dart';
 import 'package:digifarmer/services/weather_service.dart';
 
 class WeatherProvider with ChangeNotifier {
-  // WeatherProvider(this.latitude, this.longitude);
-
-  // final double? latitude;
-  // final double? longitude;
   final WeatherService _weatherService = WeatherService();
   bool _isLoading = false;
   String location = '';
@@ -33,7 +29,6 @@ class WeatherProvider with ChangeNotifier {
   }
 
   Future<void> setAndGetWeather(String location) async {
-    await setLocation(location);
     await fetchWeatherDataViaCity(location);
   }
 
@@ -46,9 +41,9 @@ class WeatherProvider with ChangeNotifier {
     final locationData = weatherData["location"];
     final currentWeather = weatherData["current"];
     location = getShortLocationName(locationData["name"]);
-    await setLocation(location);
+    setLocation(location);
     currentDate = formatDate(locationData["localtime"]);
-    currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
+    currentTime = get12HourTime(locationData["localtime"]);
     currentWeatherStatus = currentWeather["condition"]["text"];
     currentIcon = currentWeather["condition"]["icon"];
     weatherIcon =
@@ -66,7 +61,7 @@ class WeatherProvider with ChangeNotifier {
   Future<void> fetchWeatherDataViaCity(String searchText) async {
     try {
       _isLoading = true;
-      notifyListeners();
+      // notifyListeners();
       final weatherData =
           await _weatherService.fetchWeatherDataViaCity(searchText);
       await setWeatherData(weatherData);
@@ -80,12 +75,11 @@ class WeatherProvider with ChangeNotifier {
   }
 
   Future<void> fetchWeatherDataViaGps(double latitude, double longitude) async {
-    // Future<void> fetchWeatherDataViaGps( ) async {
     try {
       _isLoading = true;
       notifyListeners();
-        _isLoading = false;
-        notifyListeners();
+      _isLoading = false;
+      notifyListeners();
       final weatherData =
           await _weatherService.fetchWeatherDataViaGps(latitude, longitude);
       await setWeatherData(weatherData);
@@ -99,8 +93,13 @@ class WeatherProvider with ChangeNotifier {
   }
 
   String get12HourTime(String time) {
-    final inputDate = DateFormat("HH:mm").parse(time);
-    return DateFormat("hh:mm a").format(inputDate);
+    try {
+      final timePart = time.split(' ')[1];
+      final inputDate = DateFormat("H:mm").parse(timePart);
+      return DateFormat("hh:mm a").format(inputDate);
+    } catch (e) {
+      return "00:00";
+    }
   }
 
   String formatDate(String date) {
