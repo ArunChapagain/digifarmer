@@ -5,16 +5,12 @@ class AuthService {
   signInWithGoogle() async {
     try {
 //begin interactive sign in process
-      print("begin interactive sign in process");
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      print("googleUser: $googleUser");
 //obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
 
-      print("googleAuth: $googleAuth");
-      print(googleAuth.idToken);
 //create a new credential
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -24,7 +20,7 @@ class AuthService {
       //sign in to firebase with the credential
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
-      print("Error: $e");
+      throw Exception(e);
     }
   }
 }

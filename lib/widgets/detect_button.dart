@@ -57,8 +57,8 @@ class DetectButton extends StatelessWidget {
                       const Color(0xFFBCD57F),
                     ]
                   : [
-                      const Color(0xFF7FB608),
-                      const Color(0xff87bb18),
+                      const Color(0xFF82BB05),
+                      const Color(0xFF81B315),
                       const Color(0xFF99C628),
                       const Color(0xFFA8D24C),
                     ],

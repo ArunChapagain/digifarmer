@@ -1,7 +1,8 @@
-import 'package:digifarmer/db/preference_db.dart';
-import 'package:digifarmer/services/weather_service.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:digifarmer/db/preference_db.dart';
+import 'package:digifarmer/services/weather_service.dart';
 
 class WeatherProvider with ChangeNotifier {
   final WeatherService _weatherService = WeatherService();
@@ -17,50 +18,88 @@ class WeatherProvider with ChangeNotifier {
   List hourlyWeatherForecast = [];
   List dailyWeatherForecast = [];
   String currentWeatherStatus = '';
-  String ?currentIcon ;
+  String? currentIcon;
+
+  bool get isLoading => _isLoading;
 
   Future<void> getWeather() async {
     location = await PreferencesDB.db.getLocation();
-    await fetchWeatherData(location);
+    await fetchWeatherDataViaCity(location);
     notifyListeners();
   }
 
-  Future<void> setAndGetweather(String location) async {
-    await PreferencesDB.db.setLocation(location);
-    await fetchWeatherData(location);
+  Future<void> setAndGetWeather(String location) async {
+    await fetchWeatherDataViaCity(location);
   }
 
-  Future<void> fetchWeatherData(String searchText) async {
+  Future<void> setLocation(String location) async {
+    this.location = location;
+    await PreferencesDB.db.setLocation(location);
+  }
+
+  Future<void> setWeatherData(dynamic weatherData) async {
+    final locationData = weatherData["location"];
+    final currentWeather = weatherData["current"];
+    location = getShortLocationName(locationData["name"]);
+    setLocation(location);
+    currentDate = formatDate(locationData["localtime"]);
+    currentTime = get12HourTime(locationData["localtime"]);
+    currentWeatherStatus = currentWeather["condition"]["text"];
+    currentIcon = currentWeather["condition"]["icon"];
+    weatherIcon =
+        "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
+    temperature = (currentWeather["temp_c"]).toDouble();
+    windSpeed = currentWeather["wind_kph"].toInt();
+    humidity = currentWeather["humidity"].toInt();
+    cloud = currentWeather["cloud"].toInt();
+
+    dailyWeatherForecast = weatherData["forecast"]["forecastday"];
+    hourlyWeatherForecast = dailyWeatherForecast[0]["hour"];
+    notifyListeners();
+  }
+
+  Future<void> fetchWeatherDataViaCity(String searchText) async {
     try {
       _isLoading = true;
-      final weatherData = await _weatherService.fetchWeatherData(searchText);
-      final locationData = weatherData["location"];
-      final currentWeather = weatherData["current"];
-      location = getShortLocationName(locationData["name"]);
-      currentDate = formatDate(locationData["localtime"]);
-      currentTime = get12HourTime(locationData["localtime"].substring(11, 16));
-      currentWeatherStatus = currentWeather["condition"]["text"];
-      currentIcon = currentWeather["condition"]["icon"];
-      weatherIcon =
-          "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
-      temperature = (currentWeather["temp_c"]).toDouble();
-      windSpeed = currentWeather["wind_kph"].toInt();
-      humidity = currentWeather["humidity"].toInt();
-      cloud = currentWeather["cloud"].toInt();
-
-      dailyWeatherForecast = weatherData["forecast"]["forecastday"];
-      hourlyWeatherForecast = dailyWeatherForecast[0]["hour"];
-
+      // notifyListeners();
+      final weatherData =
+          await _weatherService.fetchWeatherDataViaCity(searchText);
+      await setWeatherData(weatherData);
       _isLoading = false;
       notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      // Handle error
+    }
+  }
+
+  Future<void> fetchWeatherDataViaGps(double latitude, double longitude) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      _isLoading = false;
+      notifyListeners();
+      final weatherData =
+          await _weatherService.fetchWeatherDataViaGps(latitude, longitude);
+      await setWeatherData(weatherData);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       // Handle error
     }
   }
 
   String get12HourTime(String time) {
-    final inputDate = DateFormat("HH:mm").parse(time);
-    return DateFormat("hh:mm a").format(inputDate);
+    try {
+      final timePart = time.split(' ')[1];
+      final inputDate = DateFormat("H:mm").parse(timePart);
+      return DateFormat("hh:mm a").format(inputDate);
+    } catch (e) {
+      return "00:00";
+    }
   }
 
   String formatDate(String date) {
@@ -72,6 +111,4 @@ class WeatherProvider with ChangeNotifier {
     final words = location.split(" ");
     return words.length > 1 ? "${words[0]} ${words[1]}" : words[0];
   }
-
-  bool get isLoading => _isLoading;
 }
