@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MyappProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
-
+//flutter version 3.22.0
   ///Get-theme mode
   void loadThemeMode() async {
     _themeMode = await PreferencesDB.db.getAppThemeMode();
