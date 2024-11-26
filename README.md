@@ -90,6 +90,10 @@ MacOS:
     ```sh
     flutter run
     ```
+## Download APK
+You can download the latest version of the APK from the link below:
+
+[Download APK](https://drive.google.com/file/d/1FwPSsglcDt-Gfb9JNW4GrgBtvyArNZil/view?usp=sharing)
 
 ## 🌏 Related websites
 > Flutter official website: [https://flutter.dev/](https://flutter.dev/)
