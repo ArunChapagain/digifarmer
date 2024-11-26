@@ -34,7 +34,7 @@ Agriculture News: Stay updated with the latest news and trends in agriculture.
 
 Windows:
 
-[√] Flutter (Channel stable, 3.22.2, on Microsoft Windows [Version 10.0.22621.3007], locale zh-CN)
+[√] Flutter (Channel stable, 3.22.2, on Microsoft Windows,linux)
 <br>
 [√] Android toolchain -develop for Android devices (Android SDK version 34.0.0)<br>
 [√] Visual Studio -develop Windows apps (Visual Studio Community 2022 17.9.6)<br>
