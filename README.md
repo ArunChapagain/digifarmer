@@ -23,8 +23,11 @@
 ## ⭐ Features
 
 Disease Detection: Identify and diagnose plant diseases through image analysis.
+</br>
 Plant Health Diagnostics: Monitor and assess the overall health of plants using various indicators.
+</br>
 Weather Forecasting: Get accurate and timely weather forecasts to plan agricultural activities.
+</br>
 Agriculture News: Stay updated with the latest news and trends in agriculture.
 
 
