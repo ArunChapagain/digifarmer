@@ -1,0 +1,114 @@
+name: digifarmer
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  flutter_smart_dialog: ^4.9.8+8
+  remixicon: ^1.4.1
+  google_fonts: ^6.2.1
+  shared_preferences: ^2.5.3
+  provider: ^6.1.5
+  carousel_slider: ^5.0.0
+  http: ^1.4.0
+  intl: ^0.20.2
+  modal_bottom_sheet: ^3.0.0
+  path_provider: ^2.1.5
+  image_picker: ^1.1.2
+  firebase_core: ^3.13.1
+  firebase_auth: ^5.5.4
+  google_sign_in: ^6.3.0
+  internet_connection_checker_plus: ^2.7.2
+  location: ^8.0.0
+  flutter_screenutil: ^5.9.3
+  tflite_flutter: ^0.11.0
+  image: ^4.0.17
+  dio: ^5.8.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/images/
+    - assets/images/home/
+    - assets/images/detection/
+    - assets/images/weather/
+    - assets/images/auth/
+    - assets/images/icon/
+    - assets/model/
+    - assets/model/disease/
+# name: digifarmer
+# description: "A new Flutter project."
+# publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+# version: 1.0.0+1
+
+# environment:
+#   sdk: ">=3.3.4 <4.0.0"
+
+# dependencies:
+#   flutter:
+#     sdk: flutter
+
+#   cupertino_icons: ^1.0.6
+#   flutter_screenutil: ^5.9.1
+#   flutter_smart_dialog: ^4.9.6+1
+#   remixicon: ^1.2.0
+#   google_fonts: ^6.2.1
+#   shared_preferences: ^2.2.3
+#   provider: ^6.1.2
+#   carousel_slider: ^4.2.1
+#   http: ^1.2.1
+#   intl: ^0.19.0
+#   modal_bottom_sheet: ^3.0.0
+#   path_provider: ^2.1.3
+#   flutter_tflite: ^1.0.1
+#   image_picker: ^0.8.6
+#   firebase_core: ^3.1.0
+#   firebase_auth: ^5.1.0
+#   google_sign_in: ^6.2.1
+#   internet_connection_checker_plus: ^0.0.1
+#   location: ^7.0.0
+
+# dev_dependencies:
+#   flutter_test:
+#     sdk: flutter
+#   flutter_lints: ^4.0.0
+#   flutter_launcher_icons: "^0.11.0"
+
+# flutter_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/images/icon/icon.png"
+
+# flutter:
+#   uses-material-design: true
+

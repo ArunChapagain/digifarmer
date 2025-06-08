@@ -1,0 +1,4 @@
+Rust
+Gray Leaf
+Healthy
+Blight
