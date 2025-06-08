@@ -8,8 +8,6 @@ import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
-import 'package:digifarmer/theme/theme.dart';
-import 'package:digifarmer/view/auth/auth_page.dart';
 import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

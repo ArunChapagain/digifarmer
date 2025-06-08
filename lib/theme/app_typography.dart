@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-
 class R {
   //Large, Very Large, Small,.Very Small...
   static double kR8 = 8;
   static double kR10 = 10;
   static double kR12 = 12;
   static double kR16 = 16;
+  static double kR18 = 18;
+  static double kR20 = 20;
+  static double kR22 = 22;
 }
 
 class FontSize {

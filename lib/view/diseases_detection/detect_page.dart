@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:digifarmer/constants/constants.dart';
@@ -81,7 +82,7 @@ class _DetectPageState extends State<DetectPage> {
       labels =
           labelsText.split('\n').where((label) => label.isNotEmpty).toList();
     } catch (e) {
-      print('Error loading model: $e');
+      log('Error loading model: $e');
     }
   }
 
@@ -98,7 +99,7 @@ class _DetectPageState extends State<DetectPage> {
 
   classifyImage(File image) async {
     if (interpreter == null || labels == null) {
-      print('Model not loaded');
+      log('Model not loaded');
       return;
     }
 
@@ -108,7 +109,7 @@ class _DetectPageState extends State<DetectPage> {
       final decodedImage = img.decodeImage(imageBytes);
 
       if (decodedImage == null) {
-        print('Could not decode image');
+        log('Could not decode image');
         return;
       }
 
@@ -165,7 +166,7 @@ class _DetectPageState extends State<DetectPage> {
 
       displayResult(predictedLabel);
     } catch (e) {
-      print('Error during classification: $e');
+      log('Error during classification: $e');
     }
   }
 
@@ -186,7 +187,7 @@ class _DetectPageState extends State<DetectPage> {
             String type = value.classDetection;
             String description = value.details;
             if (value.isDetectionLoading == true) {
-              return Container(
+              return SizedBox(
                 height: 200.h,
                 child: Center(
                   child: CircularProgressIndicator(

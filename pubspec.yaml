@@ -36,6 +36,7 @@ dependencies:
   tflite_flutter: ^0.11.0
   image: ^4.0.17
   dio: ^5.8.0+1
+  dotted_line: ^3.2.3
 
 dev_dependencies:
   flutter_test:
