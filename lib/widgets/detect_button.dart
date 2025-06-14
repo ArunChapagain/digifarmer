@@ -4,20 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetectButton extends StatelessWidget {
-  DetectButton(
-      {super.key,
-      required this.onTap,
-      required this.title,
-      required this.subTitle,
-      required this.icon,
-      this.isSecondBtn});
+  DetectButton({
+    super.key,
+    required this.onTap,
+    required this.title,
+    required this.subTitle,
+    required this.icon,
+    this.isSecondBtn,
+  });
   final Function onTap;
   final bool? isSecondBtn;
   final String title;
   final String subTitle;
   final IconData icon;
   final textStyle = TextStyle(
-      fontFamily: GoogleFonts.poppins(fontWeight: FontWeight.w700).fontFamily);
+    fontFamily: GoogleFonts.poppins(fontWeight: FontWeight.w700).fontFamily,
+  );
 
   bool get btn {
     if (isSecondBtn == null) {
@@ -35,13 +37,11 @@ class DetectButton extends StatelessWidget {
       },
       child: AnimatedPress(
         child: Container(
-          height: 70.h,
-          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 12.h),
+          height: 66.h,
+          padding: EdgeInsets.symmetric(horizontal: 26.w, vertical: 12.h),
           decoration: BoxDecoration(
             // color: Theme.of(context).primaryColor.withOpacity(0.8),
-            borderRadius: BorderRadius.all(
-              Radius.circular(26.r),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(26.r)),
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).primaryColor.withOpacity(0.3),
@@ -51,17 +51,15 @@ class DetectButton extends StatelessWidget {
               ),
             ],
             gradient: LinearGradient(
-              colors: btn
-                  ? [
-                      const Color(0xFFA9C864),
-                      const Color(0xFFBCD57F),
-                    ]
-                  : [
-                      const Color(0xFF82BB05),
-                      const Color(0xFF81B315),
-                      const Color(0xFF99C628),
-                      const Color(0xFFA8D24C),
-                    ],
+              colors:
+                  btn
+                      ? [const Color(0xFFA9C864), const Color(0xFFBCD57F)]
+                      : [
+                        const Color(0xFF82BB05),
+                        const Color(0xFF81B315),
+                        const Color(0xFF99C628),
+                        const Color(0xFFA8D24C),
+                      ],
               begin: Alignment.topLeft,
               end: Alignment.topRight,
             ),
@@ -77,21 +75,23 @@ class DetectButton extends StatelessWidget {
                     title,
                     textAlign: TextAlign.start,
                     style: textStyle.copyWith(
-                      color: btn
-                          ? const Color(0xFF020120).withOpacity(0.7)
-                          : Colors.white.withOpacity(0.9),
+                      color:
+                          btn
+                              ? const Color(0xFF020120).withOpacity(0.7)
+                              : Colors.white.withOpacity(0.9),
                       fontSize: 22.sp,
                     ),
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 2.h),
                   Text(
                     subTitle,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16.sp,
-                      color: btn
-                          ? const Color(0xFF020120).withOpacity(0.5)
-                          : const Color(0xFF428C2C),
+                      color:
+                          btn
+                              ? const Color(0xFF020120).withOpacity(0.5)
+                              : const Color(0xFF428C2C),
                       height: 0.7.h,
                     ),
                   ),
@@ -101,9 +101,10 @@ class DetectButton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
                 child: Icon(
                   icon,
-                  color: btn
-                      ? const Color(0xFF020120).withOpacity(0.7)
-                      : Colors.white.withOpacity(0.9),
+                  color:
+                      btn
+                          ? const Color(0xFF020120).withOpacity(0.7)
+                          : Colors.white.withOpacity(0.9),
                   size: 40.sp,
                 ),
               ),

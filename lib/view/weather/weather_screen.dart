@@ -2,6 +2,7 @@ import 'package:digifarmer/provider/location_provider.dart';
 import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/constants.dart';
+import 'package:digifarmer/theme/dimension.dart';
 import 'package:digifarmer/view/weather/forecasts.dart';
 import 'package:digifarmer/view/weather/widgets/reload_weather.dart';
 import 'package:digifarmer/view/weather/widgets/weather_item.dart';
@@ -47,16 +48,17 @@ class _HomePageState extends State<WeatherPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 40.w),
+                        kVSizedBox2,
                         Text(
                           'Weather',
                           style: TextStyle(
-                            fontSize: 35.sp,
+                            fontSize: 28.sp,
+
                             fontFamily:
                                 GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w600,
                                 ).fontFamily,
                             height: 0.1,
                           ),
@@ -96,8 +98,8 @@ class _HomePageState extends State<WeatherPage> {
         boxShadow: [
           BoxShadow(
             color: constants.primaryColor.withOpacity(.5),
-            spreadRadius: 5.r,
-            blurRadius: 7.r,
+            spreadRadius: 2.r,
+            blurRadius: 5.r,
             offset: const Offset(0, 3),
           ),
         ],
@@ -470,7 +472,7 @@ class TodayForecast extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
               'Today',

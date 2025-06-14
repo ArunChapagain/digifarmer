@@ -46,7 +46,7 @@ If your primary is a green button, onPrimary should be white text so it's readab
 */
 
 final ThemeData lightTheme = ThemeData(
-  scaffoldBackgroundColor: Color(0xE6CFE7CF),
+  scaffoldBackgroundColor: Color(0xE6D7E7D7),
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xFF11723D),
