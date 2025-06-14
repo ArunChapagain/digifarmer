@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:remixicon/remixicon.dart';
 
 class RotatingIconButton extends StatefulWidget {
   const RotatingIconButton({super.key, required this.onPressed});
@@ -13,6 +14,7 @@ class RotatingIconButtonState extends State<RotatingIconButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  String getUpdate = 'Update';
 
   @override
   void initState() {
@@ -33,9 +35,15 @@ class RotatingIconButtonState extends State<RotatingIconButton>
 
   void _rotateIcon() {
     widget.onPressed();
+    setState(() {
+      getUpdate = 'Updating';
+    });
     _controller.repeat();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 4), () {
       _controller.stop();
+      setState(() {
+        getUpdate = 'Update';
+      });
     });
   }
 
@@ -43,20 +51,39 @@ class RotatingIconButtonState extends State<RotatingIconButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _rotateIcon,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          return Transform.rotate(
-            angle: _animation.value *
-                2 *
-                3.141592653589793, // 360 degrees in radians
-            child: Icon(
-              Icons.autorenew_rounded,
-              size: 30.sp,
-              color: Colors.white.withOpacity(0.9),
+      child: Row(
+        spacing: 6,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Transform.rotate(
+                angle: _animation.value * 2 * 3.141592653589793,
+                alignment: Alignment.center, // Ensure center alignment
+                child: Container(
+                  width: 16.sp,
+                  height: 16.sp,
+                  alignment:
+                      Alignment.center, // Center the icon within container
+                  child: Icon(
+                    Remix.refresh_line,
+                    size: 16.sp,
+                    color: Colors.black,
+                  ),
+                ),
+              );
+            },
+          ),
+          Text(
+            getUpdate,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

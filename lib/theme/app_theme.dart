@@ -86,7 +86,7 @@ class AppThemeGreen {
     primaryColor: primaryColor,
     //scaffold background color
     // scaffoldBackgroundColor: const Color(0xFFF6F8FA),
-    scaffoldBackgroundColor: const Color.fromARGB(255, 233, 245, 233),
+    scaffoldBackgroundColor: const Color(0xFFE9F5E9),
     //bottomNavigationBar
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,

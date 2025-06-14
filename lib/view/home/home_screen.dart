@@ -199,7 +199,7 @@ Widget _weatherCard(BuildContext context) {
                     Row(
                       spacing: 8,
                       children: [
-                        Icon(Icons.location_on_outlined, size: 20),
+                        Icon(RemixIcons.map_pin_2_line, size: 20),
                         Text(
                           state.location,
                           style: customTextStyle(

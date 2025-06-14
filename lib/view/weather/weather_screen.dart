@@ -15,6 +15,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as bottom_sheet;
+import 'package:remixicon/remixicon.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -48,27 +49,14 @@ class _HomePageState extends State<WeatherPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        kVSizedBox0,
+                        leadingColumnRow(context, weatherProvider),
                         kVSizedBox2,
-                        Text(
-                          'Weather',
-                          style: TextStyle(
-                            fontSize: 28.sp,
+                        _weatherCard(context, weatherProvider),
+                        kVSizedBox2,
 
-                            fontFamily:
-                                GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                ).fontFamily,
-                            height: 0.1,
-                          ),
-                        ),
-                        SizedBox(height: 30.w),
-                        weatherCard(
-                          constants: _constants,
-                          weatherProvider: weatherProvider,
-                        ),
-                        SizedBox(height: 20.w),
                         TodayForecast(
                           dailyWeatherForecast:
                               weatherProvider.dailyWeatherForecast,
@@ -83,6 +71,154 @@ class _HomePageState extends State<WeatherPage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget leadingColumnRow(
+    BuildContext context,
+    WeatherProvider weatherProvider,
+  ) {
+    // boo
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LocationDisplay(
+              location: weatherProvider.location,
+              cityController: _cityController,
+              constants: _constants,
+            ),
+          ],
+        ),
+        AnimatedPress(
+          child: Container(
+            width: 110.w,
+            padding: EdgeInsets.symmetric(vertical: 6.w, horizontal: 6.w),
+            decoration: BoxDecoration(
+              color: Color(0xFFD8E7D8),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            child: RotatingIconButton(
+              onPressed: () => weatherProvider.getWeather(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _weatherCard(BuildContext context, WeatherProvider weatherProvider) {
+    return Column(
+      children: [
+        Image.asset(
+          "assets/images/weather/${weatherProvider.weatherIcon}",
+          height: 200.w,
+        ),
+        kVSizedBox2,
+        Text(
+          '${weatherProvider.temperature.toString()}\u00B0',
+
+          style: TextStyle(
+            fontFamily:
+                GoogleFonts.poppins(fontWeight: FontWeight.w600).fontFamily,
+            height: 1,
+            color: Colors.black,
+            fontSize: 50.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          weatherProvider.currentWeatherStatus.toString(),
+          style: TextStyle(
+            color: Colors.black.withOpacity(0.5),
+            fontSize: 26.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        kVSizedBox2,
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.w),
+          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          decoration: BoxDecoration(
+            color: Color(0xFFD8E7D8),
+            borderRadius: BorderRadius.circular(30.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _weatherItem(
+                imagePath: 'windspeed',
+                title: 'Wind',
+                value: '${weatherProvider.windSpeed} km/h',
+              ),
+              SizedBox(
+                height: 35.h,
+                child: VerticalDivider(
+                  color: Colors.black.withOpacity(0.3),
+                  thickness: 1,
+                  indent: 5,
+                  endIndent: 5,
+                ),
+              ),
+              _weatherItem(
+                imagePath: 'humidity',
+                title: 'Humidity',
+                value: '${weatherProvider.humidity}%',
+              ),
+              SizedBox(
+                height: 35.h,
+                child: VerticalDivider(
+                  color: Colors.black.withOpacity(0.3),
+                  thickness: 1,
+                  indent: 5,
+                  endIndent: 5,
+                ),
+              ),
+              _weatherItem(
+                imagePath: 'cloud',
+                title: 'Cloud',
+                value: '${weatherProvider.cloud}%',
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _weatherItem({
+    required String imagePath,
+    required String title,
+    required String value,
+  }) {
+    return Column(
+      spacing: 2,
+      children: [
+        Image.asset(
+          'assets/images/weather/${imagePath}.png',
+          fit: BoxFit.cover,
+          height: 30.w,
+          width: 30.w,
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            height: 1,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[700],
+          ),
+        ),
+      ],
     );
   }
 
@@ -309,18 +445,27 @@ class LocationDisplay extends StatelessWidget {
         );
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/weather/pin.png", width: 20.w),
-          const SizedBox(width: 2),
+          const Icon(
+            RemixIcons.map_pin_2_fill,
+            color: Color(0xFFFF6C32),
+            size: 24,
+          ),
+          SizedBox(width: 10.w),
           Text(
             location,
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.sp,
+              color: Colors.black,
+              fontSize: 24.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+          const Icon(
+            RemixIcons.arrow_down_s_line,
+            color: Colors.black,
+            size: 30,
+          ),
         ],
       ),
     );
@@ -471,39 +616,42 @@ class TodayForecast extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Today',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
-            ),
-            GestureDetector(
-              onTap:
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (_) => ForecastsScreen(
-                            dailyForecastWeather: dailyWeatherForecast,
-                          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Today',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+              GestureDetector(
+                onTap:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => ForecastsScreen(
+                              dailyForecastWeather: dailyWeatherForecast,
+                            ),
+                      ),
                     ),
-                  ),
-              child: AnimatedPress(
-                child: Text(
-                  'Forecasts',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 25.sp,
-                    color: const Color(0xFF00A4E4),
+                child: AnimatedPress(
+                  child: Text(
+                    'Forecasts >',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(
-          height: 150.w,
+          height: 105.h,
           child: HourlyForecastList(
             hourlyWeatherForecast: hourlyWeatherForecast,
             constants: constants,
@@ -514,7 +662,7 @@ class TodayForecast extends StatelessWidget {
   }
 }
 
-class HourlyForecastList extends StatelessWidget {
+class HourlyForecastList extends StatefulWidget {
   final List hourlyWeatherForecast;
   final Constants constants;
 
@@ -525,56 +673,131 @@ class HourlyForecastList extends StatelessWidget {
   });
 
   @override
+  State<HourlyForecastList> createState() => _HourlyForecastListState();
+}
+
+class _HourlyForecastListState extends State<HourlyForecastList> {
+  late ScrollController _scrollController;
+  int currentHourIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _findCurrentHourIndex();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToCurrentHour();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _findCurrentHourIndex() {
+    final now = DateTime.now();
+    final currentHour = now.hour;
+
+    for (int i = 0; i < widget.hourlyWeatherForecast.length; i++) {
+      final forecast = widget.hourlyWeatherForecast[i];
+      final forecastDateTime = DateTime.parse(forecast["time"]);
+      if (forecastDateTime.hour == currentHour &&
+          forecastDateTime.day == now.day) {
+        currentHourIndex = i;
+        break;
+      }
+    }
+  }
+
+  void _scrollToCurrentHour() {
+    if (currentHourIndex > 0) {
+      final itemWidth = 90.w; // 80.w width + 10.w margin
+      final scrollPosition =
+          (currentHourIndex * itemWidth) -
+          (MediaQuery.of(context).size.width / 2) +
+          (itemWidth / 2);
+
+      _scrollController.animateTo(
+        scrollPosition.clamp(0.0, _scrollController.position.maxScrollExtent),
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: hourlyWeatherForecast.length,
+      controller: _scrollController,
+      itemCount: widget.hourlyWeatherForecast.length,
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
       physics: const BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        final forecast = hourlyWeatherForecast[index];
+        final forecast = widget.hourlyWeatherForecast[index];
         final forecastTime = get12HourTime(forecast["time"].substring(11, 16));
         final forecastTemperature = forecast["temp_c"].round().toString();
         final forecastWeatherName = forecast["condition"]["text"];
         final forecastWeatherIcon =
             "${forecastWeatherName.replaceAll(' ', '').toLowerCase()}.png";
 
+        final isCurrentHour = index == currentHourIndex;
+
         return Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 12),
           margin: const EdgeInsets.symmetric(horizontal: 5),
-          width: 110.w,
+          width: 80.w,
           decoration: BoxDecoration(
-            // color: const Color(0xFFF8F8F8),
-            color: Theme.of(context).cardColor,
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 1),
-                blurRadius: 5,
-                color: constants.primaryColor.withOpacity(.4),
-              ),
-            ],
+            color:
+                isCurrentHour
+                    ? const Color(0xFF0089E4)
+                    : const Color(0xFFD8E7D8),
+            borderRadius: const BorderRadius.all(Radius.circular(36)),
+            boxShadow:
+                isCurrentHour
+                    ? [
+                      BoxShadow(
+                        color: const Color(0xFF0089E4).withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                    : null,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text(
+                '$forecastTemperature\u00B0',
+                style: TextStyle(
+                  height: 0.8,
+                  color:
+                      isCurrentHour
+                          ? Colors.white
+                          : widget.constants.blackColor.withOpacity(.7),
+                  fontSize: isCurrentHour ? 22.sp : 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: isCurrentHour ? 40 : 35,
+                child: Image.asset(
+                  'assets/images/weather/$forecastWeatherIcon',
+                  fit: BoxFit.cover,
+                ),
+              ),
               Text(
                 forecastTime,
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  color: constants.blackColor.withOpacity(.7),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Image.asset(
-                'assets/images/weather/$forecastWeatherIcon',
-                width: 45.w,
-              ),
-              Text(
-                '$forecastTemperature\u00B0C',
-                style: TextStyle(
-                  color: constants.blackColor.withOpacity(.7),
-                  fontSize: 20.sp,
+                  fontSize: isCurrentHour ? 15.sp : 14.sp,
+                  color:
+                      isCurrentHour
+                          ? Colors.white
+                          : widget.constants.blackColor.withOpacity(.7),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -587,6 +810,6 @@ class HourlyForecastList extends StatelessWidget {
 
   String get12HourTime(String time) {
     final inputDate = DateFormat("HH:mm").parse(time);
-    return DateFormat("hh:mm a").format(inputDate);
+    return DateFormat("hh:mm").format(inputDate);
   }
 }
