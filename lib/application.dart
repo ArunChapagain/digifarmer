@@ -1,7 +1,9 @@
+import 'package:digifarmer/constants/app_icon.dart';
 import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
 import 'package:digifarmer/view/home/home_screen.dart';
 import 'package:digifarmer/view/news/news_screen.dart';
 import 'package:digifarmer/view/weather/weather_screen.dart';
+import 'package:digifarmer/widgets/bottom_nav_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:remixicon/remixicon.dart';
@@ -23,7 +25,7 @@ class _ApplicationState extends State<Application>
     const HomePage(),
     const NewsPage(),
     DiseasesDetectionPage(),
-    const WeatherPage()
+    const WeatherPage(),
   ];
 
   ///Tab control
@@ -52,73 +54,70 @@ class _ApplicationState extends State<Application>
     final ThemeData appTheme = Theme.of(context);
 
     return Scaffold(
-        body: PageView(
-          controller: _pageViewController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _pages,
+      body: PageView(
+        controller: _pageViewController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
+      bottomNavigationBar: DecoratedBox(
+        decoration: BoxDecoration(
+          color:
+              appTheme.bottomNavigationBarTheme.backgroundColor ?? Colors.white,
+          boxShadow: [
+            BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 24),
+          ],
         ),
-        bottomNavigationBar: DecoratedBox(
-          decoration: BoxDecoration(
-            color: appTheme.bottomNavigationBarTheme.backgroundColor ??
-                Colors.white,
-            boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 24),
-            ],
+        child: TabBar(
+          enableFeedback: true,
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          controller: _pageController,
+          indicatorColor: Colors.transparent,
+          labelStyle: TextStyle(
+            // color: Colors.black,
+            height: 0.5.h,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.bold,
           ),
-          child: TabBar(
-            enableFeedback: true,
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            controller: _pageController,
-            indicatorColor: Colors.transparent,
-            labelStyle: TextStyle(
-              // color: Colors.black,
-              height: 0.5.h,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-            ),
-            unselectedLabelStyle: TextStyle(
-              // color: const Color(0xFF9FA9AF),
-              height: 0.5.h,
-              fontSize: 10.sp,
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: [
-              Tab(
-                icon: Icon(
-                  Remix.home_line,
-                  size: _tabIconSize,
-                ),
-                text: 'Home',
-              ),
-              Tab(
-                icon: Icon(
-                  Remix.newspaper_line,
-                  size: _tabIconSize,
-                ),
-                text: 'News',
-              ),
-              Tab(
-                icon: Icon(
-                  Remix.search_line,
-                  size: _tabIconSize,
-                ),
-                text: 'Diagnose',
-              ),
-              Tab(
-                icon: Icon(
-                  Remix.cloudy_line,
-                  size: _tabIconSize,
-                ),
-                text: 'Weather',
-              ),
-            ],
-            onTap: (index) {
-              _pageViewController.jumpToPage(index);
-              setState(() {
-                _currentPage = index;
-              });
-            },
+          unselectedLabelStyle: TextStyle(
+            // color: const Color(0xFF9FA9AF),
+            height: 0.5.h,
+            fontSize: 10.sp,
+            fontWeight: FontWeight.bold,
           ),
-        ));
+          tabs: [
+            BottomNavItem(
+              iconPath: kHomeLine,
+              selectedIconPath: kHomeFill,
+              label: 'Home',
+              isSelected: _currentPage == 0,
+            ),
+            BottomNavItem(
+              iconPath: kNewsLine,
+              selectedIconPath: kNewsFill,
+              label: 'News',
+              isSelected: _currentPage == 1,
+            ),
+            BottomNavItem(
+              iconPath: kDetectionLine,
+              selectedIconPath: kDetectionFill,
+              label: 'Detection',
+              isSelected: _currentPage == 2,
+            ),
+            BottomNavItem(
+              iconPath: kCloudLine,
+              selectedIconPath: kCloudFill,
+              label: 'Weather',
+              isSelected: _currentPage == 3,
+            ),
+          ],
+          onTap: (index) {
+            _pageViewController.jumpToPage(index);
+            setState(() {
+              _currentPage = index;
+            });
+          },
+        ),
+      ),
+    );
   }
 }

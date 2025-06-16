@@ -109,11 +109,12 @@ class NewsCard extends StatelessWidget {
           vertical: 8.w,
         ),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          // color: Theme.of(context).cardColor,
+          color: Color(0xFFD8E7D8),
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.07),
+              color: Color(0xFFD8E7D8).withOpacity(0.07),
               blurRadius: 8,
               offset: const Offset(1, 7),
             ),
