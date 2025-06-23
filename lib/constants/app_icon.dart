@@ -8,6 +8,8 @@ String kCloudFill = getBaseIconPath('cloud_fill.png');
 String kCloudLine = getBaseIconPath('cloud.png');
 String kGroupFill = getBaseIconPath('group_fill.png');
 String kGroupLine = getBaseIconPath('group.png');
+String kAleartLine = getBaseIconPath('alert.png');
+String kAleartFill = getBaseIconPath('alert_fill.png');
 
 String getBaseIconPath(String iconName) {
   return 'assets/icons/$iconName';
