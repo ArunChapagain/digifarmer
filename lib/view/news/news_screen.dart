@@ -100,6 +100,21 @@ class NewsCard extends StatelessWidget {
         );
       },
       child: Container(
+        // padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+
+        // width: 110.w,
+        decoration: BoxDecoration(
+          color: Color(0xFFD8E7D8),
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
         margin: EdgeInsetsDirectional.symmetric(
           horizontal: 10.w,
           vertical: 10.w,
@@ -108,18 +123,18 @@ class NewsCard extends StatelessWidget {
           horizontal: 8.h,
           vertical: 8.w,
         ),
-        decoration: BoxDecoration(
-          // color: Theme.of(context).cardColor,
-          color: Color(0xFFD8E7D8),
-          borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFFD8E7D8).withOpacity(0.07),
-              blurRadius: 8,
-              offset: const Offset(1, 7),
-            ),
-          ],
-        ),
+        // decoration: BoxDecoration(
+        //   // color: Theme.of(context).cardColor,
+        //   color: Color(0xFFD8E7D8),
+        //   borderRadius: BorderRadius.circular(12.r),
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Color(0xFFD8E7D8).withOpacity(0.07),
+        //       blurRadius: 8,
+        //       offset: const Offset(1, 7),
+        //     ),
+        //   ],
+        // ),
         child: Column(
           children: [
             Row(
@@ -129,8 +144,8 @@ class NewsCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.r),
                       child: Image.network(
                         news['urlToImage'],
-                        height: 80.h,
-                        width: 100.w,
+                        height: 70.h,
+                        width: 90.w,
                         fit: BoxFit.cover,
                       ),
                     )

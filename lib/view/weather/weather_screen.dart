@@ -93,12 +93,22 @@ class _HomePageState extends State<WeatherPage> {
         ),
         AnimatedPress(
           child: Container(
-            width: 110.w,
             padding: EdgeInsets.symmetric(vertical: 6.w, horizontal: 6.w),
+
+            width: 110.w,
             decoration: BoxDecoration(
               color: Color(0xFFD8E7D8),
-              borderRadius: BorderRadius.circular(20.r),
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.08),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
+
             child: RotatingIconButton(
               onPressed: () => weatherProvider.getWeather(),
             ),
@@ -111,9 +121,26 @@ class _HomePageState extends State<WeatherPage> {
   Widget _weatherCard(BuildContext context, WeatherProvider weatherProvider) {
     return Column(
       children: [
-        Image.asset(
-          "assets/images/weather/${weatherProvider.weatherIcon}",
-          height: 200.w,
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+
+          // width: 110.w,
+          decoration: BoxDecoration(
+            color: Color(0xFFD8E7D8),
+            borderRadius: BorderRadius.circular(16.r),
+            border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.08),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Image.asset(
+            "assets/images/weather/${weatherProvider.weatherIcon}",
+            height: 200.w,
+          ),
         ),
         kVSizedBox2,
         Text(
@@ -138,12 +165,26 @@ class _HomePageState extends State<WeatherPage> {
         ),
         kVSizedBox2,
         Container(
-          padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.w),
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          // padding: EdgeInsets.symmetric(vertical: 6.w, horizontal: 6.w),
+          // width: 110.w,
           decoration: BoxDecoration(
             color: Color(0xFFD8E7D8),
             borderRadius: BorderRadius.circular(30.r),
+            border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.08),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
+          padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 30.w),
+          margin: EdgeInsets.symmetric(horizontal: 12.w),
+          // decoration: BoxDecoration(
+          //   color: Color(0xFFD8E7D8),
+          //   borderRadius: BorderRadius.circular(30.r),
+          // ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -750,6 +791,13 @@ class _HourlyForecastListState extends State<HourlyForecastList> {
           margin: const EdgeInsets.symmetric(horizontal: 5),
           width: 80.w,
           decoration: BoxDecoration(
+            border: Border.all(
+              color:
+                  isCurrentHour
+                      ? const Color(0xFF0089E4)
+                      : Colors.grey.withOpacity(0.3),
+              width: 1,
+            ),
             color:
                 isCurrentHour
                     ? const Color(0xFF0089E4)

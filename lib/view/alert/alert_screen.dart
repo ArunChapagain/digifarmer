@@ -22,9 +22,9 @@ class _AlertPageState extends State<AlertPage> {
   void initState() {
     super.initState();
     // Refresh alerts when page loads
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AlertProvider>().getAlerts();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<AlertProvider>().getAlerts();
+    // });
   }
 
   Widget _buildSummaryHeader(List<Alert> alerts) {

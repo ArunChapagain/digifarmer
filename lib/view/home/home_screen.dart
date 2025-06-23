@@ -183,7 +183,7 @@ Widget _weatherCard(BuildContext context) {
         width: context.screenWidth * 0.95,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         decoration: BoxDecoration(
-          color: context.color.onPrimary,
+          color: const Color.fromARGB(255, 250, 250, 250),
           borderRadius: BorderRadius.circular(18.5.r),
         ),
         alignment: Alignment.center,
@@ -235,7 +235,7 @@ Widget _weatherCard(BuildContext context) {
                               ),
                             ),
                             Text(
-                              "Low: ${state.weatherModel.forecast?.forecastday?[0].day?.maxtempC ?? ''}\u00B0C",
+                              "Low: ${state.weatherModel.forecast?.forecastday?[0].day?.mintempC ?? ''}\u00B0C",
                               style: customTextStyle(
                                 color: context.color.onSurface,
                                 fontSize: FontSize.kS14,
@@ -385,7 +385,7 @@ Widget _weatherItem({required String title, required String value}) {
 
 Widget _greetingsAndWeatherStack(BuildContext context) {
   return SizedBox(
-    height: 350,
+    height: 355,
     child: Stack(
       key: ValueKey("GreetingsAndStack"),
       alignment: Alignment.topCenter,
