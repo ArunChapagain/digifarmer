@@ -9,6 +9,7 @@ import 'package:digifarmer/provider/network_checker_provider.dart';
 import 'package:digifarmer/provider/news_provider.dart';
 import 'package:digifarmer/provider/weather_provider.dart';
 import 'package:digifarmer/theme/app_theme.dart';
+import 'package:digifarmer/view/auth/auth_page.dart';
 import 'package:digifarmer/widgets/will_pop_scope_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +52,8 @@ class MyApp extends StatelessWidget {
               builder: FlutterSmartDialog.init(),
               home: const WillPopScopeRoute(
                 child: Init(
-                  // child: AuthPage(),
-                  child: Application(),
+                  child: AuthPage(),
+                  // child: Application(),
                 ),
               ),
             );

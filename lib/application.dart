@@ -38,7 +38,7 @@ class _ApplicationState extends State<Application>
 
   ///PageView control
   final PageController _pageViewController = PageController();
-
+  
   @override
   void dispose() {
     ///Tab control
@@ -113,7 +113,7 @@ class _ApplicationState extends State<Application>
             BottomNavItem(
               iconPath: kAleartLine,
               selectedIconPath: kAleartFill,
-              label: 'Weather',
+              label: 'Alert',
               isSelected: _currentPage == 4,
             ),
           ],

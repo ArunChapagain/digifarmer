@@ -8,26 +8,33 @@ class SquareTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap ,
+      onTap: onTap,
       child: Container(
-        height: 100,
-        width: 100,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-          ),
+          border: Border.all(color: Colors.white),
           color: Colors.grey[200],
-          borderRadius: const BorderRadius.all(
-            Radius.circular(16),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(32)),
         ),
-        child: Image.asset(
-          imgUrl,
-          // colorFilter: ColorFilter.mode(palette.white, BlendMode.srcIn),
-          // color: Colors.grey[300],
-      
-          colorBlendMode: BlendMode.srcOut,
+        child: Row(
+          spacing: 20,
+          children: [
+            Image.asset(
+              imgUrl,
+              height: 40,
+              // colorFilter: ColorFilter.mode(palette.white, BlendMode.srcIn),
+              // color: Colors.grey[300],
+              colorBlendMode: BlendMode.srcOut,
+            ),
+            Text(
+              "Sign in with Google",
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

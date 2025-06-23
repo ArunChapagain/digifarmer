@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-//text editing controllers
+  //text editing controllers
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
@@ -23,15 +23,14 @@ class _LoginPageState extends State<LoginPage> {
   void displayCircularProgress() {
     showDialog(
       context: context,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(
-          color: Colors.blue[300]!,
-        ),
-      ),
+      builder:
+          (context) => Center(
+            child: CircularProgressIndicator(color: Colors.blue[300]!),
+          ),
     );
   }
 
-// sign user in method
+  // sign user in method
   void signIn(BuildContext context) async {
     FocusScope.of(context).unfocus();
     displayCircularProgress();
@@ -73,21 +72,21 @@ class _LoginPageState extends State<LoginPage> {
 
   void wrongCredentialMessage(String message) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text(message),
-              content: Text(errorMessageContent(message)),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'OK',
-                      style: TextStyle(color: Colors.grey[800]),
-                    ))
-              ],
-            ));
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text(message),
+            content: Text(errorMessageContent(message)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK', style: TextStyle(color: Colors.grey[800])),
+              ),
+            ],
+          ),
+    );
   }
 
   @override
@@ -103,28 +102,16 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 30.h,
-                  ),
+                  SizedBox(height: 30.h),
                   //logo
-                  Icon(
-                    Icons.lock,
-                    size: 100.sp,
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
+                  Icon(Icons.lock, size: 100.sp),
+                  SizedBox(height: 30.h),
                   //welcome text
                   Text(
                     'Welcome Back',
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Colors.grey[700], fontSize: 16),
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 20.h),
 
                   //text fields
                   MyTextField(
@@ -132,18 +119,14 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Username',
                     controller: usernameController,
                   ),
-                  SizedBox(
-                    height: 8.h,
-                  ),
+                  SizedBox(height: 8.h),
                   MyTextField(
                     isPasswordTextField: true,
                     hintText: 'Password',
                     controller: passwordController,
                   ),
                   //forgot password
-                  SizedBox(
-                    height: 8.h,
-                  ),
+                  SizedBox(height: 8.h),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -151,9 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 20.h),
                   //login button
                   MyButton(
                     text: 'Sign In',
@@ -161,17 +142,11 @@ class _LoginPageState extends State<LoginPage> {
                       signIn(context);
                     },
                   ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
+                  SizedBox(height: 30.h),
                   //google + apple sign in
                   Row(
                     children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey[400],
-                        ),
-                      ),
+                      Expanded(child: Divider(color: Colors.grey[400])),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
@@ -179,50 +154,37 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey[400],
+                      Expanded(child: Divider(color: Colors.grey[400])),
+                    ],
+                  ),
+                  SizedBox(height: 30.h),
+                  SquareTile(
+                    onTap: () {
+                      displayCircularProgress();
+                      AuthService().signInWithGoogle();
+                      Navigator.pop(context);
+                    },
+                    imgUrl: 'assets/images/auth/google.png',
+                  ),
+
+                  SizedBox(height: 30.h),
+                  //not a member? sign up
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Not a member?',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      TextButton(
+                        onPressed: widget.onTap,
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(color: Colors.blue),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SquareTile(
-                          onTap: () {
-                            displayCircularProgress();
-                            AuthService().signInWithGoogle();
-                            Navigator.pop(context);
-                          },
-                          imgUrl: 'assets/images/auth/google.png'),
-                      SizedBox(
-                        width: 20.w,
-                      ),
-                      SquareTile(
-                          onTap: () {}, imgUrl: 'assets/images/auth/apple.png'),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  //not a member? sign up
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Text(
-                      'Not a member?',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    TextButton(
-                      onPressed: widget.onTap,
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    )
-                  ])
                 ],
               ),
             ),

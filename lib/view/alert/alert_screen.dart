@@ -166,24 +166,24 @@ class _AlertPageState extends State<AlertPage> {
           ),
         ),
         actions: [
-          Consumer<AlertProvider>(
-            builder: (context, alertProvider, child) {
-              if (alertProvider.isLoading) {
-                return Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: SizedBox(
-                    width: 20.w,
-                    height: 20.h,
-                    child: const CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                );
-              }
-              return IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: () => alertProvider.getAlerts(),
-              );
-            },
-          ),
+          // Consumer<AlertProvider>(
+          //   builder: (context, alertProvider, child) {
+          //     if (alertProvider.isLoading) {
+          //       return Padding(
+          //         padding: EdgeInsets.all(16.w),
+          //         child: SizedBox(
+          //           width: 20.w,
+          //           height: 20.h,
+          //           child: const CircularProgressIndicator(strokeWidth: 2),
+          //         ),
+          //       );
+          //     }
+          //     return IconButton(
+          //       icon: const Icon(Icons.refresh),
+          //       onPressed: () => alertProvider.getAlerts(),
+          //     );
+          //   },
+          // ),
         ],
       ),
       body: SafeArea(
@@ -192,7 +192,7 @@ class _AlertPageState extends State<AlertPage> {
             return networkProvider.status == InternetStatus.disconnected
                 ? const NoInternetWidget()
                 : alertProvider.alerts.isEmpty
-                ? const EmptyWidget()
+                ? Center(child: const EmptyWidget())
                 : RefreshIndicator(
                   onRefresh: () async {
                     await alertProvider.getAlerts();
