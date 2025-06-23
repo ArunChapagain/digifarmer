@@ -47,31 +47,10 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
+    // String modelPath = cornDiseaseModel;
+    // String labelPath = cornDiseasetxt;
     String modelPath = '';
     String labelPath = '';
-
-    if (widget.title == 'Rice Leaf') {
-      modelPath = riceDiseaseModel;
-      labelPath = riceDiseasetxt;
-    } else if (widget.title == 'Wheat Leaf') {
-      modelPath = wheatDiseaseModel;
-      labelPath = wheatDiseasetxt;
-    } else if (widget.title == 'Tomato Leaf') {
-      modelPath = tomatoDiseaseModel;
-      labelPath = tomatoDiseasetxt;
-    } else if (widget.title == 'Sugarcane Leaf') {
-      modelPath = sugarcaneDiseaseModel;
-      labelPath = sugarcaneDiseasetxt;
-    } else if (widget.title == 'Cotton Leaf') {
-      modelPath = cottonDiseaseModel;
-      labelPath = cottonDiseasetxt;
-    } else if (widget.title == 'Maize Leaf') {
-      modelPath = cornDiseaseModel;
-      labelPath = cornDiseasetxt;
-    } else if (widget.title == 'Plant Health') {
-      modelPath = plantHealthModel;
-      labelPath = plantHealthtxt;
-    }
 
     try {
       // Load the model

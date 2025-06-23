@@ -31,8 +31,9 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
       String weatherName = day["condition"]["text"];
       String weatherIcon =
           "${weatherName.replaceAll(' ', '').toLowerCase()}.png";
-      String forecastDate = DateFormat('EEEE, d MMMM')
-          .format(DateTime.parse(weatherData[index]["date"]));
+      String forecastDate = DateFormat(
+        'EEEE, d MMMM',
+      ).format(DateTime.parse(weatherData[index]["date"]));
 
       return {
         'maxWindSpeed': maxWindSpeed,
@@ -70,22 +71,16 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
     }
 
     Widget buildTemperatureRow(
-        Map forecast, TextStyle tempStyle, TextStyle degreeStyle) {
+      Map forecast,
+      TextStyle tempStyle,
+      TextStyle degreeStyle,
+    ) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            forecast["maxTemperature"].toString(),
-            style: tempStyle,
-          ),
-          Text(
-            'o',
-            style: degreeStyle,
-          ),
-          Text(
-            'C',
-            style: tempStyle,
-          ),
+          Text(forecast["maxTemperature"].toString(), style: tempStyle),
+          Text('o', style: degreeStyle),
+          Text('C', style: tempStyle),
         ],
       );
     }
@@ -137,9 +132,10 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-                offset: const Offset(0, 1),
-                blurRadius: 5,
-                color: _constants.primaryColor.withOpacity(.4)),
+              offset: const Offset(0, 1),
+              blurRadius: 5,
+              color: _constants.primaryColor.withOpacity(.4),
+            ),
           ],
         ),
         child: Padding(
@@ -162,13 +158,14 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                   Row(
                     children: [
                       temperatureDisplay(forecast["minTemperature"].toString()),
-                      Text('/',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(.7),
-                            fontSize:
-                                14.sp, // adjust the size to fit your needs
-                            fontWeight: FontWeight.w600,
-                          )),
+                      Text(
+                        '/',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(.7),
+                          fontSize: 14.sp, // adjust the size to fit your needs
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       temperatureDisplay(forecast["maxTemperature"].toString()),
                     ],
                   ),
@@ -182,8 +179,9 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                          'assets/images/weather/${forecast["weatherIcon"]}',
-                          width: 40.w),
+                        'assets/images/weather/${forecast["weatherIcon"]}',
+                        width: 40.w,
+                      ),
                       const SizedBox(width: 5),
                       Text(
                         forecast["weatherName"] == 'Patchy rain nearby'
@@ -208,9 +206,7 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                         'assets/images/weather/humidity.png',
                         forecast["avgHumidity"].toString(),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                      const SizedBox(width: 10),
                       cardWeatherItem(
                         'assets/images/weather/lightrain.png',
                         forecast["chanceOfRain"].toString(),
@@ -272,12 +268,10 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                         width: size.width * .7,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.center,
-                              colors: [
-                                Color(0xffa9c1f5),
-                                Color(0xff6696f5),
-                              ]),
+                            begin: Alignment.topLeft,
+                            end: Alignment.center,
+                            colors: [Color(0xffa9c1f5), Color(0xff6696f5)],
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.blue.withOpacity(.1),
@@ -308,9 +302,10 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                                 child: Text(
                                   getForecastWeather(0)["weatherName"],
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 26.sp,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.white,
+                                    fontSize: 26.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -319,10 +314,12 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                               left: 20,
                               child: Container(
                                 width: size.width * .8,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child:
-                                    buildWeatherItemRow(getForecastWeather(0)),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                child: buildWeatherItemRow(
+                                  getForecastWeather(0),
+                                ),
                               ),
                             ),
                             Positioned(
@@ -333,32 +330,34 @@ class _ForecastsScreenState extends State<ForecastsScreen> {
                                 TextStyle(
                                   fontSize: 80,
                                   fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = _constants.shader,
+                                  foreground:
+                                      Paint()..shader = _constants.shader,
                                 ),
                                 TextStyle(
                                   fontSize: 40,
                                   fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..shader = _constants.shader,
+                                  foreground:
+                                      Paint()..shader = _constants.shader,
                                 ),
                               ),
                             ),
                             Positioned(
-                                top: 220.h,
-                                left: 0,
-                                child: SizedBox(
-                                  height: 700,
-                                  width: size.width * .9,
-                                  child: ListView.builder(
-                                    itemCount: 3,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return buildForecastCard(
-                                          getForecastWeather(index));
-                                    },
-                                  ),
-                                ))
+                              top: 220.h,
+                              left: 0,
+                              child: SizedBox(
+                                height: 700,
+                                width: size.width * .9,
+                                child: ListView.builder(
+                                  itemCount: 3,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return buildForecastCard(
+                                      getForecastWeather(index),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
