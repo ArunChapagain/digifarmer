@@ -1,4 +1,5 @@
 import 'package:digifarmer/constants/app_icon.dart';
+import 'package:digifarmer/view/alert/alert_screen.dart';
 import 'package:digifarmer/view/diseases_detection/diseases_overview_screen.dart';
 import 'package:digifarmer/view/home/home_screen.dart';
 import 'package:digifarmer/view/news/news_screen.dart';
@@ -18,7 +19,6 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application>
     with TickerProviderStateMixin {
   late int _currentPage = 0;
-  final double _tabIconSize = 20.sp;
 
   ///page
   final List<Widget> _pages = [
@@ -26,6 +26,7 @@ class _ApplicationState extends State<Application>
     const NewsPage(),
     DiseasesDetectionPage(),
     const WeatherPage(),
+    AlertPage(),
   ];
 
   ///Tab control
@@ -108,6 +109,12 @@ class _ApplicationState extends State<Application>
               selectedIconPath: kCloudFill,
               label: 'Weather',
               isSelected: _currentPage == 3,
+            ),
+            BottomNavItem(
+              iconPath: kAleartLine,
+              selectedIconPath: kAleartFill,
+              label: 'Weather',
+              isSelected: _currentPage == 4,
             ),
           ],
           onTap: (index) {

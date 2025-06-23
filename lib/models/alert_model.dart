@@ -4,27 +4,27 @@
 
 import 'dart:convert';
 
-Alert alertFromJson(String str) => Alert.fromJson(json.decode(str));
+AlertModel alertFromJson(String str) => AlertModel.fromJson(json.decode(str));
 
-String alertToJson(Alert data) => json.encode(data.toJson());
+String alertToJson(AlertModel data) => json.encode(data.toJson());
 
-class Alert {
+class AlertModel {
   final double? count;
   final String? next;
   final dynamic previous;
-  final List<Result>? results;
+  final List<Alert>? results;
 
-  Alert({this.count, this.next, this.previous, this.results});
+  AlertModel({this.count, this.next, this.previous, this.results});
 
-  factory Alert.fromJson(Map<String, dynamic> json) => Alert(
+  factory AlertModel.fromJson(Map<String, dynamic> json) => AlertModel(
     count: json["count"]?.toDouble(),
     next: json["next"],
     previous: json["previous"],
     results:
         json["results"] == null
             ? []
-            : List<Result>.from(
-              json["results"]!.map((x) => Result.fromJson(x)),
+            : List<Alert>.from(
+              json["results"]!.map((x) => Alert.fromJson(x)),
             ),
   );
 
@@ -39,7 +39,7 @@ class Alert {
   };
 }
 
-class Result {
+class Alert {
   final int? id;
   final String? title;
   final List<int>? wards;
@@ -63,7 +63,7 @@ class Result {
   final int? hazard;
   final int? event;
 
-  Result({
+  Alert({
     this.id,
     this.title,
     this.wards,
@@ -88,7 +88,7 @@ class Result {
     this.event,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Alert.fromJson(Map<String, dynamic> json) => Alert(
     id: json["id"],
     title: json["title"],
     wards:

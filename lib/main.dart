@@ -1,6 +1,7 @@
 import 'package:digifarmer/application.dart';
 import 'package:digifarmer/firebase_options.dart';
 import 'package:digifarmer/init.dart';
+import 'package:digifarmer/provider/alert_provider.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
 import 'package:digifarmer/provider/location_provider.dart';
 import 'package:digifarmer/provider/myapp_provider.dart';
@@ -19,7 +20,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DetectionProvider()),
         ChangeNotifierProvider(create: (context) => LocationProvider()),
         ChangeNotifierProvider(create: (context) => WeatherProvider()),
+        ChangeNotifierProvider(create: (context) => AlertProvider()),
       ],
       builder: (context, child) {
         return ScreenUtilInit(

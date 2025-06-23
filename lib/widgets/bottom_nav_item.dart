@@ -29,7 +29,7 @@ class BottomNavItem extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 10,
               color:
                   isSelected
                       ? Theme.of(context).colorScheme.primary

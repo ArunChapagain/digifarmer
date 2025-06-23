@@ -2,7 +2,7 @@ import 'package:digifarmer/models/alert_model.dart';
 import 'package:http/http.dart' as http;
 
 class AlertService {
-  Future<List<Result>> fetchAlert() async {
+  Future<List<Alert>> fetchAlert() async {
     try {
       final response = await http.get(
         Uri.parse('https://bipadportal.gov.np/api/v1/alert/?format=json'),
