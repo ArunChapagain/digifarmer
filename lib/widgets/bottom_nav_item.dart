@@ -25,11 +25,11 @@ class BottomNavItem extends StatelessWidget {
             width: 24,
             height: 24,
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 5),
           Text(
             label,
             style: TextStyle(
-              fontSize: 10,
+              fontSize: 11,
               color:
                   isSelected
                       ? Theme.of(context).colorScheme.primary

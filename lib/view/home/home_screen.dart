@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             _greetingsAndWeatherStack(context),
-            SizedBox(height: 10.h),
+            SizedBox(height: 8.h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -385,7 +385,7 @@ Widget _weatherItem({required String title, required String value}) {
 
 Widget _greetingsAndWeatherStack(BuildContext context) {
   return SizedBox(
-    height: 355,
+    height: 345,
     child: Stack(
       key: ValueKey("GreetingsAndStack"),
       alignment: Alignment.topCenter,

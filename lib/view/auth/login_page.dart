@@ -159,10 +159,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 30.h),
                   SquareTile(
-                    onTap: () {
+                    onTap: () async {
                       displayCircularProgress();
-                      AuthService().signInWithGoogle();
-                      Navigator.pop(context);
+                      await AuthService().signInWithGoogle();
+                      // Navigator.pop(context);
                     },
                     imgUrl: 'assets/images/auth/google.png',
                   ),

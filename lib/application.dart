@@ -38,7 +38,7 @@ class _ApplicationState extends State<Application>
 
   ///PageView control
   final PageController _pageViewController = PageController();
-  
+
   @override
   void dispose() {
     ///Tab control
@@ -70,7 +70,7 @@ class _ApplicationState extends State<Application>
         ),
         child: TabBar(
           enableFeedback: true,
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          padding: EdgeInsets.symmetric(horizontal: 6.w),
           controller: _pageController,
           indicatorColor: Colors.transparent,
           labelStyle: TextStyle(
@@ -101,7 +101,7 @@ class _ApplicationState extends State<Application>
             BottomNavItem(
               iconPath: kDetectionLine,
               selectedIconPath: kDetectionFill,
-              label: 'Detection',
+              label: 'Detect',
               isSelected: _currentPage == 2,
             ),
             BottomNavItem(

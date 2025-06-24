@@ -37,7 +37,7 @@ class DetectButton extends StatelessWidget {
       },
       child: AnimatedPress(
         child: Container(
-          height: 66.h,
+          height: 65.h,
           padding: EdgeInsets.symmetric(horizontal: 26.w, vertical: 12.h),
           decoration: BoxDecoration(
             // color: Theme.of(context).primaryColor.withOpacity(0.8),

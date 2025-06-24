@@ -53,9 +53,9 @@ class _HomePageState extends State<WeatherPage> {
                       children: [
                         kVSizedBox0,
                         leadingColumnRow(context, weatherProvider),
-                        kVSizedBox2,
+                        kVSizedBox1,
                         _weatherCard(context, weatherProvider),
-                        kVSizedBox2,
+                        kVSizedBox1,
 
                         TodayForecast(
                           dailyWeatherForecast:

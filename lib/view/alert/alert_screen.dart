@@ -467,6 +467,13 @@ class AlertCard extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 12.h),
+              Icon(Icons.touch_app, size: 14.sp, color: Colors.grey),
+              SizedBox(width: 2.w),
+              Text(
+                'Tap for details',
+                style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+              ),
 
               // Additional info row
               if (alert.public == true || alert.point != null) ...[
@@ -499,13 +506,6 @@ class AlertCard extends StatelessWidget {
                         ),
                       ),
                     ],
-                    const Spacer(),
-                    Icon(Icons.touch_app, size: 14.sp, color: Colors.grey),
-                    SizedBox(width: 2.w),
-                    Text(
-                      'Tap for details',
-                      style: TextStyle(fontSize: 10.sp, color: Colors.grey),
-                    ),
                   ],
                 ),
               ],
