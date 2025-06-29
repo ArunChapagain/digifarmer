@@ -36,7 +36,7 @@ class DetectPage extends StatefulWidget {
 class _DetectPageState extends State<DetectPage> {
   Interpreter? interpreter;
   List<String>? labels;
-  
+
   // Store detection results for Gemini analysis
   List<double>? lastProbabilityScores;
   String? lastPredictedLabel;
@@ -149,7 +149,7 @@ class _DetectPageState extends State<DetectPage> {
       print('Predicted index: $maxIndex, Score: $maxScore');
 
       String predictedLabel = labels![maxIndex];
-      
+
       // Store results for Gemini analysis
       lastProbabilityScores = List<double>.from(results);
       lastPredictedLabel = predictedLabel;
@@ -159,11 +159,14 @@ class _DetectPageState extends State<DetectPage> {
         context,
         listen: false,
       ).getDetectionDetail(widget.title, predictedLabel);
-      
+
       // Store the detected class from provider
-      final detectionProvider = Provider.of<DetectionProvider>(context, listen: false);
+      final detectionProvider = Provider.of<DetectionProvider>(
+        context,
+        listen: false,
+      );
       lastDetectedClass = detectionProvider.classDetection;
-      
+
       LoadingOverlay().hide();
 
       displayResult(predictedLabel);
@@ -329,7 +332,9 @@ class _DetectPageState extends State<DetectPage> {
     if (lastProbabilityScores == null || labels == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Detection data not available. Please try detecting again.'),
+          content: Text(
+            'Detection data not available. Please try detecting again.',
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -339,10 +344,13 @@ class _DetectPageState extends State<DetectPage> {
     // Navigate to AI Analysis Screen
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DiseaseAnalysisScreen(
-          diseaseName: diseaseName,
-          detectedClass: detectedClass,
-        ),
+        builder:
+            (context) => DiseaseAnalysisScreen(
+              diseaseName: diseaseName,
+              detectedClass: detectedClass,
+              classLabels: labels,
+              probabilityScores: lastProbabilityScores,
+            ),
       ),
     );
 

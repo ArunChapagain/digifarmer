@@ -1,4 +1,3 @@
-import 'package:digifarmer/application.dart';
 import 'package:digifarmer/firebase_options.dart';
 import 'package:digifarmer/init.dart';
 import 'package:digifarmer/provider/alert_provider.dart';
