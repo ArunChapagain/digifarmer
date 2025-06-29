@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
+import 'package:digifarmer/provider/gemini_provider.dart';
+import 'package:digifarmer/view/diseases_detection/disease_analysis_screen.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
 import 'package:digifarmer/widgets/loading_overlay.dart';
@@ -34,6 +36,11 @@ class DetectPage extends StatefulWidget {
 class _DetectPageState extends State<DetectPage> {
   Interpreter? interpreter;
   List<String>? labels;
+  
+  // Store detection results for Gemini analysis
+  List<double>? lastProbabilityScores;
+  String? lastPredictedLabel;
+  String? lastDetectedClass;
 
   @override
   void initState() {
@@ -142,12 +149,21 @@ class _DetectPageState extends State<DetectPage> {
       print('Predicted index: $maxIndex, Score: $maxScore');
 
       String predictedLabel = labels![maxIndex];
+      
+      // Store results for Gemini analysis
+      lastProbabilityScores = List<double>.from(results);
+      lastPredictedLabel = predictedLabel;
 
       // Update provider and display result
       Provider.of<DetectionProvider>(
         context,
         listen: false,
       ).getDetectionDetail(widget.title, predictedLabel);
+      
+      // Store the detected class from provider
+      final detectionProvider = Provider.of<DetectionProvider>(context, listen: false);
+      lastDetectedClass = detectionProvider.classDetection;
+      
       LoadingOverlay().hide();
 
       displayResult(predictedLabel);
@@ -264,6 +280,40 @@ class _DetectPageState extends State<DetectPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      SizedBox(height: 20.h),
+                      // AI Analysis Button
+                      Container(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            _navigateToAIAnalysis(diagnosis, type);
+                          },
+                          icon: Icon(
+                            Remix.robot_line,
+                            color: Colors.white,
+                            size: 20.sp,
+                          ),
+                          label: Text(
+                            'Get AI Analysis',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 12.h,
+                              horizontal: 20.w,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            elevation: 3,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -272,6 +322,37 @@ class _DetectPageState extends State<DetectPage> {
           },
         );
       },
+    );
+  }
+
+  void _navigateToAIAnalysis(String diseaseName, String detectedClass) async {
+    if (lastProbabilityScores == null || labels == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Detection data not available. Please try detecting again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Navigate to AI Analysis Screen
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DiseaseAnalysisScreen(
+          diseaseName: diseaseName,
+          detectedClass: detectedClass,
+        ),
+      ),
+    );
+
+    // Start Gemini analysis
+    final geminiProvider = Provider.of<GeminiProvider>(context, listen: false);
+    await geminiProvider.analyzeDisease(
+      diseaseName: diseaseName,
+      classLabels: labels!,
+      probabilityScores: lastProbabilityScores!,
+      detectedClass: detectedClass,
     );
   }
 

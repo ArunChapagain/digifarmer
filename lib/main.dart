@@ -3,6 +3,7 @@ import 'package:digifarmer/firebase_options.dart';
 import 'package:digifarmer/init.dart';
 import 'package:digifarmer/provider/alert_provider.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
+import 'package:digifarmer/provider/gemini_provider.dart';
 import 'package:digifarmer/provider/location_provider.dart';
 import 'package:digifarmer/provider/myapp_provider.dart';
 import 'package:digifarmer/provider/network_checker_provider.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LocationProvider()),
         ChangeNotifierProvider(create: (context) => WeatherProvider()),
         ChangeNotifierProvider(create: (context) => AlertProvider()),
+        ChangeNotifierProvider(create: (context) => GeminiProvider()),
       ],
       builder: (context, child) {
         return ScreenUtilInit(
