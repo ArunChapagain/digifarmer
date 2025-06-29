@@ -5,6 +5,7 @@ import 'package:digifarmer/constants/constants.dart';
 import 'package:digifarmer/provider/detection_provider.dart';
 import 'package:digifarmer/widgets/animation.dart';
 import 'package:digifarmer/widgets/detect_button.dart';
+import 'package:digifarmer/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -47,10 +48,10 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
-    // String modelPath = cornDiseaseModel;
-    // String labelPath = cornDiseasetxt;
-    String modelPath = '';
-    String labelPath = '';
+    String modelPath = cornDiseaseModel;
+    String labelPath = cornDiseasetxt;
+    // String modelPath = maizeDiseasesModel;
+    // String labelPath = maizeDiseasestxt;
 
     try {
       // Load the model
@@ -73,6 +74,7 @@ class _DetectPageState extends State<DetectPage> {
     if (image == null) return;
 
     File imageFile = File(image.path);
+
     classifyImage(imageFile);
   }
 
@@ -83,6 +85,7 @@ class _DetectPageState extends State<DetectPage> {
     }
 
     try {
+      LoadingOverlay().show(context);
       // Load and preprocess the image
       final imageBytes = await image.readAsBytes();
       final decodedImage = img.decodeImage(imageBytes);
@@ -129,11 +132,14 @@ class _DetectPageState extends State<DetectPage> {
       int maxIndex = 0;
 
       for (int i = 1; i < results.length; i++) {
+        print('score: ${results[i]} for index: $i');
         if (results[i] > maxScore) {
           maxScore = results[i];
           maxIndex = i;
         }
       }
+
+      print('Predicted index: $maxIndex, Score: $maxScore');
 
       String predictedLabel = labels![maxIndex];
 
@@ -142,9 +148,11 @@ class _DetectPageState extends State<DetectPage> {
         context,
         listen: false,
       ).getDetectionDetail(widget.title, predictedLabel);
+      LoadingOverlay().hide();
 
       displayResult(predictedLabel);
     } catch (e) {
+      LoadingOverlay().hide();
       log('Error during classification: $e');
     }
   }

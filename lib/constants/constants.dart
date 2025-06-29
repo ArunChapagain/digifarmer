@@ -30,3 +30,6 @@ String cottonDiseasetxt = "assets/model/disease/cottonlabels.txt";
 
 String plantHealthModel = "assets/model/disease/plant_health.tflite";
 String plantHealthtxt = "assets/model/disease/plant_health_labels.txt";
+
+    String maizeDiseasesModel= 'assets/model/disease/maize_disease_model.tflite';
+    String maizeDiseasestxt = 'assets/model/disease/maize_disease_labels.txt';
